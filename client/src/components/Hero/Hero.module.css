@@ -1,0 +1,23 @@
+.hero {
+    width: 100%;
+    margin: 20px 0 0 0;
+    background: white;
+    padding: 15px 0;
+}
+.hero h1 {
+    font-size: 60px;
+    text-align: center;
+}
+.hero h2 {
+    color: #e63946;
+}
+.circleImage {
+    background: #e9ecef;
+    border-radius: 50%;
+    height: 80px;
+    width: 80px;
+    margin: 20px 10px 0 10px;
+}
+.image {
+    height: 50px;
+}

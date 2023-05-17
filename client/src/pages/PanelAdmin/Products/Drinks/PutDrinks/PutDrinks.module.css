@@ -1,0 +1,44 @@
+.postProducts {
+    width: 1200px;
+    margin: 0 auto 30px auto;
+    padding: 80px 0 0 0;
+}
+.panelAdmin {
+    width: 380px;
+}
+.containerProducts {
+    width: 800px;
+}
+.containerProducts h3 {
+    text-align: center;
+}
+.formProducts {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.input {
+    width: 450px;
+}
+input, .select__Category {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    border: 1px solid grey;
+    margin-bottom: 10px;
+    width: 100%;
+    font-size: 16px;
+}
+
+.button__submit {
+    margin: 0 auto;
+    padding: 10px 20px;
+    background: #522D6D;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+

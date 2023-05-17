@@ -1,0 +1,80 @@
+.getUsers {
+    margin: 0 auto;
+    /* padding: 80px 0 0 0; */
+}
+.text__container {
+    border: 1px solid #dee2e6;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 0 20px 0;
+    border-radius: 10px;
+}
+.buttons {
+    padding: 5px 0;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+.link {
+    text-decoration: none;
+}
+.paragraph {
+    border: none;
+    background: #522D6D;
+    width: 180px;
+    padding: 10px 0;
+    color: #f8f9fa;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.buttons {
+    height: 120px;
+    gap: 20px;
+    padding: 5px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.button {
+    border: none;
+    background: #d7263d;
+    padding: 10px 20px;
+    color: #f8f9fa;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.buttonUpdate {
+    border: none;
+    background: #522D6D;
+    padding: 10px 20px;
+    color: #f8f9fa;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.fff {
+    position: relative;
+}
+.modal {
+    border: 1px solid red;
+    position: absolute;
+    background: #f8f9fa;
+    top: 0;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    height: 120px;
+}
+.modal p {
+    text-align: center;
+    margin: 0 0 0 0;
+}
+.modalButtons button {
+    margin: 0 15px 0 0;
+}
+

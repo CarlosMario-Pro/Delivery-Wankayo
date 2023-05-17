@@ -1,0 +1,156 @@
+.detail {
+    width: 885px;
+    margin: 80px auto;
+    border: 1px solid #e9ecef;
+}
+.detail h1 {
+    margin: 10px 0 10px 20px;
+}
+.container {
+    border-top: 1px solid #e9ecef;
+    display: flex;
+    width: 870px;
+}
+
+.product {
+    width: 380px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;  
+}
+
+.cards {
+    overflow: hidden;
+    padding: 0 20px;
+    margin: 20px 0 0 0;
+}
+.description {
+    margin: 20px 0;
+}
+
+.image__container {
+    border-radius: 10px;
+    position: relative;
+    height: 200px;
+    width: 340px;
+    overflow: hidden;
+    margin: 0 0 5px 0;
+}
+.aviso {
+    position: absolute;
+    font-weight: bold;
+    align-items: center;
+    color: #3a86ff;
+    height: 35px;
+    width: 160px;
+    background: #e0fbfc;
+    gap: 5px;
+    top: 10px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+.free {
+    position: relative;
+    margin: 7px 0 0 0;
+}
+.tiStarburst {
+    font-size: 20px;
+}
+.percentage {
+    position: absolute;
+    font-size: 9px;
+    color: white;
+    top: 3.5px;
+    left: 6px;
+}
+.image {
+    height: 200px;
+    width: 340px;
+    object-fit: cover;
+}
+.promotionNotice {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 3;
+    color: white;
+    background: #e63946;
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+}
+.description {
+    /* height: 60px; */
+    width: 100%;
+}
+.logo {
+    /* height: 60px; */
+    width: 80px;
+    font-size: 30px;
+}
+.logoIcon {
+    font-size: 50px;
+    color: #522D6D;
+}
+.text__container {
+    position: relative;
+    padding: 0 10px;
+    width: 100%;
+}
+
+/* .text__container p {
+    border: 1px solid red;
+    margin: 5px auto;
+} */
+.strikethrough {
+    color: red;
+    text-decoration: line-through;
+}
+.timeShipment {
+    display: flex;
+    gap: 20px;
+}
+.time, .shipment {
+    gap: 5px;
+}
+.icon {
+    margin: 3px 0 0 0;
+    font-size: 20px;
+}
+.shipment p {
+    color: #3a86ff;
+}
+
+.price {
+    padding: 20px;
+}
+
+.options {
+    width: 460px;
+    height: 800px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.accompanyings {
+    border-top: 1px solid #e9ecef;
+    border-left: 1px solid #e9ecef;
+    border-right: 1px solid #e9ecef;
+    width: 400px;
+}
+.accompanyings__container {
+    border-bottom: 1px solid #e9ecef;
+    padding: 15px;
+}
+.option__container {
+    padding: 15px;
+
+}
+
+.totals {
+    width: 100%;
+}
+.totals__container {
+    /* border: 1px solid red; */
+    width: 300px;
+    margin: 0 auto;
+}

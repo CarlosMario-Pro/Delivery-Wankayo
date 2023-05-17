@@ -1,0 +1,20 @@
+.panelAdmin {
+    height: 500px;
+    width: 350px;
+}
+.panel {
+    width: 350px;
+}
+.link {
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    height: 50px;
+    width: 100%;
+    text-decoration: none;
+    margin: 5px 0;
+}
+.active {
+    background: #522D6D;
+    color: white;
+    border: none;
+}

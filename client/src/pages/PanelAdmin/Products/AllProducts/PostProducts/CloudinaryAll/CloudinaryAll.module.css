@@ -1,0 +1,44 @@
+.cloudinary {
+    position: relative;
+    height: 400px;
+    width: 760px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    margin: 0 auto;
+}
+.cloudinaryInput {
+    width: 250px;
+}
+.cloudinaryButton {
+    background-image: linear-gradient(to right, #314755 0%, #26a0da  51%, #314755  100%);
+    margin: 10px;
+    padding: 15px 45px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;            
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+    display: block;
+    border: none;
+}
+.cloudinaryButton:hover {
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+ .imageUploadedMessage {
+    position: absolute;
+    color: #2a9d8f;
+    font-size: 20px;
+    font-weight: bold;
+    bottom: 20px;
+}
+
+
+
+.imagenes {
+    width: 150px;
+}

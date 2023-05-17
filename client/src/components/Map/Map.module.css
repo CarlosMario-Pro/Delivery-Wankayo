@@ -1,0 +1,83 @@
+.map {
+    flex: 0 0 auto;
+    width: 100%;
+    margin: 50px 0;
+}
+.container {
+    width: 1200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+/*-----Contenedor horarios-----*/
+.schedules {
+    height: 100%;
+    width: 350px;
+    padding: 10px;
+}
+.schedules h4 {
+    /* text-align: center; */
+    margin: 0 0 10px 0;
+    letter-spacing: 1px;
+}
+.schedules__container {
+    border-radius: 10px;
+    padding: 10px;
+    height: 200px;
+    width: 100%;
+    display: flex;
+    margin: 0 0 10px 0;
+    border: 1px solid #ced4da;
+}
+.one {
+    height: 100%;
+    width: 170px;
+    padding: 5px;
+    color: #495057;
+}
+.two {
+    color: #495057;
+    height: 100%;
+    width: 130px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+.open {
+    color: #0ead69;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+.close {
+    color: #e63946;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+.address {
+    width: 100%;
+    margin: 50px 0 0 0;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ced4da;
+}
+.address h3 {
+    margin: 0 0 5px 0;
+}
+.address p {
+    font-size: 14px;
+    color: #495057;
+}
+
+/*-----Mapa-----*/
+
+.map__container {
+    width: 800px;
+}
+.iframe  {
+    width: 100%;
+}
+

@@ -1,0 +1,29 @@
+.options {
+    width: 800px;
+    margin: 0 auto;
+}
+.panelAdmin {
+    width: 380px;
+}  
+.links {
+    width: 800px;    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding:  0;
+    margin: 15px 0;
+}
+.link {
+    text-decoration: none;
+    width: 200px;
+}  
+.paragraph {
+    padding: 10px 20px;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+}  
+.active {
+    background: #522D6D;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}

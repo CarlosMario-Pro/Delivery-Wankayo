@@ -1,0 +1,72 @@
+.orderCard {
+    border: 1px solid #02c39a;
+    margin: 0 0 30px 0;
+    padding: 20px;
+    border-radius: 10px;
+}
+.spanTitle {
+    font-weight: 600;
+    color: #4361ee;
+}
+.products {
+    margin: 15px 0 0 0;
+}
+.product {
+    border: 1px solid #006d77;
+    border-radius: 10px;
+    margin: 5px 0 10px 0;
+    padding: 10px;
+}
+.link {
+    text-decoration: none;
+    font-weight: 700;
+    color: #e63946;
+}
+.update {
+    width: 35%;
+    text-decoration: none;
+}
+.buttons {
+    height: 120px;
+    gap: 20px;
+    padding: 5px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.button {
+    border: none;
+    background: #d7263d;
+    padding: 10px 20px;
+    color: #f8f9fa;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.buttonUpdate {
+    border: none;
+    background: #522D6D;
+    padding: 10px 20px;
+    color: #f8f9fa;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.fff {
+    position: relative;
+}
+.modal {
+    position: absolute;
+    background: #f8f9fa;
+    top: 0;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    height: 120px;
+}
+.modal p {
+    text-align: center;
+    margin: 0 0 10px 0;
+}
+.modalButtons button {
+    margin: 0 15px 0 0;
+}

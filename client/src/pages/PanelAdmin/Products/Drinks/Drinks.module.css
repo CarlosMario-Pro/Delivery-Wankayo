@@ -1,0 +1,96 @@
+.drinks {
+    width: 1200px;
+    margin: 0 auto;
+    padding: 80px 0 0 0;
+}
+.panelAdmin {
+    width: 380px;
+}
+.containerDrinks {
+    width: 800px;
+    padding: 20px;
+}
+.link {
+    text-decoration: none;
+}
+.containerDrinks h1 {
+    margin: 10px 0;
+    text-align: center;
+}
+.container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+.text__container {
+    width: 340px;
+    margin: 0 0 30px 0;
+}
+.container_Image {
+    border: 1px solid #3a86ff;
+    height: 200px;
+    width: 340px;
+    overflow: hidden;
+    border-radius: 10px;
+}
+.image {
+    height: 200px;
+    width: 340px;
+}
+.buttons {
+    padding: 5px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.button {
+    border: none;
+    background: #d7263d;
+    padding: 10px 20px;
+    color: #f8f9fa;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.paragraph {
+    border: none;
+    background: #522D6D;
+    padding: 10px 20px;
+    color: #f8f9fa;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.strikethrough {
+    color: red;
+    text-decoration: line-through;
+}
+
+.buttonUpdate {
+    border: none;
+    background: #522D6D;
+    padding: 10px 20px;
+    color: #f8f9fa;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.fff {
+    position: relative;
+}
+.modal {
+    position: absolute;
+    background: #f8f9fa;
+    top: 0;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    height: 120px;
+}
+.modal p {
+    text-align: center;
+    margin: 0 0 10px 0;
+}
+.modalButtons button {
+    margin: 0 15px 0 0;
+}

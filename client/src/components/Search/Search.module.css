@@ -1,0 +1,56 @@
+.container {
+    width: 100%;
+    position: sticky;
+    z-index: 2;
+    top: 79px;
+    background: white;
+    padding: 0 0 15px 0;
+    border-bottom: 1px solid #e9ecef;
+}
+.input {
+    background: white;
+    height: 50px;
+    width: 70%;
+    border-radius: 5px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto 0 auto;
+
+}
+.search {
+    border: 1px solid #e9ecef;    
+    width: 100%;
+    height: 40px;
+    border-radius: 5px;
+    padding: 0 10px;
+    font-size: 16px;
+    margin: 0;
+}
+.bsSearch {
+    border: none;
+    letter-spacing: 1px;
+    border-radius: 5px;
+    width: 80px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 300ms all ease;
+}
+.bsSearch:hover {
+    cursor: pointer;
+    color: #fff;
+    background: #522D6D;
+}
+.circleImage {
+    background: #e9ecef;
+    border-radius: 50%;
+    height: 80px;
+    width: 80px;
+    margin: 10px 10px 0 10px;
+}
+.image {
+    height: 50px;
+}

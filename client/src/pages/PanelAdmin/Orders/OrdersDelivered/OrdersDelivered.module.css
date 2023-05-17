@@ -1,0 +1,126 @@
+.ordersPreparation {
+    width: 1200px;
+    margin: 0 auto 30px auto;
+}
+.panelAdmin {
+    width: 380px;
+    padding: 80px 0 0 0;
+}
+
+.orderCard {
+    border: 1px solid #dee2e6;
+    margin: 0 0 30px 0;
+    padding: 20px;
+    border-radius: 10px;
+}
+.spanTitle {
+    font-weight: 600;
+    color: #4361ee;
+}
+
+.products {
+    margin: 15px 0 0 0;
+}
+.product {
+    border: 1px solid #006d77;
+    border-radius: 10px;
+    margin: 5px 0 10px 0;
+    padding: 10px;
+}
+
+.link {
+    text-decoration: none;
+    font-weight: 700;
+    color: #e63946;
+}
+.update {
+    width: 35%;
+    text-decoration: none;
+}
+.buttons {
+    gap: 20px;
+    padding: 5px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.button {
+    border: none;
+    background: #d7263d;
+    padding: 10px 20px;
+    color: #f8f9fa;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.buttonUpdatePrevius {
+    border: none;
+    background: #2a9d8f;
+    padding: 10px 20px;
+    color: #f8f9fa;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+
+
+.button1 {
+    background: #8ecae6;
+    padding: 10px 20px;
+    color: #f8f9fa;
+    border: none;
+    border-radius: 5px;
+}
+.button1Desabled {
+    color: #f8f9fa;
+    background: #219ebc;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+}
+
+.button2 {
+    background: #e9ecef;
+    color: #ced4da;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+}
+.button2Desabled {
+    color: #f8f9fa;
+    background: #d90429;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+}
+.buttonUpdate {
+    border: none;
+    background: #522D6D;
+    padding: 10px 20px;
+    color: #f8f9fa;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+
+
+.fff {
+    position: relative;
+}
+.modal {
+    position: absolute;
+    background: #f8f9fa;
+    top: 0;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    height: 120px;
+}
+.modal p {
+    text-align: center;
+    margin: 0 0 10px 0;
+}
+.modalButtons button {
+    margin: 0 15px 0 0;
+}

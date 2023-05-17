@@ -1,0 +1,109 @@
+.general {
+    width: 1200px;
+    margin: 0 auto;
+    padding: 80px 0 0 0;
+}
+.panelAdmin {
+    width: 380px;
+}
+.container {
+    width: 800px;
+    padding: 0 20px;
+}
+.options {
+    width: 35%;
+    text-decoration: none;
+}
+.container h1 {
+    margin: 10px 0;
+    text-align: center;
+}
+.paragraph {
+    border: none;
+    border: 1px solid #dee2e6;
+    padding: 10px 20px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.all {
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 0 0 15px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+.container__buttons {
+    gap: 20px;
+    padding: 5px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.buttonDelete {
+    border: none;
+    background: #d7263d;
+    padding: 7px 20px;
+    color: #f8f9fa;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.link {
+    text-decoration: none;
+}
+.buttonUpdate {
+    border: none;
+    background: #522D6D;
+    padding: 10px 20px;
+    color: #f8f9fa;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.iconDelete {
+    font-size: 20px;
+}
+.modal {
+    position: absolute;
+    background: white;
+    padding: 0 20px;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    border-radius: 5px;
+    height: 75px;
+}
+.modal p {
+    text-align: center;
+    margin: 0 0 10px 0;
+}
+.approve {
+    border: none;
+    background: #d7263d;
+    padding: 10px 20px;
+    color: #f8f9fa;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 0 15px 0 0;
+}
+.disapprove {
+    border: none;
+    background: #522D6D;
+    padding: 10px 20px;
+    color: #f8f9fa;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.active {
+    background: #522D6D;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}

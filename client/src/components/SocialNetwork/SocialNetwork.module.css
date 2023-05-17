@@ -1,0 +1,13 @@
+.socialNetworks {
+    gap: 15px;
+}
+.borderSocialNetworks {
+    transition: 100ms all ease;
+}
+.borderSocialNetworks:hover {
+    transform: scale(1.1);
+}
+.iconSocialNetworks {
+    font-size: 30px;
+    color: white;
+}

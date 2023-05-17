@@ -1,0 +1,56 @@
+.footer {
+    background: #522D6D;
+    height: 335px;
+    width: 100%;
+    color: white;
+    padding: 10px;
+}
+
+.network {
+    margin: 0 auto 10px auto;
+    gap: 150px;
+    width: 1200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-bottom: 1px solid white;
+}
+.logo {
+    width: 110px;
+}
+.imageLogo {
+    width: 110px;
+    transition: 200ms all ease;
+}
+.imageLogo:hover {
+    transform: scale(1.05);
+}
+
+
+
+.links__container {
+    height: 210px;
+    width: 1200px;
+}
+.column {
+    height: 210px;
+}
+.column h3 {
+    letter-spacing: 2px;
+    margin: 0 0 10px 0;
+}
+.link {
+    color: white;
+}
+.link:hover {
+    color: #fec89a;
+    text-decoration: none;
+}
+.copy {
+    font-size: 12px;
+    height: 20px;
+    width: 1200px;
+    text-align: center;
+    padding:0 0 15px 0;
+}
