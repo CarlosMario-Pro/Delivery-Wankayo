@@ -1,60 +1,43 @@
-.panelAdmin {
+.panelUser {
     border: 1px solid #02c39a;
     margin: 0 0 30px 0;
     padding: 20px;
     border-radius: 10px;
 }
-
+.spanTitle {
+    font-weight: 600;
+    color: #4361ee;
+}
+.link {
+    width: 190px;
+    border: 1px solid #ced4da;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: #495057;
+    margin: 10px 0;
+    text-decoration: none;
+}
+.icon {
+    margin: 4px 0 0 0;
+}
 .address {
     border: 1px solid #006d77;
     border-radius: 10px;
     margin: 5px 0 10px 0;
     padding: 10px;
 }
-
-
-
-
-
-.spanTitle {
-    font-weight: 600;
-    color: #4361ee;
-}
-
-
-.link {
-    text-decoration: none;
-    font-weight: 700;
-    color: #e63946;
-}
-
-
-
-.paragraph {
-    border: none;
-    background: #522D6D;
-    padding: 10px 20px;
-    color: #f8f9fa;
-    letter-spacing: 2px;
-    cursor: pointer;
-    border-radius: 5px;
-    text-align: center;
-}
-
-
-.update {
-    width: 35%;
-    text-decoration: none;
+.container__buttos {
+    position: relative;
 }
 .buttons {
-    height: 120px;
-    gap: 20px;
+    gap: 10px;
     padding: 5px 25px;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-.button {
+.delete {
     border: none;
     background: #d7263d;
     padding: 10px 20px;
@@ -63,7 +46,10 @@
     cursor: pointer;
     border-radius: 5px;
 }
-.buttonUpdate {
+.update {
+    text-decoration: none;
+}
+.textUpdate {
     border: none;
     background: #522D6D;
     padding: 10px 20px;
@@ -71,9 +57,7 @@
     letter-spacing: 2px;
     cursor: pointer;
     border-radius: 5px;
-}
-.fff {
-    position: relative;
+    text-align: center;
 }
 .modal {
     position: absolute;
@@ -88,4 +72,13 @@
 }
 .modalButtons button {
     margin: 10px 0 0 0;
+}
+.buttonUpdate {
+    border: none;
+    background: #522D6D;
+    padding: 10px 20px;
+    color: #f8f9fa;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-radius: 5px;
 }

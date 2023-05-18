@@ -28,11 +28,10 @@ export default function OrdersDelivered() {
 
              <div className={`${styles.ordersPendings} `}>
 
-                <h1>Órdenes Entregadas</h1>
+                <h1>Tu historial de órdenes</h1>
                 <div>
                     {orderHistoryUser.map((order) => (
                         <div key={order._id} className={styles.orderCard}>
-                            <p>Número de órden: {order._id}</p>
                             <h4><span className={styles.spanTitle}>Dirección de entrega: </span>{order.address[0].street}, {order.address[0].city}</h4>
                             <p><span className={styles.spanTitle}>Status: </span> {order.status}</p>
                             <p><span className={styles.spanTitle}>Observaciones del cliente: </span>{order.comment}</p>

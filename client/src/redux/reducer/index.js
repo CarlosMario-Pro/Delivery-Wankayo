@@ -293,6 +293,11 @@ export default function rootReducer (state= initialState, action) {
                 userSession: action.payload
             }
         }
+        case 'DELETE_ACCOUNT': {
+            return {
+                ...state,
+            }
+        }
 
 
         
@@ -301,6 +306,15 @@ export default function rootReducer (state= initialState, action) {
             return {
                 ...state,
                 userInfoLogin: action.payload
+            }
+
+        case 'CHANGE_PASSWORD_USER':
+            return {
+                ...state,
+            }
+        case 'CHANGE_PASSWORD':
+            return {
+                ...state,
             }
 
 

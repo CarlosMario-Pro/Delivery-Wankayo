@@ -675,6 +675,20 @@ export function registerUser (payload) {
     }
 }
 
+//Elimina permanentemente la cuenta de un usuario
+export function deleteAccountUser (idUser){
+    try {
+        return async function (dispatch) {
+            const { data } = await axios.delete(`http://localhost:3001/user/deleteAccount/${idUser}`);
+            window.location.reload();
+            window.location.href =  '/';
+            return dispatch({ type: 'DELETE_ACCOUNT', payload: data });
+        };
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 //Obtiene toda información de sesión del usuario
 export function getUserInfo(dispatch, data){
     try {
@@ -685,7 +699,33 @@ export function getUserInfo(dispatch, data){
 };
 
 //!IMPLEMENTAR deleteAccountUser o logicalDeletionUser
-//!changePasswordUser
+
+//Actualiza la constraseña de un usuario
+export function recoverPassword (idUser, payload){
+    try {
+        return async function (dispatch) {
+            const { data } = await axios.put(`http://localhost:3001/user/recoverPassword/${idUser}`, payload);
+            window.location.href =  '/login';
+            return dispatch({ type: 'CHANGE_PASSWORD_USER', payload: data });
+        };
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+//Actualiza la constraseña de un usuario
+export function changePasswordr (payload){
+    try {
+        return async function (dispatch) {
+            const { data } = await axios.put(`http://localhost:3001/user/changePasswordr`, payload);
+            window.location.href =  '/login';
+            return dispatch({ type: 'CHANGE_PASSWORD', payload: data });
+        };
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 
 //Trae todos los Usuarios con rol "user"
 export function getAllUsers(){              //!NO IMPLEMENTADA
@@ -729,8 +769,21 @@ export function postAddress (idUser, payload){
     try {
         return async function (dispatch) {
             const { data } = await axios.post(`http://localhost:3001/user/postAddress/${idUser}`, payload);
-            window.location.href =  '/panelUser/allInfoUser';
+            window.location.href =  `/panelUser/allInfoUser/${idUser}`;
             return dispatch({ type: 'POST_ADDRESS', payload: data });
+        };
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+//Actualiza la dirección de un usuario
+export function putAddress (idUser, idAddress, payload){
+    try {
+        return async function (dispatch) {
+            const { data } = await axios.put(`http://localhost:3001/user/putAddress/${idUser}/${idAddress}`, payload);
+            window.location.href =  `/panelUser/allInfoUser/${idUser}`;
+            dispatch({ type: 'PUT_ADDRESS', payload: data });
         };
     } catch (error) {
         console.log(error);
@@ -760,20 +813,6 @@ export function getIdAddress (idAddress) {
         console.log(error);
     }
 };
-
-//Actualiza la dirección de un usuario
-export function putAddress (idUser, idAddress, payload){
-    try {
-        return async function (dispatch) {
-            const { data } = await axios.put(`http://localhost:3001/user/putAddress/${idUser}/${idAddress}`, payload);
-            window.location.href =  '/panelUser/allInfoUser';
-            dispatch({ type: 'PUT_ADDRESS', payload: data });
-        };
-    } catch (error) {
-        console.log(error);
-    }
-};
-
 
 //Elimina permanetemente una dirección
 export function deleteAddress (idAddress){

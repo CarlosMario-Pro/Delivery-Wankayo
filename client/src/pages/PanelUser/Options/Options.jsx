@@ -22,8 +22,8 @@ export default function Options () {
                     <Link className={`${styles.link} ${isActive(`/panelUser/allInfoUser/UpdateInfoUser/${idUser}`)}`} to={`/panelUser/allInfoUser/UpdateInfoUser/${idUser}`} >
                         <p className={`${styles.paragraph} center`}>Actualiza tu información personal</p>
                     </Link>
-                    <Link className={`${styles.link} ${isActive(`/panelUser/allInfoUser/postAddress/${idUser}`)}`} to={`/panelUser/allInfoUser/postAddress/${idUser}`} >
-                        <p className={`${styles.paragraph} center`}>Tus direcciones</p>
+                    <Link className={`${styles.link} ${isActive(`/deleteAccount/${idUser}`)}`} to={`/deleteAccount/${idUser}`} >
+                        <p className={`${styles.paragraph} center`}>Elimina tu cuenta</p>
                     </Link>
                 </div>
             </div>

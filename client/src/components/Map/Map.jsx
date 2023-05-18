@@ -19,7 +19,7 @@ export default function Map () {
             { open: { hour: 11, minute: 0 }, close: { hour: 23, minute: 0 } },      // Lunes
             { open: { hour: 11, minute: 0 }, close: { hour: 23, minute: 0 } },      // Martes
             { open: { hour: 11, minute: 0 }, close: { hour: 23, minute: 0 } },      // Miércoles
-            { open: { hour: 11, minute: 0 }, close: { hour: 23, minute: 0 } },     // Jueves
+            { open: { hour: 11, minute: 0 }, close: { hour: 23, minute: 0 } },      // Jueves
             { open: { hour: 11, minute: 0 }, close: { hour: 23, minute: 0 } },      // Viernes
             { open: { hour: 11, minute: 0 }, close: { hour: 23, minute: 0 } },      // Sábado
         ];

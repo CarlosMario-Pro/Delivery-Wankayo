@@ -8,10 +8,12 @@ import WhatsApp from "./components/WhatsApp/WhatsApp";
 import Scroll from "./components/Scroll/Scroll";
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
-import ChangePassword from './pages/Login/ChangePassword/ChangePassword';
 import Register from './pages/Register/Register';
+import DeleteAccount from './pages/DeleteAccount/DeleteAccount';
 import Detail from './pages/Detail/Detail';
 import SearchResults from './pages/SearchResults/SearchResults';
+import RecoverPassword from './pages/PanelUser/InfoUser/RecoverPassword/RecoverPassword';
+import ChangePassword from './pages/PanelUser/InfoUser/ChangePassword/ChangePassword';
 import Error404 from './pages/Error404/Error404';
 
 import Footer from './components/Footer/Footer';
@@ -113,14 +115,16 @@ export default function App() {
                 <Route path='/' element={ <Home /> } />
                 <Route path='/login' element={ <Login /> } />
                 <Route path='/register' element={ <Register /> } />
+                <Route path='/deleteAccount/:idUser' element={ <DeleteAccount /> } />
                 <Route path='/productDetail/:idProduct' element={ <Detail /> } />
                 <Route path='/searchResults' element={ <SearchResults /> } />
+                <Route path='/recoverPassword/:idUser' element={ <RecoverPassword /> } />
                 <Route path='/changePassword' element={ <ChangePassword /> } />
 
 
                 {/* PANEL ADMIN */}
-                <Route path='/panelAdmin/products/' element={ <Products /> } />
-                <Route path="/panelAdmin/products/" element={protectRoute(<Products />, userInfoLogin.role)} />
+                <Route path='/panelAdmin/products' element={ <Products /> } />
+                <Route path="/panelAdmin/products" element={protectRoute(<Products />, userInfoLogin.role)} />
                 
                 <Route path='/panelAdmin/products/postProducts' element={protectRoute(<PostProducts />, userInfoLogin.role) } />
                 <Route path='/panelAdmin/products/putProduct/:idProduct' element={protectRoute(<PutProduct />, userInfoLogin.role) } />
