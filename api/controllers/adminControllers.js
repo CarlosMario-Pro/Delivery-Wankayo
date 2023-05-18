@@ -110,7 +110,7 @@ const getIdProduct = async (req, res) => {
 }; //GET http://localhost:3001/admin/:idProduct
 
 
-//Crea actualizar productos
+//Actualizar un producto
 const putProduct = async (req, res) => {
     const { idProduct } = req.params;
     const { code, name, pseudoName, image, description, price, promoPrice, category } = req.body;
@@ -487,38 +487,6 @@ const unlockedAdmin = async (req, res) => {                 //!NO IMPLEMENTADO A
         return res.status(status).send({ message });
     }
 }; //PUT http://localhost:3001/admin/unlockedAdmin/6430f62084de82b330f348b9
-
-
-//Cambia el rol a un usuaruio administrador
-const changeRoleAdmin = async (req, res) => {               //!NO IMPLEMENTADA, SE USA --putUserAdmin--
-    const { idAdmin } = req.params;
-    const { role } = req.body;
-    const session = await mongoose.startSession();
-    try {
-        await session.withTransaction(async (session) => {
-            const updatedUserAdmin = await User.findByIdAndUpdate(
-                idAdmin,
-                { role },
-                { users: true, session }
-            );
-            if (!updatedUserAdmin) {
-                return res.status(404).send({ message: `Al usuario con ID ${idAdmin} no se le cambió el rol` });
-            }          
-            res.status(200).json({
-                idAdmin: updatedUserAdmin._id,
-                role: updatedUserAdmin.role
-            });
-        });
-    } catch (error) {
-        console.error(error);
-        const status = error.status || 500;
-        const message = error.message || "Ocurrió un error al cambiar el rol";
-        return res.status(status).send({ message });
-    } finally {
-        await session.endSession();
-    }
-}; //PUT http://localhost:3001/admin/changeRoleAdmin/6430f62084de82b330f348b9
-
 
 
 //^CATEGORIES
@@ -1265,7 +1233,6 @@ const getOrdersHistory = async (req, res) => {
     try {
         await session.withTransaction(async (session) => {
             const orders = await Orders.find({ 
-                // isArchive: true, 
                 status: { $nin: ["Pendiente", "En preparación", "En camino"] } 
             }).populate('user address').session(session);
             if (!orders) return res.status(404).send({ message: "Orden no encontrada" });
@@ -1301,6 +1268,7 @@ const trueLogicalOrdersHistory = async (req, res) => {
         return res.status(status).send({ message });
     }
 }; // PUT - http://localhost:3001/admin/trueLogicalOrdersHistory/:idOrder
+
 
 //Desmarca una orden del archivo
 const falseLogicalOrdersHistory = async (req, res) => {
@@ -1476,7 +1444,6 @@ module.exports = {
     falseLogicalDeletionAdmin,
     blockedAdmin,
     unlockedAdmin,
-    changeRoleAdmin,
     
     postCategory,
     getCategories,

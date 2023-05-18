@@ -29,7 +29,6 @@ adminRouter.put("/trueLogicalDeletionAdmin/:idAdmin", admin.trueLogicalDeletionA
 adminRouter.put("/falseLogicalDeletionAdmin/:idAdmin", admin.falseLogicalDeletionAdmin);        //PUT para quitar borrado lógico a un usuario administrador
 adminRouter.put("/blockedAdmin/:idAdmin", admin.blockedAdmin);                                  //PUT para bloquear un usuario administrador
 adminRouter.put("/unlockedAdmin/:idAdmin", admin.unlockedAdmin);                                //PUT para desbloquear un usuario administrador
-adminRouter.put("/changeRoleAdmin/:idAdmin", admin.changeRoleAdmin);                            //PUT para cambiar el rol a un usuario administrador
 
 
 //PRODUCTOS

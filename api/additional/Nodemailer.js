@@ -96,22 +96,6 @@ module.exports = {
     },
 
 
-    mailNewPassword: (email, link) => {
-        return {
-            from: EMAIL,
-            to: email,
-            subject: 'Nueva contraseña',
-            html: `
-                <p>Este es tu correo de solicitud de cambio de contraseña.</p>
-                <br/>
-                <p><b>Da click en el siguiente enlace.</b></p>
-                <br/>
-                <a href=${link} ><b>LINK</b></a>
-            `
-        }
-    },
-
-
     mailCancelOrder: (email, cancelMessage) => {
         return {
             from: EMAIL,
@@ -127,6 +111,67 @@ module.exports = {
         }
     },
 
+
+    mailNewPassword: (email, link) => {
+        return {
+            from: EMAIL,
+            to: email,
+            subject: 'Has solicitado el cambio de tu contraseña a cuenta Wankayo',
+            html: `
+                <p>Este es tu correo de solicitud para cambio de contraseña.</p>
+                <br/>
+                <p><b>Da click en el siguiente enlace.</b></p>
+                <br/>
+                <a href=${link} ><b>LINK</b></a>
+            `
+        }
+    },
+
+
+    mailConfirmNewPassword: (email) => {
+        return {
+            from: EMAIL,
+            to: email,
+            subject: 'Wankayo confirma el cambio de tu contraseña',
+            html: `
+                <p>Has cambiado exitosamente la contraseña, si no fuiste tu, comunícate de inmediato con nosotros.</p>
+                <br/>
+                <p><b>Da click en el siguiente enlace.</b></p>
+                <br/>
+            `
+        }
+    },
+
+
+    mailConfirmActivateAccountNewPassword: (email) => {
+        return {
+            from: EMAIL,
+            to: email,
+            subject: 'Wankayo confirma la activación de tu cuenta y el cambio de contraseña',
+            html: `
+                <p>Has activado tu cuenta exitosamente y cambiaste la contraseña, si no fuiste tu, comunícate de inmediato con nosotros.</p>
+                <br/>
+                <p><b>Da click en el siguiente enlace.</b></p>
+                <br/>
+            `
+        }
+    },
+
+
+    emailAccountBlocked: (email, link) => {
+        return {
+            from: EMAIL,
+            to: email,
+            subject: 'Tu cuenta ha sido bloqueada',
+            html: `
+                <p>Wankayo te informa que has bloqueado tu cuenta por exceso de ingresasos fallidos.</p>
+                <br/>
+                <p><b>Para desbloquear tu cuenta, te pedimos que hagas clic en el siguiente enlace.</b></p>
+                <br/>
+                <a href=${link} ><b>LINK</b></a>
+            `
+        }
+    },
 
 
     mailMasive: (email) => {

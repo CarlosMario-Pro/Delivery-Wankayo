@@ -1,36 +1,52 @@
 require("dotenv").config();
 const { CLIENT_ID_GOOGLE, CLIENT_SECRET_GOOGLE } = process.env;
+const { transporter, emailAccountBlocked } = require("./additional/Nodemailer");
 const User = require("./models/Users");
 const bcrypt = require("bcryptjs");
 const localStrategy = require("passport-local").Strategy;
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 
 
-
 module.exports = function (passport) {
-    passport.use(
-        "local",
-        new localStrategy(
-            { usernameField: "email" },
-            async (email, password, done) => {
-                // console.log(email, password)
-                try {
-                    const user = await User.findOne({ email: email });
-                    // console.log(user.email)
-                    if (!user) return done(null, false);
-                    const result = bcrypt.compareSync(password, user.password); // Cambio aquí
-                    // console.log(result)
-                    if (result === true) {
-                        return done(null, user);
-                    } else {
-                        return done(null, false);
+    passport.use("local", new localStrategy(
+        { usernameField: "email" },
+        async (email, password, done) => {
+            try {
+                const user = await User.findOne({ email: email });
+                if (!user) return done(null, false, { message: "Incorrect email or password" });
+                if (user.isBlocked) return done(null, false, { message: "Usuario bloqueado" });
+                const result = bcrypt.compareSync(password, user.password);
+                if (result === true) {
+                    user.loginAttempts = 0;
+                    await user.save();
+                    return done(null, user);
+                } else {
+                    user.loginAttempts += 1;
+                    if (user.loginAttempts === 3) {
+                        user.isBlocked = true;
+                        await user.save();
+
+                        const link = `http://localhost:3000/recoverPassword/${user._id}`;
+                        const mailOptions = emailAccountBlocked(email, link);
+                        transporter.sendMail(mailOptions, (error, info) => {
+                            if (error) {
+                                console.log(error);
+                            } else console.log(`Correo electrónico enviado: ${info.response}`);
+                        });
+                        return done(null, false, { message: "Has bloqueado tu cuenta" });
                     }
-                } catch (err) {
-                    throw err;
+                    if (user.loginAttempts > 3) {
+                        return done(null, false, { message: "Usuario bloqueado" });
+                    }
+                    await user.save();
+                    return done(null, false, { message: "Correo o contraseña incorrecta" });
                 }
+            } catch (err) {
+                return done(err);
             }
-        )
-    );
+        }
+    )); // POST - http://localhost:3001/login con { "email": "cmario.reyesp@gmail.com", "password": "Carlos..150" }
+
 
     passport.use(
         new GoogleStrategy(

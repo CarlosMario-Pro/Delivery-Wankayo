@@ -1,7 +1,6 @@
 const { Schema, model } = require("mongoose");
 
 
-//!PONER LA FECHA DE NACIMIENTO
 const usersSchema = new Schema({
     name: {
         type: String,
@@ -33,6 +32,11 @@ const usersSchema = new Schema({
         type: String,
         // required: true
     },
+    role: {
+        type: String,
+        enum: ["superAdmin", "admin", "user"],
+        default: "user"
+    },
     signupDate: {
         type: Date,
         default: Date.now(),
@@ -41,10 +45,9 @@ const usersSchema = new Schema({
         type: Boolean,
         default: false
     },
-    role: {
-        type: String,
-        enum: ["superAdmin", "admin", "user"],
-        default: "user"
+    loginAttempts : {
+        type: Number,
+        default: 0
     },
     isBlocked: {
         type: Boolean,
@@ -62,7 +65,7 @@ const usersSchema = new Schema({
         type: String,
         // required: true,
     },
-    orders: [{ type: Schema.Types.ObjectId, ref: "Orders" }],
+
     address: [{ type: Schema.Types.ObjectId, ref: "Address" }]
 },
 { timestamps: true, versionKey: false });
@@ -94,5 +97,7 @@ module.exports = model("Users", usersSchema);
 - Sured
 - Ding
 
+
+//!PONER LA FECHA DE NACIMIENTO
 
 */

@@ -3,7 +3,7 @@ const User = require("../models/Users");
 const Address = require("../models/Address");
 const Orders = require("../models/Orders");
 const jwt = require('jsonwebtoken');
-const { transporter, mailWelcome, mailNewPassword, mailDelete, mailOrderCreate, mailMasive } = require("../additional/Nodemailer");
+const { transporter, mailWelcome, mailConfirmActivateAccountNewPassword, mailNewPassword, mailConfirmNewPassword, mailDelete, mailOrderCreate, mailMasive } = require("../additional/Nodemailer");
 const bcrypt = require('bcryptjs');
 const dotenv = require("dotenv");
 dotenv.config();
@@ -52,8 +52,30 @@ const registerUsers = async (req, res) => {
 }; // POST http://localhost:3001/user/register con { "name": "Carlos", "lastName": "Reyes", "email": "carlosmario.reyesp@gmail.com", "docIdentity": "AAA-1151111", "password": "Carlos..15", "phone": "3128052002" }
 
 
+//Marca una orden como archivada
+const unblockUser = async (req, res) => {
+    const { idUser } = req.params;
+    const session = await mongoose.startSession();    
+    try {
+        await session.withTransaction(async (session) => {
+            const user = await User.findById(idUser);
+            if (!user) return res.status(404).send({ message: "Usuario no encontrado" });
+            user.loginAttempts = 0;
+            user.isBlocked = false;
+            await user.save();
+            res.status(200).send({ message: "Usuario activado con éxito" });
+        });
+    } catch (error) {
+        console.error(error);
+        const status = error.status || 500;
+        const message = error.message || "Ocurrió un error al enviar a archivo la orden";
+        return res.status(status).send({ message });
+    }
+}; // PUT - http://localhost:3001/user/unblockUser/:idUser
+
+
 //Elimina la cuenta de un usuario
-const deleteAccountUser = async (req, res) => {         //!NO IMPLEMENTADA
+const deleteAccountUser = async (req, res) => {
     const { idUser } = req.params;
     try {
         const user = await User.findByIdAndRemove(idUser);
@@ -73,7 +95,7 @@ const deleteAccountUser = async (req, res) => {         //!NO IMPLEMENTADA
     } catch (error) {
         res.status(500).send("Error interno del servidor.");
     }
-}; // DELETE http://localhost:3001/user/deleteAccount/:idUser
+}; // DELETE - http://localhost:3001/user/deleteAccount/:idUser
 
 
 //Eliminado lógico de un usuario
@@ -99,35 +121,99 @@ const logicalDeletionUser = async (req, res) => {           //!NO IMPLEMENTADA
 };// PUT http://localhost:3001/user/logicalDeletionUser/:idUser
 
 
-//Cambio de contraseña para un usuario
-const changePasswordUser = async (req, res) => {            //!NO IMPLEMENTADA
-    const { email } = req.body;
+//Activar cuenta y cambiar contraseña de un usuario
+const recoverPassword = async (req, res) => {
+    const { idUser } = req.params;
+    const { password } = req.body;
+    console.log(idUser, password)
+    const session = await mongoose.startSession();
     try {
-        const user = await User.findOne({ email: email });
-        if (!user) {
-            return res.status(404).send("Email not found");
-        }
-        const token = jwt.sign({ name: user.name, id: user._id }, process.env.JWT_SECRET, { expiresIn: '30m' });
-        const hashedToken = await bcrypt.hash(token, 10);
-        user.passwordResetToken = hashedToken;
-        user.passwordResetExpires = Date.now() + 30 * 60 * 1000;
-        await user.save();
-        const LinknewPassword = "http://localhost:3000/NewPassword/" + token;
-
-        const mailOptions = mailNewPassword(email, LinknewPassword);
-        transporter.sendMail(mailOptions, (error, info) => {
-            if (error) {
-                console.log(error);
-            } else {
-                console.log(`Correo electrónico enviado: ${info.response}`);
+        await session.withTransaction(async (session) => {
+            const user = await User.findOne({ _id: idUser });
+            if (!user) {
+                return res.status(404).send("Usuario no encontrado");
             }
+            const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/;
+            const isValidPassword = passwordRegex.test(password);
+            if (!isValidPassword) {
+                return res.status(400).send({ message: 'La contraseña no cumple los requisitos mínimos' });
+            }
+            const hashedPassword = await bcrypt.hash(password, 10);
+            user.password = hashedPassword;
+            console.log('Bloqueo ', user.isBlocked)
+
+            if(user.isBlocked === false) {
+                user.loginAttempts = 0;
+                await user.save();
+                const mailOptions = mailConfirmNewPassword(user.email);
+                transporter.sendMail(mailOptions, (error, info) => {
+                    if (error) {
+                        console.log(error);
+                    } else {
+                        console.log(`Correo electrónico enviado: ${info.response}`);
+                    }
+                });
+            } if (user.isBlocked === true) {
+                user.isBlocked = false;
+                user.loginAttempts = 0;
+                await user.save();
+                const mailOptions = mailConfirmActivateAccountNewPassword(user.email);
+                transporter.sendMail(mailOptions, (error, info) => {
+                    if (error) {
+                        console.log(error);
+                    } else {
+                        console.log(`Correo electrónico enviado: ${info.response}`);
+                    }
+                });
+            }
+            res.status(201).send('Contraseña actualizada exitosamente');
         });
-        res.status(201).send('Correo enviado exitosamente');
     } catch (error) {
-        console.log(error);
-        res.status(500).send("An error has occurred: " + error.message);
+        console.error(error);
+        const status = error.status || 500;
+        const message = error.message || "Ocurrió un error al actualizar el producto";
+        return res.status(status).send({ message });
+    } finally {
+        await session.endSession();
     }
-}; // PUT - http://localhost:3001/user/changePasswordUser/:idUser con { "email": "cmario.reyesp@gmail.com" }
+};  //PUT - http://localhost:3001/user/recoverPassword/:idUser con { "password" : "Carlos..1000" }
+
+
+//Cambia la contraseña de un usuario
+const changePasswordr = async (req, res) => {
+    const { email } = req.body;
+    const session = await mongoose.startSession();
+    try {
+        await session.withTransaction(async (session) => {
+            const user = await User.findOne({ email: email });
+            if (!user) {
+                return res.status(404).send("Usuario no encontrado");
+            }
+            const link = `http://localhost:3000/recoverPassword/${user._id}`;
+            const mailOptions = mailNewPassword(email, link);
+            transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log(`Correo electrónico enviado: ${info.response}`);
+                }
+            });
+            res.status(201).send('Contraseña actualizada exitosamente');
+        });
+    } catch (error) {
+        console.error(error);
+        const status = error.status || 500;
+        const message = error.message || "Ocurrió un error al actualizar el producto";
+        return res.status(status).send({ message });
+    } finally {
+        await session.endSession();
+    }
+};  //PUT - http://localhost:3001/user/changePasswordr/:idUser con { "password" : "Carlos..1000"}
+
+
+
+
+
 
 
 //Obtener toda la información de un solo usuario por ID
@@ -489,10 +575,12 @@ const getUserOrdersActivesInPreparation = async (req, res) => {     //!SE IMPLEM
 
 module.exports = {
     registerUsers,
+    unblockUser,
+    recoverPassword,
+    changePasswordr,
     deleteAccountUser,
     // confirmUser,
     logicalDeletionUser,
-    changePasswordUser,
     getAllUsers,
     getAllEmails,
     getAllInfoUser,
