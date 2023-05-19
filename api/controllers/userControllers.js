@@ -49,7 +49,7 @@ const registerUsers = async (req, res) => {
     } catch {
         res.status(500).send('Error al registrar el usuario');
     }
-}; // POST http://localhost:3001/user/register con { "name": "Carlos", "lastName": "Reyes", "email": "carlosmario.reyesp@gmail.com", "docIdentity": "AAA-1151111", "password": "Carlos..15", "phone": "3128052002" }
+}; // POST - http://localhost:3001/user/register con { "name": "Carlos", "lastName": "Reyes", "email": "carlosmario.reyesp@gmail.com", "docIdentity": "AAA-1151111", "password": "Carlos..15", "phone": "3128052002" }
 
 
 //Marca una orden como archivada
@@ -125,7 +125,6 @@ const logicalDeletionUser = async (req, res) => {           //!NO IMPLEMENTADA
 const recoverPassword = async (req, res) => {
     const { idUser } = req.params;
     const { password } = req.body;
-    console.log(idUser, password)
     const session = await mongoose.startSession();
     try {
         await session.withTransaction(async (session) => {
@@ -140,7 +139,6 @@ const recoverPassword = async (req, res) => {
             }
             const hashedPassword = await bcrypt.hash(password, 10);
             user.password = hashedPassword;
-            console.log('Bloqueo ', user.isBlocked)
 
             if(user.isBlocked === false) {
                 user.loginAttempts = 0;
@@ -209,11 +207,6 @@ const changePasswordr = async (req, res) => {
         await session.endSession();
     }
 };  //PUT - http://localhost:3001/user/changePasswordr/:idUser con { "password" : "Carlos..1000"}
-
-
-
-
-
 
 
 //Obtener toda la información de un solo usuario por ID
@@ -342,7 +335,6 @@ const getIdAddress = async (req, res) => {
       await session.endSession();
     }
 }; //GET http://localhost:3001/user/getIdAddress/:idAddress
-
 
 
 //Actualizar una dirección del usuario
