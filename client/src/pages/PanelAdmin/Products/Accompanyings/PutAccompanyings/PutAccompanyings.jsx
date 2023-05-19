@@ -7,20 +7,45 @@ import PanelAdmin from '../../../PanelAdmin';
 import Options from '../../Options/Options';
 import styles from './PutAccompanyings.module.css';
 
-const initialAccompanyingsState = {
-    code: '',
-    name: '',
-    description: '',
-    price: '',
-    promoPrice: '',
-    category: ''
+
+function validate (product) {
+    let errors = {};
+    if(!product.code){
+        errors.code = "El código de tu producto requerido";
+    }
+    if(!product.name){
+        errors.name = "EL nombre de tu producto es requerido";
+    }
+    if(!product.description){
+        errors.description = "La descripci+on de tu producto es requerida";
+    }
+    if(!product.price){
+        errors.price = "El precio de tu producto es requerido";
+    } else if (!/^[0-9]+(\.[0-9]+)?$/.test(product.price)) {
+        errors.price = "El precio de tu producto es requerido";
+    }
+    if(!product.category){
+        errors.category = "La categoría de tu producto es requerida";
+    }
+    return errors;
 };
 
+
 export default function PutAccompanyings() {
+    const [touched, setTouched] = useState({});
+    const [ errors, setErrors ] = useState({});
     const dispatch = useDispatch();
     const { idAccompanyings } = useParams();
     
-    const [accompanyings, setAccompanyings] = useState(initialAccompanyingsState);
+    const [accompanyings, setAccompanyings] = useState({
+        code: '',
+        name: '',
+        description: '',
+        price: '',
+        promoPrice: '',
+        category: ''
+    });
+
     const { categoriesId, accompanyingsDetails } = useSelector(state => ({
         categoriesId: state.categoriesId,
         accompanyingsDetails: state.accompanyingsDetails
@@ -29,36 +54,56 @@ export default function PutAccompanyings() {
     useEffect(() => {
         dispatch(getCategories());
         dispatch(getIdAccompanyings(idAccompanyings));
-    }, [dispatch, idAccompanyings]);
+    }, [dispatch]);
+
 
     useEffect(() => {
         if (accompanyingsDetails) {
-            setAccompanyings(accompanyingsDetails);
+        setAccompanyings(prevAccompanyings => ({
+            ...prevAccompanyings,
+            ...accompanyingsDetails
+        }));
         }
     }, [accompanyingsDetails]);
 
-    const handleInputChange = (event) => {
-        const { name, value } = event.target;
-        setAccompanyings({
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setAccompanyings((prevAccompanyings) => ({
+            ...prevAccompanyings,
+            [name]: value
+        }));
+        setErrors(validate({
             ...accompanyings,
             [name]: value
-        });
+        }));
+        setTouched((prevTouched) => ({
+            ...prevTouched,
+            [name]: true
+        }));
     };
 
-    const handleSelectChange = (event) => {
+    function handleSelectChange (event) {
         const selectedCategoryId = event.target.value;
-        setAccompanyings({
-            ...accompanyings,
+        setAccompanyings(prevAccompanyings => ({
+            ...prevAccompanyings,
             category: selectedCategoryId
-        });
+        }));
     };
+
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const accompanyingsToSend = { ...accompanyings };
-            dispatch(putAccompanyings(idAccompanyings, accompanyingsToSend));
-            setAccompanyings(initialAccompanyingsState);
+            dispatch(putAccompanyings(idAccompanyings, accompanyings));
+            setAccompanyings({
+                code: '',
+                name: '',
+                description: '',
+                price: '',
+                promoPrice: '',
+                category: ''
+            });
         } catch (error) {
             console.log(error);
         }
@@ -90,18 +135,22 @@ export default function PutAccompanyings() {
                         <div>
                             <label className={`${styles.label} `} htmlFor="code">Código:</label>
                             <input className={`${styles.input} `} type="text" name="code" value={accompanyings.code} onChange={handleInputChange} />
+                            {touched.code && errors.code && <p className={`${styles.danger} `}>{errors.code}</p>}
                         </div>
                         <div>
                             <label className={`${styles.label} `} htmlFor="name">Nombre:</label>
                             <input className={`${styles.input} `} type="text" name="name" value={accompanyings.name} onChange={handleInputChange} />
+                            {touched.name && errors.name && <p className={`${styles.danger} `}>{errors.name}</p>}
                         </div>
                         <div>
                             <label className={`${styles.label} `} htmlFor="description">Descripción:</label>
                             <input className={`${styles.input} `} type="text" name="description" value={accompanyings.description} onChange={handleInputChange} />
+                            {touched.description && errors.description && <p className={`${styles.danger} `}>{errors.description}</p>}
                         </div>
                         <div>
                             <label className={`${styles.label} `} htmlFor="price">Precio:</label>
                             <input className={`${styles.input} `} type="number" name="price" value={accompanyings.price} onChange={handleInputChange} />
+                            {touched.price && errors.price && <p className={`${styles.danger} `}>{errors.price}</p>}
                         </div>
                         <div>
                             <label className={`${styles.label} `} htmlFor="promoPrice">Precio de promoción:</label>
@@ -115,8 +164,16 @@ export default function PutAccompanyings() {
                                     <option key={category._id} value={category._id}>{category.category}</option>
                                 ))}
                             </select>
+                            {touched.category && errors.category && <p className={`${styles.danger} `}>{errors.category}</p>}
                         </div>
-                        <button className={`${styles.button} `} type="submit">Actualizar Acompañamiento</button>
+                        {   
+                            !errors.code && accompanyings.code.length > 0 &&
+                            !errors.name && accompanyings.name.length > 0 &&
+                            !errors.description && accompanyings.description.length > 0 &&
+                            !errors.price && accompanyings.price.length > 0 &&
+                            !errors.category && accompanyings.category.length > 0 ?
+                            <button className={`${styles.button} `} type="submit">Actualizar Acompañamiento</button> : <button className={`${styles.button} `} type="submit">Actualizar Acompañamiento</button>
+                        }
                     </form>
                 </div>
             </div>

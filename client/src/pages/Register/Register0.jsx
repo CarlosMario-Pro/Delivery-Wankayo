@@ -34,7 +34,6 @@ function validate (product) {
     return errors;
 };
 
-
 export default function Register() {
     const [ errors, setErrors ] = useState({});
     const [touched, setTouched] = useState({});
@@ -52,15 +51,15 @@ export default function Register() {
     });
 
     const [confirmPassword, setConfirmPassword] = useState("");
-    function onChangeConfirmPassword (e) {
-        if (e.target.name === "confirmPassword") {
-            setConfirmPassword(e.target.value);
-        }
+    const onChangeConfirmPassword = (e) => {
+    if (e.target.name === "confirmPassword") {
+        setConfirmPassword(e.target.value);
+    }
     };
 
     const { name, lastName, docIdentity, email, password, phone } = formData;
 
-    function onChange (e) {
+    const onChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevFormData) => ({
             ...prevFormData,
@@ -84,9 +83,11 @@ export default function Register() {
         }
         try {
             dispatch(registerUser(formData));
+            toast.success("Registrado correctamente");
+            navigate("/login");
         } catch (error) {
+            console.log(error);
             toast.error("Error en el registro");
-            return;
         }
     };
 

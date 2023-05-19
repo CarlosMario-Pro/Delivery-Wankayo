@@ -8,7 +8,6 @@ export default function OrdersPendings() {
     const [message, setMessage] = useState({
         cancelMessage: ''
     });
-    console.log(message)
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;

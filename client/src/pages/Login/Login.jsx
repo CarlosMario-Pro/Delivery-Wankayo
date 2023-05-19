@@ -9,7 +9,20 @@ import styles from "./Login.module.css";
 import axios from 'axios';
 
 
+function validate (input) {
+    let errors = {};
+    if(!input.email) {
+        errors.email = "Ingresa un email válido";
+    } else if(!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(input.email)) {
+        errors.email = "Ingresa un email válido";
+    }
+    return errors;
+};
+
+
 export default function Login() {
+    const [ errors, setErrors ] = useState({});
+    const [touched, setTouched] = useState({});
     const navigate = useNavigate()
     const dispatch = useDispatch();
 
@@ -24,10 +37,21 @@ export default function Login() {
 
     const { email, password } = formData;
 
-    const onChange = (e) => setFormData({
-        ...formData,
-        [e.target.name]: e.target.value,
-    });
+    const onChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            [name]: value
+        }));
+        setErrors(validate({
+            ...formData,
+            [name]: value
+        }));
+        setTouched((prevTouched) => ({
+            ...prevTouched,
+            [name]: true
+        }));
+    };
 
     const toggleShowPassword = () => {
         setShowPassword((prevState) => !prevState);
@@ -60,32 +84,42 @@ export default function Login() {
             <div className={`${styles.general} `}>
                 <form className={`${styles.form} `} onSubmit={onSubmit}>
                     <div>
-                        <label className={`${styles.label} `} htmlFor="email">Email</label>
-                        <input className={`${styles.input} `} type="email" name="email" value={email} onChange={onChange} required />
-                    </div>
-                    <div className={`${styles.password} `}>
-                        <div className={styles.passwordInput}>
-                            <label htmlFor="password">Contraseña</label>
-                            {showPassword ? (
-                                    <RiEyeOffFill onClick={toggleShowPassword} className={`${styles.passwordIcon}`} />
-                                ) : (
-                                    <RiEyeFill onClick={toggleShowPassword} className={`${styles.passwordIcon}`} />
-                            )}
+                        <div>
+                            <label className={styles.label} htmlFor="email">Email</label>
+                            <input className={styles.input} type="email" name="email" value={email} onChange={onChange} />
+                            {touched.email && errors.email && <p className={`${styles.danger} `}>{errors.email}</p>}
                         </div>
-                        <input type={showPassword ? "text" : "password"} name="password" value={password} onChange={onChange} minLength="6" required />
+
+                        <div className={styles.password}>
+                            <div className={`${styles.passwordInput} jcspaceBetween`}>
+                                <label className={`${styles.label} `} htmlFor="password">Contraseña</label>
+                                {showPassword ? (
+                                        <RiEyeOffFill onClick={toggleShowPassword} className={`${styles.passwordIcon}`} />
+                                    ) : (
+                                        <RiEyeFill onClick={toggleShowPassword} className={`${styles.passwordIcon}`} />
+                                )}
+                            </div>
+                            <input className={`${styles.input} `} type={showPassword ? "text" : "password"} name="password" value={password} onChange={onChange} />
+                            {errors.password && <p className={`${styles.danger} `}>{ errors.password }</p>}
+                        </div>
+                        {
+                            !errors.email && formData.email.length > 0 &&
+                            !errors.password && formData.password.length > 0 ?
+                            <button className={`${styles.button} `} type="submit">Login</button> : <button className={`${styles.button} `} type="submit">Login</button>
+                        }
                     </div>
-                    <button className={`${styles.button} `} type="submit">Login</button>
+
                     <div className={`${styles.register} `}><Link className={`${styles.registerLink} `} to="/changePassword">¿Olvidaste tu comtraseña?</Link></div>
                     <div className={`${styles.register} `}>¿No tienes una cuenta? <Link className={`${styles.registerLink} `} to="/register">Regístrate aquí</Link></div>
                 </form>
                 {showEmailInstructions && (
                     <div className={`${styles.blockedAccount} `}>
-                        Revisa tu bandeja de correo electrónico para desbloquear tu cuenta.
+                        <p>Revisa tu bandeja de correo electrónico para desbloquear tu cuenta</p>
                     </div>
                 )}
                 {showEmailInstructionsPPP && (
                     <div className={`${styles.blockedAccount} `}>
-                        Revisa tu bandeja de correo electrónico para desbloquear tu cuenta.
+                        <p>Revisa tu bandeja de correo electrónico para desbloquear tu cuenta</p>
                     </div>
                 )}
             </div>

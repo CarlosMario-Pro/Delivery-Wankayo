@@ -2,6 +2,7 @@
     width: 1200px;
     margin: 0 auto;
     padding: 80px 0 0 0;
+    height: 100vh;
 }
 .panelAdmin {
     width: 380px;
@@ -26,11 +27,17 @@
 }
 .label {
     display: block;
-    margin-bottom: 5px;
+    margin: 5px;
 }
 .input {
+    padding: 0 0 0 8px;
     width: 450px;
-    margin: 0 0 10px 0;
+    margin: 0 0 30px 0;
+}
+.danger {
+    color: red;
+    position: absolute;
+    margin: -30px 0 0 0;
 }
 .select {
     display: flex;
@@ -52,6 +59,17 @@
     background: #522D6D;
     width: 200px;
     color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 auto;
+}
+.disable {
+    cursor: default;
+    color: #adb5bd;    
+    padding: 10px 20px;
+    background: #e9ecef;
+    width: 200px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
