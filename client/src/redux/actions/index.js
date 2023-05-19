@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { toast } from "react-toastify";
 // import Cookies from "js-cookie";
 
 
@@ -663,17 +664,35 @@ export function getUserOrdersActivesOnTheWay(idUser){
 
 //^USER--------------------------------------------------------------------------------
 //Register
-export function registerUser (payload) {
-    try {
-        return async function (dispatch) {
+export function registerUser(payload) {
+    return async function (dispatch) {
+        try {
             const { data } = await axios.post(`http://localhost:3001/user/register`, payload);
-            // window.location.href =  '/';
-            return dispatch({ type: 'REGISTER_USER', payload: data });
-        };        
-    } catch (error) {
-        console.log(error);
+            dispatch({ type: 'REGISTER_USER', payload: data });
+            toast.success('Registrado correctamente');
+            setTimeout(() => {
+                window.location.href = '/login';
+            }, 5000); // 5000 milisegundos = 5 segundos
+        } catch (error) {
+            if (error.response && error.response.status === 409) {
+                toast.error('El correo electrónico ya está registrado');
+            } else {
+                toast.error('Error en el registro');
+            }
+        }
     }
 }
+// export function registerUser (payload) {
+//     console.log(payload)
+//     try {
+//         return async function (dispatch) {
+//             const { data } = await axios.post(`http://localhost:3001/user/register`, payload);
+//             return dispatch({ type: 'REGISTER_USER', payload: data });
+//         };        
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
 
 //Elimina permanentemente la cuenta de un usuario
 export function deleteAccountUser (idUser){

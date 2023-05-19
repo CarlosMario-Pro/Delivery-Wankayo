@@ -20,24 +20,11 @@ export default function Detail () {
 
     useEffect(() => {
         dispatch(getIdProduct(idProduct));
-    }, [dispatch, idProduct]);
-
-    useEffect(() => {
         dispatch(getDrinks());
-    }, [dispatch]);
-
-    useEffect(() => {
         dispatch(getAccompanyings());
-    }, [dispatch]);
-
-    useEffect(() => {
         dispatch(getExtras());
-    }, [dispatch]);
-
-    useEffect(() => {
         dispatch(getSauces());
     }, [dispatch]);
-
 
     //Calcular el precio del producto principal
     const [count, setCount] = useState(1);

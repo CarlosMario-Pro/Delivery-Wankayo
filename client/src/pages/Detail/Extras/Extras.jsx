@@ -37,7 +37,6 @@ export default function Extras () {
         }
         return total;
     };
-    // Esta función calcula el precio total de todas las bebidas seleccionadas
 
     useEffect(() => {
         dispatch(getExtras());
