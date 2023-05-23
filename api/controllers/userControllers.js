@@ -380,6 +380,7 @@ const deleteAddress = async (req, res) => {     //!IMPLEMENTADA CON OTRO NOMBRE
 // Crea una orden y envía el correo de confirmación con todos los productos escogidos
 const postOrders = async (req, res) => {
     const { products, total, user, address, comment, cancelMessage  } = req.body;
+    console.log(products, total, user, address, comment, cancelMessage)
     try {
         const order = new Orders({ products, total, user, address, comment, cancelMessage  });
         await order.save();
@@ -432,19 +433,6 @@ const getIdUserOrders = async (req, res) => {
 }; //GET - http://localhost:3001/user/getIdUserOrders/:idUser
 
 
-//Obtener todas las órdenes EN CAMINO de un usuario
-const getUserOrdersActivesOnTheWay = async (req, res) => {
-    const { idUser } = req.params;
-    try {
-        const deliveredOrders = await Orders.find({ user: idUser, status: "En camino" }).populate("address");
-        return res.status(200).json(deliveredOrders);
-    } catch (error) {
-        console.error(error);
-        const status = error.status || 500;
-        const message = error.message || "Ocurrió un error al obtener las órdenes entregadas";
-        return res.status(status).send({ message });
-    }
-}; //GET - http://localhost:3001/user/getUserOrdersActivesOnTheWay/:idUser
 
 
 
@@ -536,33 +524,37 @@ const getUserOrdersDelivered  = async (req, res) => {               //!SE IMPLEM
 }; //GET - http://localhost:3001/user/getUserOrdersDelivered/:idUser
 
 
-const getUserOrdersActivesPending = async (req, res) => {           //!SE IMPLEMENTO OTRA
-    const { idUser } = req.params;
-    try {
-        const deliveredOrders = await Orders.find({ user: idUser, status: "Pendiente" }).populate("address");
-        return res.status(200).json(deliveredOrders);
-    } catch (error) {
-        console.error(error);
-        const status = error.status || 500;
-        const message = error.message || "Ocurrió un error al obtener las órdenes entregadas";
-        return res.status(status).send({ message });
-    }
-};  //GET - http://localhost:3001/user/getUserOrdersActivesPending/:idUser
 
 
-//Obtener todas las órdenes EN PREPARACION de un usuario
-const getUserOrdersActivesInPreparation = async (req, res) => {     //!SE IMPLEMENTO OTRA
-    const { idUser } = req.params;
-    try {
-        const deliveredOrders = await Orders.find({ user: idUser, status: "En preparación" }).populate("address");
-        return res.status(200).json(deliveredOrders);
-    } catch (error) {
-        console.error(error);
-        const status = error.status || 500;
-        const message = error.message || "Ocurrió un error al obtener las órdenes entregadas";
-        return res.status(status).send({ message });
-    }
-}; //GET - http://localhost:3001/user/getUserOrdersActivesInPreparation/:idUser
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 module.exports = {
@@ -591,10 +583,5 @@ module.exports = {
     getUserOrdersDelivered,
 
 
-    getUserOrdersActivesPending,
-    getUserOrdersActivesInPreparation,
-    getUserOrdersActivesOnTheWay,
-    // getOrderHistory,
-    // putOrder,
-    // deleteOrders -- Se usará la delete del Admin
+
 };

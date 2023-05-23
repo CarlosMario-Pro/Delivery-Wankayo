@@ -384,7 +384,7 @@ const products = [
     {
         code: "BF-60-109",
         name: "Guarana ",
-        image: "",
+        image: "https://res.cloudinary.com/dmkklptzi/image/upload/v1684777679/images/basyoex2qd83wxepeuzg.jpg",
         description: "450ml",
         category: "Bebidas",
         price: 3
