@@ -2,7 +2,7 @@ const bebidas = [
     {
         code: "BC-60-101",
         name: "Infusión de Aniz",
-        image: "",
+        image: "https://res.cloudinary.com/dmkklptzi/image/upload/v1684285749/images/nuiem3flfobd2vj20woo.png",
         description: "Pendiente por definir",
         category: "Bebidas",
         price: 2.5
@@ -10,7 +10,7 @@ const bebidas = [
     {
         code: "BC-60-102",
         name: "Infusión de Manzanilla",
-        image: "",
+        image: "https://res.cloudinary.com/dmkklptzi/image/upload/v1684285749/images/iaggagkew02ugmsgvxxx.jpg",
         description: "Pendiente por definir",
         category: "Bebidas",
         price: 2.5
@@ -18,7 +18,7 @@ const bebidas = [
     {
         code: "BC-60-103",
         name: "Infusión de Hierba Luisa",
-        image: "",
+        image: "https://res.cloudinary.com/dmkklptzi/image/upload/v1684285749/images/xcqbhah5248lhssxykwl.png",
         description: "Pendiente por definir",
         category: "Bebidas",
         price: 2.5
@@ -26,7 +26,7 @@ const bebidas = [
     {
         code: "BC-60-104",
         name: "Emoliente",
-        image: "",
+        image: "https://res.cloudinary.com/dmkklptzi/image/upload/v1684285749/images/xyknbrmi5g86vxgkfkac.png",
         description: "Pendiente por definir",
         category: "Bebidas",
         price: 3
@@ -34,7 +34,7 @@ const bebidas = [
     {
         code: "BC-60-105",
         name: "Café pasado",
-        image: "",
+        image: "https://res.cloudinary.com/dmkklptzi/image/upload/v1684285749/images/nmdehaevrrwymgfohndk.png",
         description: "Pendiente por definir",
         category: "Bebidas",
         price: 3
@@ -42,7 +42,7 @@ const bebidas = [
     {
         code: "BF-60-106",
         name: "Agua",
-        image: "",
+        image: "https://res.cloudinary.com/dmkklptzi/image/upload/v1684286230/images/iubnpukjmdeyyc3927im.png",
         description: "Pendiente por definir",
         category: "Bebidas",
         price: 2.5
@@ -50,7 +50,7 @@ const bebidas = [
     {
         code: "BF-60-107",
         name: "Chicha morada",
-        image: "",
+        image: "https://res.cloudinary.com/dmkklptzi/image/upload/v1684286230/images/w6ngiytxo9h5oluqdkea.png",
         description: "16 oz",
         category: "Bebidas",
         price: 3
@@ -58,7 +58,7 @@ const bebidas = [
     {
         code: "BF-60-108",
         name: "Maracuya ",
-        image: "",
+        image: "https://res.cloudinary.com/dmkklptzi/image/upload/v1684286230/images/efmi3svmrrk0a1wtgz75.png",
         description: "16 oz",
         category: "Bebidas",
         price: 3
@@ -66,7 +66,7 @@ const bebidas = [
     {
         code: "BF-60-109",
         name: "Guarana ",
-        image: "",
+        image: "https://res.cloudinary.com/dmkklptzi/image/upload/v1684777679/images/basyoex2qd83wxepeuzg.jpg",
         description: "450ml",
         category: "Bebidas",
         price: 3
@@ -74,7 +74,7 @@ const bebidas = [
     {
         code: "BF-60-110",
         name: "Sprite",
-        image: "",
+        image: "https://res.cloudinary.com/dmkklptzi/image/upload/v1684286230/images/nh6yc4ttsgq3wz6ecs5f.png",
         description: "500ml",
         category: "Bebidas",
         price: 4
@@ -82,7 +82,7 @@ const bebidas = [
     {
         code: "BF-60-111",
         name: "Fanta",
-        image: "",
+        image: "https://res.cloudinary.com/dmkklptzi/image/upload/v1684286230/images/dbdjhxbxb7iey32ygrtf.png",
         description: "500ml",
         category: "Bebidas",
         price: 4
@@ -90,7 +90,7 @@ const bebidas = [
     {
         code: "BF-60-112",
         name: "Inca Kola",
-        image: "",
+        image: "https://res.cloudinary.com/dmkklptzi/image/upload/v1684286230/images/spxmhmzgxjgtrnjqohjx.png",
         description: "600ml",
         category: "Bebidas",
         price: 5
@@ -98,7 +98,7 @@ const bebidas = [
     {
         code: "BF-60-113",
         name: "Coca Cola",
-        image: "",
+        image: "https://res.cloudinary.com/dmkklptzi/image/upload/v1684286230/images/ivu367h0322zl1g6owxk.png",
         description: "600ml",
         category: "Bebidas",
         price: 5

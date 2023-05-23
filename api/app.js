@@ -70,4 +70,24 @@ app.get("/getUserData",(req, res)=>{
 })
 
 
+
+app.get("/logout", (req, res) => {
+    console.log('Hola 1')
+    req?.session?.destroy((err) => {
+        if (err) {
+            // Manejar el error aquí
+            console.error(err);
+            res.status(500).json({ success: false, message: "No se pudo cerrar la sesión." });
+        } else {
+            console.log('Hola 2')
+            // Eliminando la cookie
+            res.clearCookie('connect.sid');
+            console.log('Hola 3')
+            res.status(200).json({ success: true });
+            console.log('Hola 4')
+        }
+    });
+});
+
+
 module.exports = app;

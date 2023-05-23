@@ -50,29 +50,8 @@ const postProduct = async (req, res) => {
     }
 }; //POST http://localhost:3001/admin con { "name": "Super maleta", "image": "https://res.cloudinary.com/dmkklptzi/image/upload/v1680210978/images/ucylwmaclplivybskcd3.png", "description": "Maleta roja", "price": 100, "category": "643017f46a0e3aa31703e961" }
 
-
-
-//Obtener todos los productos con el borrado lógico
+//Obtener todos los productos incluyendo los de borrado lógico
 const getProducts = async (req, res) => {
-    const session = await mongoose.startSession();    
-    try {
-        await session.withTransaction(async (session) => {
-            const products = await Products.find({ isDeleted: false }).session(session);
-            return res.status(200).json(products);
-        });
-    } catch (error) {
-        console.error(error);
-        const status = error.status || 500;
-        const message = error.message || "Ocurrió un error al obtener los productos";
-        return res.status(status).send({ message });
-    } finally {
-        await session.endSession();
-    }
-}; // GET - http://localhost:3001/admin/
-
-
-//Obtener todos los productos
-const getProductsLogical = async (req, res) => {
     const session = await mongoose.startSession();    
     try {
         await session.withTransaction(async (session) => {
@@ -87,7 +66,26 @@ const getProductsLogical = async (req, res) => {
     } finally {
         await session.endSession();
     }
-}; //GET http://localhost:3001/admin/getProductsLogical
+}; //GET http://localhost:3001/admin/
+
+//Obtener todos los productos a excepción de los marcados con borrado lógico
+const getProductsLogical = async (req, res) => {
+    const session = await mongoose.startSession();    
+    try {
+        await session.withTransaction(async (session) => {
+            const products = await Products.find({ isDeleted: false }).session(session);
+            return res.status(200).json(products);
+        });
+    } catch (error) {
+        console.error(error);
+        const status = error.status || 500;
+        const message = error.message || "Ocurrió un error al obtener los productos";
+        return res.status(status).send({ message });
+    } finally {
+        await session.endSession();
+    }
+}; // GET - http://localhost:3001/admin/getProductsLogical
+
 
 //Obtener un producto por id
 const getIdProduct = async (req, res) => {
@@ -393,7 +391,7 @@ const deleteUserAdmin = async (req, res) => {
     } finally {
         await session.endSession();
     }
-}; //DELETE http://localhost:3001/admin/deleteUserAdmin/:idUser
+}; //DELETE http://localhost:3001/admin/deleteUserAdmin/:idAdmin
 
 
 //VER LA POSIBILIDAD DE HABILITAR LUEGO DE SER BORRADO LOGICAMENTE
@@ -417,7 +415,7 @@ const trueLogicalDeletionAdmin = async (req, res) => {              //!NO IMPLEM
         const message = error.message || "Ocurrió un error al eliminar (ocultar) el usuario";
         return res.status(status).send({ message });
     }
-}; //PUT http://localhost:3001/admin/trueLogicalDeletionAdmin/6430f62084de82b330f348b9
+}; //PUT http://localhost:3001/admin/trueLogicalDeletionAdmin/:idAdmin
 
 
 //Activa un producto eliminado con borrado lógico
@@ -440,7 +438,7 @@ const falseLogicalDeletionAdmin = async (req, res) => {             //!NO IMPLEM
         const message = error.message || "Ocurrió un error al recuperar el usuario";
         return res.status(status).send({ message });
     }
-}; //PUT http://localhost:3001/admin/falseLogicalDeletionAdmin/6430f62084de82b330f348b9
+}; //PUT http://localhost:3001/admin/falseLogicalDeletionAdmin/:idAdmin
 
 
 //Bloquea un usuaruio administrador
@@ -463,7 +461,7 @@ const blockedAdmin = async (req, res) => {                  //!NO IMPLEMENTADO A
         const message = error.message || "Ocurrió un error al bloquear el usuario";
         return res.status(status).send({ message });
     }
-}; //PUT http://localhost:3001/admin/blockedAdmin/6430f62084de82b330f348b9
+}; //PUT http://localhost:3001/admin/blockedAdmin/:idAdmin
 
 
 //Desbloquea un usuaruio administrador
@@ -486,7 +484,7 @@ const unlockedAdmin = async (req, res) => {                 //!NO IMPLEMENTADO A
         const message = error.message || "Ocurrió un error al desbloquear el usuario";
         return res.status(status).send({ message });
     }
-}; //PUT http://localhost:3001/admin/unlockedAdmin/6430f62084de82b330f348b9
+}; //PUT http://localhost:3001/admin/unlockedAdmin/:idAdmin
 
 
 //^CATEGORIES
@@ -543,7 +541,7 @@ const putCategory = async (req, res) => {
     } finally {
         await session.endSession();
     }
-}; // PUT http://localhost:3001/admin/putCategory/64326fcebadb245294dc75e2 con { "category": "Papitas con salsa de tomate" }
+}; // PUT http://localhost:3001/admin/putCategory/:idCategory con { "category": "Papitas con salsa de tomate" }
 
 
 //Elimina permanentemente una categoría
@@ -568,7 +566,7 @@ const deleteCategory = async (req, res) => {
     } finally {
         await session.endSession();
     }
-}; // DELETE http://localhost:3001/admin/deleteCategory/64326fcebadb245294dc75e2
+}; // DELETE http://localhost:3001/admin/deleteCategory/:idCategory
 
 
 //^DRINKS
@@ -607,8 +605,7 @@ const postDrinks = async (req, res) => {
     }
 }; //POST http://localhost:3001/admin/postDrinks con { "code": "BF-60-120", "name": "Jugo de guanabana", "image": "https://res.cloudinary.com/dmkklptzi/image/upload/v1680210978/images/ucylwmaclplivybskcd3.png", "description": "20 oz", "price": 20, "category": "643b002e5bb903f42513ba99" }
 
-
-//Obtener todas las bebidas
+//Obtener todas las bebidas incluyendo las de borrado lógico
 const getDrinks = async (req, res) => {
     const session = await mongoose.startSession();    
     try {
@@ -626,6 +623,23 @@ const getDrinks = async (req, res) => {
     }
 }; //GET http://localhost:3001/admin/getDrinks
 
+//Obtener todas las bebidas a excepción de las que tienen borrado lógico
+const getDrinksLogical = async (req, res) => {
+    const session = await mongoose.startSession();    
+    try {
+        await session.withTransaction(async (session) => {
+            const drinks = await Drinks.find({ isDeleted: false }).session(session);
+            return res.status(200).json(drinks);
+        });
+    } catch (error) {
+        console.error(error);
+        const status = error.status || 500;
+        const message = error.message || "Ocurrió un error al obtener las bebidas";
+        return res.status(status).send({ message });
+    } finally {
+        await session.endSession();
+    }
+}; //GET http://localhost:3001/admin/getDrinksLogical
 
 //Obtiene bebidas por id
 const getIdDrinks = async (req, res) => {
@@ -647,9 +661,7 @@ const getIdDrinks = async (req, res) => {
     } finally {
       await session.endSession();
     }
-}; //GET http://localhost:3001/admin/getDrinks/6430c43706a31cbfe00096da
-
-
+}; //GET http://localhost:3001/admin/getDrinks/:idDrinks
 
 //Actualiza una bebida
 const putDrinks = async (req, res) => {
@@ -685,8 +697,7 @@ const putDrinks = async (req, res) => {
     } finally {
         await session.endSession();
     }
-} // PUT http://localhost:3001/admin/putDrinks/64326fcebadb245294dc75e2 con { "name": "Jugo rico", "image": "https://res.cloudinary.com/dmkklptzi/image/upload/v1677732823/images/se0ku9gfmbkcxqywtjad.jpg", "description": "25 oz", "price": 20, "category": "643b002e5bb903f42513ba99" }
-
+} // PUT http://localhost:3001/admin/putDrinks/:idDrinks con { "name": "Jugo rico", "image": "https://res.cloudinary.com/dmkklptzi/image/upload/v1677732823/images/se0ku9gfmbkcxqywtjad.jpg", "description": "25 oz", "price": 20, "category": "643b002e5bb903f42513ba99" }
 
 //Elimina permanentemente una bebida
 const deleteDrinks = async (req, res) => {
@@ -710,7 +721,50 @@ const deleteDrinks = async (req, res) => {
     } finally {
         await session.endSession();
     }
-}; // DELETE http://localhost:3001/admin/deleteDrinks/643b106bda9e83a50d26e525
+}; // DELETE http://localhost:3001/admin/deleteDrinks/:idDrinks
+
+//Elimina un producto con borrado lógico
+const trueLogicalDeletionDrink = async (req, res) => {
+    const { idDrinks } = req.params;
+    const session = await mongoose.startSession();    
+    try {
+        await session.withTransaction(async (session) => {
+            const drinks = await Drinks.findById(idDrinks);
+            if (!drinks) return res.status(404).send({ message: "Bebida no encontrada" });
+            drinks.isDeleted = true;
+            await drinks.save();
+            res.status(200).send({ message: "Bebida eliminada (ocultada) exitosamente" });
+        });
+    } catch (error) {
+        console.error(error);
+        const status = error.status || 500;
+        const message = error.message || "Ocurrió un error al eliminar (ocultar) la bebida";
+        return res.status(status).send({ message });
+    }
+}; // PUT - http://localhost:3001/admin/trueLogicalDeletionDrink/:idDrinks
+
+//Activa un producto eliminado con borrado lógico
+const falseLogicalDeletionDrink = async (req, res) => {
+    const { idDrinks } = req.params;
+    const session = await mongoose.startSession();    
+    try {
+        await session.withTransaction(async (session) => {
+            const drinks = await Drinks.findById(idDrinks);
+            if (!drinks) {
+                return res.status(404).send({ message: "Bebida no encontrada" });
+            }
+            drinks.isDeleted = false;
+            await drinks.save();
+            res.status(200).send({ message: "Bebida recuperada exitosamente" });
+        });
+    } catch (error) {
+        console.error(error);
+        const status = error.status || 500;
+        const message = error.message || "Ocurrió un error al recuperar la Bebida";
+        return res.status(status).send({ message });
+    }
+}; // PUT http://localhost:3001/admin/falseLogicalDeletionDrink/:idDrinks
+
 
 
 //^ACOMPAÑAMIENTOS
@@ -748,8 +802,7 @@ const postAccompanyings = async (req, res) => {
     }
 }; //POST http://localhost:3001/admin/postAccompanyings con { "name": "Jugo delicioso", "image": "https://res.cloudinary.com/dmkklptzi/image/upload/v1680210978/images/ucylwmaclplivybskcd3.png", "description": "30 oz", "price": 15, "category": "643b0fcfc27bc892fca4a724" }
 
-
-//Obtener todos los acompañamientos
+//Obtener todos los acompañamientos incluyendo los de borrado lógico
 const getAccompanyings = async (req, res) => {
     const session = await mongoose.startSession();    
     try {
@@ -765,8 +818,25 @@ const getAccompanyings = async (req, res) => {
     } finally {
         await session.endSession();
     }
-}; //GET http://localhost:3001/admin/getAccompanyings
+}; // GET - http://localhost:3001/admin/getAccompanyings
 
+//Obtener todos los acompañamientos a excepción de las que tienen borrado lógico
+const getAccompanyingsLogical = async (req, res) => {
+    const session = await mongoose.startSession();    
+    try {
+        await session.withTransaction(async (session) => {
+            const accompanyings = await Accompanyings.find({ isDeleted: false }).session(session);
+            return res.status(200).json(accompanyings);
+        });
+    } catch (error) {
+        console.error(error);
+        const status = error.status || 500;
+        const message = error.message || "Ocurrió un error al obtener los acompañamientos";
+        return res.status(status).send({ message });
+    } finally {
+        await session.endSession();
+    }
+}; //GET - http://localhost:3001/admin/getAccompanyingsLogical
 
 //Obtener acompañamientos por ID
 const getIdAccompanyings = async (req, res) => {
@@ -788,8 +858,7 @@ const getIdAccompanyings = async (req, res) => {
     } finally {
       await session.endSession();
     }
-}; //GET http://localhost:3001/admin/getAccompanyings/6430c43706a31cbfe00096da
-
+}; //GET http://localhost:3001/admin/getAccompanyings/:idAccompanyings
 
 //Actualiza un acompañamiento
 const putAccompanyings = async (req, res) => {
@@ -826,7 +895,6 @@ const putAccompanyings = async (req, res) => {
     }
 } // PUT http://localhost:3001/admin/putAccompanyings/643b1602ac600f22e9aff970 con { "name": "Jugo rico", "image": "https://res.cloudinary.com/dmkklptzi/image/upload/v1677732823/images/se0ku9gfmbkcxqywtjad.jpg", "description": "25 oz", "price": 20, "category": "643b002e5bb903f42513ba99" }
 
-
 //Elimina permanentemente un acompañamiento
 const deleteAccompanyings = async (req, res) => {
     const { idAccompanyings } = req.params;
@@ -850,6 +918,48 @@ const deleteAccompanyings = async (req, res) => {
         await session.endSession();
     }
 }; // DELETE http://localhost:3001/admin/deleteAccompanyings/643b106bda9e83a50d26e525
+
+//Elimina un producto con borrado lógico
+const trueLogicalDeletionAccompanying = async (req, res) => {
+    const { idAccompanyings } = req.params;
+    const session = await mongoose.startSession();    
+    try {
+        await session.withTransaction(async (session) => {
+            const accompanyings = await Accompanyings.findById(idAccompanyings);
+            if (!accompanyings) return res.status(404).send({ message: "Acompañamiento no encontrado" });
+            accompanyings.isDeleted = true;
+            await accompanyings.save();
+            res.status(200).send({ message: "Acompañamiento eliminado (ocultado) exitosamente" });
+        });
+    } catch (error) {
+        console.error(error);
+        const status = error.status || 500;
+        const message = error.message || "Ocurrió un error al eliminar (ocultar) el Acompañamiento";
+        return res.status(status).send({ message });
+    }
+}; // PUT - http://localhost:3001/admin/trueLogicalDeletionAccompanying/:idAccompanying
+
+//Activa un producto eliminado con borrado lógico
+const falseLogicalDeletionAccompanying = async (req, res) => {
+    const { idAccompanyings } = req.params;
+    const session = await mongoose.startSession();    
+    try {
+        await session.withTransaction(async (session) => {
+            const accompanyings = await Accompanyings.findById(idAccompanyings);
+            if (!accompanyings) {
+                return res.status(404).send({ message: "Acompañamiento no encontrada" });
+            }
+            accompanyings.isDeleted = false;
+            await accompanyings.save();
+            res.status(200).send({ message: "Acompañamiento recuperado exitosamente" });
+        });
+    } catch (error) {
+        console.error(error);
+        const status = error.status || 500;
+        const message = error.message || "Ocurrió un error al recuperar el Acompañamiento";
+        return res.status(status).send({ message });
+    }
+}; // PUT - http://localhost:3001/admin/falseLogicalDeletionAccompanying/:idAccompanying
 
 
 
@@ -887,10 +997,9 @@ const postExtras = async (req, res) => {
     } finally {
         await session.endSession();
     }
-}; //POST http://localhost:3001/admin/postExtras con { "code": "EX-70-107", "name": "Salchichón", "image": "https://res.cloudinary.com/dmkklptzi/image/upload/v1680210978/images/ucylwmaclplivybskcd3.png", "description": "300 gr", "price": 30, "category": "643b0fcfc27bc892fca4a726" }
+}; //POST - http://localhost:3001/admin/postExtras con { "code": "EX-70-107", "name": "Salchichón", "image": "https://res.cloudinary.com/dmkklptzi/image/upload/v1680210978/images/ucylwmaclplivybskcd3.png", "description": "300 gr", "price": 30, "category": "643b0fcfc27bc892fca4a726" }
 
-
-//Obtiene todos los extras
+//Obtener todos los extras incluyendo los de borrado lógico
 const getExtras = async (req, res) => {
     const session = await mongoose.startSession();    
     try {
@@ -906,8 +1015,25 @@ const getExtras = async (req, res) => {
     } finally {
         await session.endSession();
     }
-}; //GET http://localhost:3001/admin/getExtras
+}; //GET - http://localhost:3001/admin/getExtras
 
+//Obtener todos los extras a excepción de las que tienen borrado lógico
+const getExtrasLogical = async (req, res) => {
+    const session = await mongoose.startSession();    
+    try {
+        await session.withTransaction(async (session) => {
+            const extras = await Extras.find({ isDeleted: false }).session(session);
+            return res.status(200).json(extras);
+        });
+    } catch (error) {
+        console.error(error);
+        const status = error.status || 500;
+        const message = error.message || "Ocurrió un error al obtener los extras";
+        return res.status(status).send({ message });
+    } finally {
+        await session.endSession();
+    }
+}; //GET - http://localhost:3001/admin/getExtrasLogical
 
 //Obtiene un extra por ID
 const getIdExtras = async (req, res) => {
@@ -929,8 +1055,7 @@ const getIdExtras = async (req, res) => {
     } finally {
       await session.endSession();
     }
-}; //GET http://localhost:3001/admin/getExtras/6430c43706a31cbfe00096da
-
+}; //GET http://localhost:3001/admin/getExtras/:idExtras
 
 //Actualiza un acompañamiento
 const putExtras = async (req, res) => {
@@ -966,8 +1091,7 @@ const putExtras = async (req, res) => {
     } finally {
         await session.endSession();
     }
-} // PUT http://localhost:3001/admin/putExtras/643b1602ac600f22e9aff970 con { "name": "Jugo rico", "image": "https://res.cloudinary.com/dmkklptzi/image/upload/v1677732823/images/se0ku9gfmbkcxqywtjad.jpg", "description": "25 oz", "price": 20, "category": "643b002e5bb903f42513ba99" }
-
+} // PUT http://localhost:3001/admin/putExtras/:idExtras con { "name": "Jugo rico", "image": "https://res.cloudinary.com/dmkklptzi/image/upload/v1677732823/images/se0ku9gfmbkcxqywtjad.jpg", "description": "25 oz", "price": 20, "category": "643b002e5bb903f42513ba99" }
 
 //Elimina permanentemente un extra
 const deleteExtras = async (req, res) => {
@@ -991,7 +1115,50 @@ const deleteExtras = async (req, res) => {
     } finally {
         await session.endSession();
     }
-}; // DELETE http://localhost:3001/admin/deleteExtras/643b106bda9e83a50d26e525
+}; // DELETE - http://localhost:3001/admin/deleteExtras/:idExtras
+
+//Elimina un extra con borrado lógico
+const trueLogicalDeletionExtras = async (req, res) => {
+    const { idExtras } = req.params;
+    const session = await mongoose.startSession();    
+    try {
+        await session.withTransaction(async (session) => {
+            const extras = await Extras.findById(idExtras);
+            if (!extras) return res.status(404).send({ message: "Extra no encontrado" });
+            extras.isDeleted = true;
+            await extras.save();
+            res.status(200).send({ message: "Extra eliminado (ocultado) exitosamente" });
+        });
+    } catch (error) {
+        console.error(error);
+        const status = error.status || 500;
+        const message = error.message || "Ocurrió un error al eliminar (ocultar) el Extra";
+        return res.status(status).send({ message });
+    }
+}; // PUT - http://localhost:3001/admin/trueLogicalDeletionExtras/:idExtras
+
+//Activa un extra eliminado con borrado lógico
+const falseLogicalDeletionExtras = async (req, res) => {
+    const { idExtras } = req.params;
+    const session = await mongoose.startSession();    
+    try {
+        await session.withTransaction(async (session) => {
+            const extras = await Extras.findById(idExtras);
+            if (!extras) {
+                return res.status(404).send({ message: "Extra no encontrado" });
+            }
+            extras.isDeleted = false;
+            await extras.save();
+            res.status(200).send({ message: "Extra recuperado exitosamente" });
+        });
+    } catch (error) {
+        console.error(error);
+        const status = error.status || 500;
+        const message = error.message || "Ocurrió un error al recuperar el Acompañamiento";
+        return res.status(status).send({ message });
+    }
+}; // PUT - http://localhost:3001/admin/falseLogicalDeletionExtras/:idExtras
+
 
 
 //^Salsas
@@ -1024,8 +1191,7 @@ const postSauces = async (req, res) => {
     } finally {
         await session.endSession();
     }
-}; //POST http://localhost:3001/admin/postSauces con { "name": "Salsa de birra", "category": "643b0fcfc27bc892fca4a727" }
-
+}; //POST - http://localhost:3001/admin/postSauces con { "name": "Salsa de birra", "category": "643b0fcfc27bc892fca4a727" }
 
 //Obtiene todas las salsas
 const getSauces = async (req, res) => {
@@ -1043,8 +1209,25 @@ const getSauces = async (req, res) => {
     } finally {
         await session.endSession();
     }
-}; //GET http://localhost:3001/admin/getSauces
+}; //GET - http://localhost:3001/admin/getSauces
 
+//Obtener todos las sauces a excepción de las que tienen borrado lógico
+const getSaucesLogical = async (req, res) => {
+    const session = await mongoose.startSession();    
+    try {
+        await session.withTransaction(async (session) => {
+            const sauce = await Sauces.find({ isDeleted: false }).session(session);
+            return res.status(200).json(sauce);
+        });
+    } catch (error) {
+        console.error(error);
+        const status = error.status || 500;
+        const message = error.message || "Ocurrió un error al obtener las salsas";
+        return res.status(status).send({ message });
+    } finally {
+        await session.endSession();
+    }
+}; //GET - http://localhost:3001/admin/getSaucesLogical
 
 //Obtiene una salsa por ID
 const getIdSauces = async (req, res) => {
@@ -1066,9 +1249,7 @@ const getIdSauces = async (req, res) => {
     } finally {
       await session.endSession();
     }
-}; //GET http://localhost:3001/admin/getSauces/6430c43706a31cbfe00096da
-
-
+}; //GET - http://localhost:3001/admin/getSauces/6430c43706a31cbfe00096da
 
 //Actualiza una Sauce
 const putSauces = async (req, res) => {
@@ -1100,8 +1281,7 @@ const putSauces = async (req, res) => {
     } finally {
         await session.endSession();
     }
-} // PUT http://localhost:3001/admin/putSauces/643b1602ac600f22e9aff970 con { "name": "Salsa de Chocó", "category": "643b0fcfc27bc892fca4a727" }
-
+} // PUT - http://localhost:3001/admin/putSauces/643b1602ac600f22e9aff970 con { "name": "Salsa de Chocó", "category": "643b0fcfc27bc892fca4a727" }
 
 //Elimina permanentemente una salsa
 const deleteSauces = async (req, res) => {
@@ -1125,7 +1305,50 @@ const deleteSauces = async (req, res) => {
     } finally {
         await session.endSession();
     }
-}; // DELETE http://localhost:3001/admin/deleteSauces/643b106bda9e83a50d26e525
+}; // DELETE - http://localhost:3001/admin/deleteSauces/643b106bda9e83a50d26e525
+
+//Elimina un extra con borrado lógico
+const trueLogicalDeletionSauces = async (req, res) => {
+    const { idSauces } = req.params;
+    const session = await mongoose.startSession();    
+    try {
+        await session.withTransaction(async (session) => {
+            const sauces = await Sauces.findById(idSauces);
+            if (!sauces) return res.status(404).send({ message: "Sauce no encontrado" });
+            sauces.isDeleted = true;
+            await sauces.save();
+            res.status(200).send({ message: "Sauce eliminada (ocultada) exitosamente" });
+        });
+    } catch (error) {
+        console.error(error);
+        const status = error.status || 500;
+        const message = error.message || "Ocurrió un error al eliminar (ocultar) la sauce";
+        return res.status(status).send({ message });
+    }
+}; // PUT - http://localhost:3001/admin/trueLogicalDeletionSauces/:idSauces
+
+//Activa un extra eliminado con borrado lógico
+const falseLogicalDeletionSauces = async (req, res) => {
+    const { idSauces } = req.params;
+    const session = await mongoose.startSession();    
+    try {
+        await session.withTransaction(async (session) => {
+            const sauces = await Sauces.findById(idSauces);
+            if (!sauces) {
+                return res.status(404).send({ message: "Sauce no encontrado" });
+            }
+            sauces.isDeleted = false;
+            await sauces.save();
+            res.status(200).send({ message: "Sauce recuperado exitosamente" });
+        });
+    } catch (error) {
+        console.error(error);
+        const status = error.status || 500;
+        const message = error.message || "Ocurrió un error al recuperar la sauce";
+        return res.status(status).send({ message });
+    }
+}; // PUT - http://localhost:3001/admin/falseLogicalDeletionSauces/:idExtras
+
 
 
 //^ORDENES
@@ -1452,28 +1675,39 @@ module.exports = {
     
     postDrinks,
     getDrinks,
+    getDrinksLogical,
+    trueLogicalDeletionDrink,
+    falseLogicalDeletionDrink,
     getIdDrinks,
     putDrinks,
     deleteDrinks,
     
     postAccompanyings,
     getAccompanyings,
+    getAccompanyingsLogical,
+    trueLogicalDeletionAccompanying,
+    falseLogicalDeletionAccompanying,
     getIdAccompanyings,
     putAccompanyings,
     deleteAccompanyings,
     
     postExtras,
     getExtras,
+    getExtrasLogical,
+    trueLogicalDeletionExtras,
+    falseLogicalDeletionExtras,
     getIdExtras,
     putExtras,
     deleteExtras,
     
     postSauces,
     getSauces,
+    trueLogicalDeletionSauces,
+    falseLogicalDeletionSauces,
+    getSaucesLogical,
     getIdSauces,
     putSauces,
     deleteSauces,
-
 
     getOrders,
     getOrdersPendings,
@@ -1481,7 +1715,6 @@ module.exports = {
     getOrdersOnTheWay,
     getOrdersHistory,
     getOrdersHistoryDelivered,
-
 
     trueLogicalOrdersHistory,
     falseLogicalOrdersHistory,
