@@ -15,11 +15,14 @@ export default function Options () {
                 <Link className={`${styles.link} ${isActive('/panelAdmin/products')}`} to='/panelAdmin/products' >
                     <p className={`${styles.paragraph} center`}>Productos</p>
                 </Link>
-                <Link className={`${styles.link} ${isActive('/panelAdmin/products/postProducts')}`} to='/panelAdmin/products/postProducts' >
-                    <p className={`${styles.paragraph} center`}>Crear Productos</p>
-                </Link>
                 <Link className={`${styles.link} ${isActive('/panelAdmin/products/categories')}`} to='/panelAdmin/products/categories' >
                     <p className={`${styles.paragraph} center`}>Categorías</p>
+                </Link>
+                <Link className={`${styles.link} ${isActive('/panelAdmin/products/drinks')}`} to='/panelAdmin/products/drinks' >
+                    <p className={`${styles.paragraph} center`}>Bebidas</p>
+                </Link>
+                <Link className={`${styles.link} ${isActive('/panelAdmin/products/extras')}`} to='/panelAdmin/products/extras' >
+                    <p className={`${styles.paragraph} center`}>Extras</p>
                 </Link>
                 <Link className={`${styles.link} ${isActive('/panelAdmin/products/accompanyings')}`} to='/panelAdmin/products/accompanyings' >
                     <p className={`${styles.paragraph} center`}>Acompañamientos</p>

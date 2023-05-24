@@ -15,13 +15,13 @@ export default function Map () {
     function isOpenNow() {
         const { day, hour, minute } = getCurrentDayAndTime();
         const schedule = [
-            { open: { hour: 11, minute: 0 }, close: { hour: 23, minute: 0 } },      // Domingo
-            { open: { hour: 11, minute: 0 }, close: { hour: 23, minute: 0 } },      // Lunes
-            { open: { hour: 11, minute: 0 }, close: { hour: 23, minute: 0 } },      // Martes
-            { open: { hour: 11, minute: 0 }, close: { hour: 23, minute: 0 } },      // Miércoles
-            { open: { hour: 11, minute: 0 }, close: { hour: 23, minute: 0 } },     // Jueves
-            { open: { hour: 11, minute: 0 }, close: { hour: 23, minute: 0 } },      // Viernes
-            { open: { hour: 11, minute: 0 }, close: { hour: 23, minute: 0 } },      // Sábado
+            { open: { hour: 11, minute: 30 }, close: { hour: 23, minute: 0 } },      // Domingo
+            { open: { hour: 11, minute: 30 }, close: { hour: 23, minute: 0 } },      // Lunes
+            { open: { hour: 11, minute: 30 }, close: { hour: 23, minute: 0 } },      // Martes
+            { open: { hour: 11, minute: 30 }, close: { hour: 23, minute: 0 } },      // Miércoles
+            { open: { hour: 11, minute: 30 }, close: { hour: 23, minute: 0 } },      // Jueves
+            { open: { hour: 11, minute: 30 }, close: { hour: 23, minute: 0 } },      // Viernes
+            { open: { hour: 11, minute: 30 }, close: { hour: 23, minute: 0 } },      // Sábado
         ];
 
         const { open, close } = schedule[day];
@@ -52,13 +52,13 @@ export default function Map () {
                             <p className={`${styles.text} `}>Domingo</p>
                         </div>
                         <div className={`${styles.two}`}>
-                            <p className={`${styles.text} `}>11:00 - 23:00</p>
-                            <p className={`${styles.text} `}>11:00 - 23:00</p>
-                            <p className={`${styles.text} `}>11:00 - 23:00</p>
-                            <p className={`${styles.text} `}>11:00 - 23:00</p>
-                            <p className={`${styles.text} `}>11:00 - 23:00</p>
-                            <p className={`${styles.text} `}>11:00 - 23:00</p>
-                            <p className={`${styles.text} `}>11:00 - 23:00</p>
+                            <p className={`${styles.text} `}>11:30 - 23:00</p>
+                            <p className={`${styles.text} `}>11:30 - 23:00</p>
+                            <p className={`${styles.text} `}>11:30 - 23:00</p>
+                            <p className={`${styles.text} `}>11:30 - 23:00</p>
+                            <p className={`${styles.text} `}>11:30 - 23:00</p>
+                            <p className={`${styles.text} `}>11:30 - 23:00</p>
+                            <p className={`${styles.text} `}>11:30 - 23:00</p>
                         </div>
                     </div>
 

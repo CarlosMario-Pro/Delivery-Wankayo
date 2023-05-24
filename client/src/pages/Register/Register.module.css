@@ -1,8 +1,6 @@
 .register {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     padding: 80px 0 0 0;
+    height: 100vh;
 }
 .form {
     display: flex;
@@ -11,8 +9,14 @@
     max-width: 400px;
     margin: 1rem;
     padding: 1rem;
-    border: 1px solid #bbd0ff;
     border-radius: 5px;
+    border: 1px solid #bbd0ff;
+    color: #212529;
+}
+.requirement {
+    color: #e63946;
+    font-weight: 500;
+    font-size: 20px;
 }
 .label {
     display: block;
@@ -20,16 +24,23 @@
 }
 .input {
     width: 100%;
-    margin: 0 0 10px 0;
-    border: 1px solid #bbd0ff;
+    padding: 0 0 0 10px;
+    margin: 0 0 30px 0;
+    border: 1px solid #dee2e6;
 }
 .input:focus {
     outline: none;
     border-color: #0077cc;
 }
-.Labelpassword {
+.danger {
+    color: red;
+    position: absolute;
+    margin: -30px 0 0 0;
+}
+.labelpassword{
     display: flex;
     align-items: center;
+    width: 100%;
     justify-content: space-between;
 }
 .passwordIcon {
@@ -45,7 +56,7 @@
     border: none;
     font-size: 1rem;
     cursor: pointer;
-    margin: 1rem auto 0 auto;
+    margin: -10px auto 5px auto;
 }
 .login {
     margin: 0 auto;

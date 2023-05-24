@@ -100,10 +100,38 @@
     cursor: pointer;
     border-radius: 5px;
 }
-
 .active {
     background: #522D6D;
     color: white;
     border: none;
+    border-radius: 5px;
+}
+
+
+
+
+.pppppppppppp {
+    top: 10px;
+    right: 10px;
+    position: absolute;
+    z-index: 1;
+}
+.buttonModale {
+    border: none;
+    background: #0081a7;
+    padding: 10px 20px;
+    color: #f8f9fa;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.button {
+    border: none;
+    background: #d7263d;
+    padding: 10px 20px;
+    color: #f8f9fa;
+    letter-spacing: 2px;
+    cursor: pointer;
     border-radius: 5px;
 }

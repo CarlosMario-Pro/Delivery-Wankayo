@@ -35,10 +35,8 @@ userRouter.get("/getIdOrders/:idOrder", user.getIdOrders);                      
 userRouter.get("/getIdUserOrders/:idUser", user.getIdUserOrders);                                           //POST para crear una order
 userRouter.post("/postOrders/:idUser", user.postOrders);                                                    //GET para obtener order actual del usuarios por su ID
 userRouter.get("/getUserOrdersDelivered/:idUser", user.getUserOrdersDelivered);                             //GET para obtener order el historial de órdenes del usuario
-userRouter.get("/getUserOrdersActivesPending/:idUser", user.getUserOrdersActivesPending);                   //GET para obtener order el historial de órdenes del usuario
-userRouter.get("/getUserOrdersActivesInPreparation/:idUser", user.getUserOrdersActivesInPreparation);       //GET para obtener order el historial de órdenes del usuario
-userRouter.get("/getUserOrdersActivesOnTheWay/:idUser", user.getUserOrdersActivesOnTheWay);                 //GET para obtener order el historial de órdenes del usuario
 
-// userRouter.get("/getUserOrdersActivesOnTheWay/:idUser", user.getUserOrdersActivesOnTheWay);                 //GET para obtener order el historial de órdenes del usuario
+
+
 
 module.exports = userRouter;

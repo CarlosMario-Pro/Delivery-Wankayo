@@ -5,11 +5,13 @@
     padding: 15px 0;
 }
 .hero h1 {
-    font-size: 60px;
+    font-size: 80px;
     text-align: center;
 }
 .hero h2 {
     color: #e63946;
+    font-size: 35px;
+    text-align: center;
 }
 .circleImage {
     background: #e9ecef;

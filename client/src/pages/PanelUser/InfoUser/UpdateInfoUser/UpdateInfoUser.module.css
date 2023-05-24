@@ -1,44 +1,48 @@
-.productos {
+.general {
     width: 1200px;
-    margin: 0 auto 30px auto;
+    margin: 0 auto;
     padding: 80px 0 0 0;
 }
-.panelAdmin {
+.panelUser {
     width: 380px;
+}
+.container {
+    width: 800px;
+    padding: 0 20px;
+}
+.container h1 {
+    text-align: center;
+}
+.form {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.label {
+    display: block;
+    margin-bottom: 5px;
+}
+.input {
+    width: 450px;
+    margin: 0 0 10px 0;
 }
 .button {
     padding: 10px 20px;
     background: #522D6D;
+    width: 200px;
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin: 0 auto 10px auto;
+    margin: 0 auto;
 }
 .backButton {
     padding: 10px 20px;
-    background: #219ebc;
-    color: #fff;
     border: none;
+    color: white;
+    background: #2a9d8f;
     border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin: 0 auto;
-}
-.input {
-    width: 450px;
-}
-.formLabel {
-    display: block;
-    margin-bottom: 5px;
-}
-input {
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    border: 1px solid grey;
-    margin-bottom: 10px;
-    width: 100%;
-    font-size: 16px;
+    margin: 10px 0;
 }

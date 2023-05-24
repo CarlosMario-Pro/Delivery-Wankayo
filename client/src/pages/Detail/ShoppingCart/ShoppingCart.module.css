@@ -1,0 +1,169 @@
+.shoppingCart {
+    width: 1200px;
+    margin: 90px auto 30px auto;
+}
+.product {
+    display: flex;
+    grid-template-columns: repeat(2, 1fr);
+    border: 1px solid red;
+}
+.container__image {
+    border: 1px solid #e9ecef;
+    height: 282px;
+    width: 480px;
+    overflow: hidden;
+    border-radius: 10px;
+}
+.image {
+    height: 282px;
+    width: 480px;    
+}
+.description {
+    height: 282px;
+    width: 480px;
+    border: 1px solid #e9ecef;
+    padding: 0 0 0 10px;
+}
+.principal__product {
+    margin: 0 0 10px 0;
+}
+.quantity {
+    font-weight: 700;
+}
+
+
+
+
+
+.other__products {
+    margin: 30px 0 0 0;
+}
+.container__two {
+    border: 1px solid #e9ecef;
+    padding: 0 20px;
+}
+.unit__container {
+    border-bottom: 1px solid #e9ecef;
+    padding: 20px 0;
+    width: 100%;
+}
+.unit__container:last-child {
+    border-bottom: none;
+}
+
+.title {
+    font-size: 18px;
+}
+.quantity__product {
+    font-size: 14px;
+    color: #6c757d;
+}
+.counter__container {
+    width: 300px;
+    gap: 10px;
+}
+.button {
+    height: 40px;
+    width: 50px;
+    border: none;
+    cursor: pointer;
+    font-size: 23px;
+}
+.counter {
+    margin: 0 15px;
+}
+.unity {
+    font-size: 13px;
+    color: #6c757d;
+}
+.delete {
+    width: 200px;
+}
+.button__delete {
+    padding: 10px 30px;
+    border: 1px solid #e9ecef;
+    color: #e63946;
+    letter-spacing: 1px;
+    background: transparent;
+    cursor: pointer;
+}
+
+
+
+
+.free {
+    color: #3a86ff;
+    font-weight: 700;
+}
+
+
+
+
+
+
+.orderNow {
+    margin: 10px 0 0 0;
+    width: 100%;
+    padding: 20px 0;
+    letter-spacing: 1px;
+    background: #2ACF86;
+    font-size: 22px;
+    font-weight: 600;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: 300 all ease;
+}
+.orderNow:hover {
+    background: #2a9d8f;
+}
+.login {
+    margin: 10px 0 0 0;
+    width: 100%;
+    padding: 20px 0;
+    letter-spacing: 1px;
+    background: #e63946;
+    font-size: 22px;
+    font-weight: 600;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: 300 all ease;
+}
+.login:hover {
+    background: #2a9d8f;
+}
+
+
+
+.end {
+    border: 1px solid #e9ecef;
+    padding: 20px;
+    height: 230px;
+    width: 500px;
+    margin: 20px auto;
+}
+.link {
+    text-decoration: none;
+    width: 100%;
+}
+
+
+.back {
+    margin: 10px 0 0 0;
+    letter-spacing: 1px;
+    padding: 20px;
+    font-size: 22px;
+    font-weight: 600;
+    border-radius: 5px;
+    color: #264653;
+    border: none;
+    cursor: pointer;
+    border: 1px solid #e9ecef;
+    transition: 300 all ease;
+}
+.back:hover {
+    background: #ced4da;
+}

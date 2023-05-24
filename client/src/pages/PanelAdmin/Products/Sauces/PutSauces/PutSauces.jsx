@@ -13,11 +13,31 @@ const initialSaucesState = {
     category: ''
 }
 
+function validate (product) {
+    let errors = {};
+    if(!product.code){
+        errors.code = "El código de tu producto requerido";
+    }
+    if(!product.name){
+        errors.name = "EL nombre de tu producto es requerido";
+    }
+    if(!product.category){
+        errors.category = "La categoría de tu producto es requerida";
+    }
+    return errors;
+};
+
 export default function PutSauces () {
+    const [touched, setTouched] = useState({});
+    const [ errors, setErrors ] = useState({});
     const dispatch = useDispatch();
     const { idSauces } = useParams();
   
-    const [sauces, setSauces] = useState(initialSaucesState);
+    const [sauces, setSauces] = useState({
+        code: '',
+        name: '',
+        category: ''
+    });
     const { categoriesId, saucesDetails } = useSelector(state => ({
         categoriesId: state.categoriesId,
         saucesDetails: state.saucesDetails
@@ -26,36 +46,53 @@ export default function PutSauces () {
     useEffect(() => {
         dispatch(getCategories());
         dispatch(getIdSauces(idSauces));
-    }, [dispatch, idSauces]);
+    }, [dispatch]);
 
     useEffect(() => {
         if (saucesDetails) {
-            setSauces(saucesDetails);
+        setSauces(prevSauces => ({
+            ...prevSauces,
+            ...saucesDetails
+        }));
         }
     }, [saucesDetails]);
 
-    const handleInputChange = (event) => {
-        const { name, value } = event.target;
-        setSauces({
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setSauces((prevSauces) => ({
+            ...prevSauces,
+            [name]: value
+        }));
+        setErrors(validate({
             ...sauces,
             [name]: value
-        });
+        }));
+        setTouched((prevTouched) => ({
+            ...prevTouched,
+            [name]: true
+        }));
     };
 
-    const handleSelectChange = (event) => {
+
+
+    function handleSelectChange (event) {
         const selectedCategoryId = event.target.value;
-        setSauces({
-            ...sauces,
+        setSauces(prevSauces => ({
+            ...prevSauces,
             category: selectedCategoryId
-        });
+        }));
     };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const saucesToSend = { ...sauces };
-            dispatch(putSauces(idSauces, saucesToSend));
-            setSauces(initialSaucesState);
+            dispatch(putSauces(idSauces, sauces));
+            setSauces({
+                code: '',
+                name: '',
+                category: ''
+            });
         } catch (error) {
             console.log(error);
         }
@@ -87,10 +124,12 @@ export default function PutSauces () {
                         <div>
                             <label className={`${styles.label} `} htmlFor="code">Código:</label>
                             <input className={`${styles.input} `} type="text" name="code" value={sauces.code} onChange={handleInputChange} />
+                            {touched.code && errors.code && <p className={`${styles.danger} `}>{errors.code}</p>}
                         </div>
                         <div>
                             <label className={`${styles.label} `} htmlFor="name">Nombre:</label>
                             <input className={`${styles.input} `} type="text" name="name" value={sauces.name} onChange={handleInputChange} />
+                            {touched.name && errors.name && <p className={`${styles.danger} `}>{errors.name}</p>}
                         </div>
                         <div  className={`${styles.select} `}>
                             <label className={`${styles.label} `} htmlFor="category">Categoría:</label>
@@ -100,8 +139,14 @@ export default function PutSauces () {
                                     <option key={category._id} value={category._id}>{category.category}</option>
                                 ))}
                             </select>
+                            {touched.category && errors.category && <p className={`${styles.danger} `}>{errors.category}</p>}
                         </div>
-                        <button className={`${styles.button} `} type="submit">Actualizar Salsa</button>
+                        {   
+                            !errors.code && sauces.code.length > 0 &&
+                            !errors.name && sauces.name.length > 0 &&
+                            !errors.category && sauces.category.length > 0 ?
+                            <button className={`${styles.button} `} type="submit">Actualizar Salsa</button> : <button className={`${styles.button} `} type="submit">Actualizar Salsa</button>
+                        }
                     </form>
                 </div>
             </div>

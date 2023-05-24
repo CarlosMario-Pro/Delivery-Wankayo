@@ -13,6 +13,10 @@ const saucesSchema = new Schema(
             // required: true,
             trim: true
         },
+        isDeleted: {
+            type: Boolean,
+            default: false
+        },
         category: { type: Schema.Types.ObjectId, ref: "Categories" },
         products: [{ type: Schema.Types.ObjectId, ref: "Products", required: true }],
     },

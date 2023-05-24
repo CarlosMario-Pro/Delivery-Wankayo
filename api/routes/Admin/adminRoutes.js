@@ -8,9 +8,13 @@ const { isAdmin, isSuperAdmin } = require("../../middlewares/auth");
 adminRouter.get("/getUserAdmin", admin.getUserAdmin);                                           //GET para obtener todos los usuarios administradores - Se pasa aquí para su funcionamiento
 adminRouter.get("/getCategories", admin.getCategories);                                         //GET para obtener todas las categorías
 adminRouter.get("/getDrinks", admin.getDrinks);                                                 //GET para obtener todas las bebidas
+adminRouter.get("/getDrinksLogical", admin.getDrinksLogical);                                   //GET para obtener todas las bebidas
 adminRouter.get("/getAccompanyings", admin.getAccompanyings);                                   //GET para obtener todas los acompañamientos
+adminRouter.get("/getAccompanyingsLogical", admin.getAccompanyingsLogical);                     //GET para obtener todas los acompañamientos a excepción de los que tienen borrado lógico
 adminRouter.get("/getExtras", admin.getExtras);                                                 //GET para obtener todas los extras
+adminRouter.get("/getExtrasLogical", admin.getExtrasLogical);                                   //GET para obtener todas los extras a excepción de los que tienen borrado lógico
 adminRouter.get("/getSauces", admin.getSauces);                                                 //GET para obtener todas las salsas
+adminRouter.get("/getSaucesLogical", admin.getSaucesLogical);                                                 //GET para obtener todas las salsas
 adminRouter.get("/getNameProducts", admin.getNameProducts);                                     //GET para obtener productos por nombre
 adminRouter.get("/getOrders", admin.getOrders);                                                 //GET para obtener todas las ordenes
 adminRouter.get("/getOrdersPendings", admin.getOrdersPendings);                                 //GET para obtener todas las ordenes
@@ -53,6 +57,8 @@ adminRouter.get("/getDrinks/:idDrinks", admin.getIdDrinks);                     
 adminRouter.post("/postDrinks", admin.postDrinks);                                              //POST para crear una bebida
 adminRouter.put("/putDrinks/:idDrinks", admin.putDrinks);                                       //PUT para actualizar una bebida
 adminRouter.delete("/deleteDrinks/:idDrinks", admin.deleteDrinks);                              //DELETE para eliminar permanentemente una bebida
+adminRouter.put("/trueLogicalDeletionDrink/:idDrinks", admin.trueLogicalDeletionDrink);         //PUT para aplicar borrado lógico a una bebida
+adminRouter.put("/falseLogicalDeletionDrink/:idDrinks", admin.falseLogicalDeletionDrink);       //PUT para quitar borrado lógico a una bebida
 
 
 //ACOMPAÑAMIENTOS
@@ -60,6 +66,8 @@ adminRouter.get("/getAccompanyings/:idAccompanyings", admin.getIdAccompanyings);
 adminRouter.post("/postAccompanyings", admin.postAccompanyings);                                //POST para crear un acompañamiento
 adminRouter.put("/putAccompanyings/:idAccompanyings", admin.putAccompanyings);                  //PUT para actualizar un acompañamiento
 adminRouter.delete("/deleteAccompanyings/:idAccompanyings", admin.deleteAccompanyings);         //DELETE para eliminar un acompañamiento
+adminRouter.put("/trueLogicalDeletionAccompanying/:idAccompanyings", admin.trueLogicalDeletionAccompanying);         //PUT para aplicar borrado lógico a un acompañamiento
+adminRouter.put("/falseLogicalDeletionAccompanying/:idAccompanyings", admin.falseLogicalDeletionAccompanying);       //PUT para quitar borrado lógico a un acompañamiento
 
 
 //EXTRAS
@@ -67,6 +75,8 @@ adminRouter.get("/getExtras/:idExtras", admin.getIdExtras);                     
 adminRouter.post("/postExtras", admin.postExtras);                                              //POST para crear un extras
 adminRouter.put("/putExtras/:idExtras", admin.putExtras);                                       //PUT para actualizar un extras
 adminRouter.delete("/deleteExtras/:idExtras", admin.deleteExtras);                              //DELETE para eliminar permanentemente un extras
+adminRouter.put("/trueLogicalDeletionExtras/:idExtras", admin.trueLogicalDeletionExtras);       //PUT para aplicar borrado lógico a un acompañamiento
+adminRouter.put("/falseLogicalDeletionExtras/:idExtras", admin.falseLogicalDeletionExtras);     //PUT para quitar borrado lógico a un acompañamiento
 
 
 //SALSAS
@@ -74,6 +84,8 @@ adminRouter.get("/getSauces/:idSauces", admin.getIdSauces);                     
 adminRouter.post("/postSauces", admin.postSauces);                                              //POST para crear una salsa
 adminRouter.put("/putSauces/:idSauces", admin.putSauces);                                       //PUT para actualizar una salsa
 adminRouter.delete("/deleteSauces/:idSauces", admin.deleteSauces);                              //DELETE para eliminar una salsa
+adminRouter.put("/trueLogicalDeletionSauces/:idSauces", admin.trueLogicalDeletionSauces);       //PUT para aplicar borrado lógico a un acompañamiento
+adminRouter.put("/falseLogicalDeletionSauces/:idSauces", admin.falseLogicalDeletionSauces);     //PUT para quitar borrado lógico a un acompañamiento
 
 
 //ORDENES

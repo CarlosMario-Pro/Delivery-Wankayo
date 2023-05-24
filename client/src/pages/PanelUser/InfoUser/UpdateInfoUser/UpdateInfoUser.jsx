@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getAllInfoUser, putUserInfo } from '../../../../redux/actions/index';
 import PanelUser from '../../PanelUser';
 import Options from '../../Options/Options';
@@ -53,45 +53,45 @@ export default function UpdateInfoUser () {
 
 
     return (
-        <div className={`${styles.productos} flex `}>
-           <div className={` flex `}>
-                <div className={`${styles.panelAdmin} `}>
+        <div className={`${styles.general} flex `}>
+            <div className={` flex `}>
+                <div className={`${styles.panelUser} `}>
                     <PanelUser />
                 </div>
             </div>
+
             <div>
                 <Options />
-                <h1>Rellena todos los espacios para actualizar tu dirección</h1>
-                <div className={`${styles.containerProducts} center `}>
-                    <form className={`${styles.formProducts} `} onSubmit={(e) => handleSubmit(e)}>
-                        <div className={`${styles.input} `}>
-                            <label className={`${styles.formLabel} `} >Nombre</label>
-                            <input type="name" name='name' placeholder="Nombre"value={ user.name } onChange={(e) => handleInputChange(e)} />
+                <div className={`${styles.container} `}>
+                    <h1>Actualizar tu información</h1>
+                    <form className={`${styles.form} `} onSubmit={(e) => handleSubmit(e)}>
+                        <div>
+                            <label className={`${styles.label} `} >Nombre</label>
+                            <input className={`${styles.input} `} type="name" name='name' placeholder="Nombre"value={ user.name } onChange={(e) => handleInputChange(e)} />
                         </div>
-                        <div className={`${styles.input} `}>
-                            <label className={`${styles.formLabel} `} >Apellido</label>
-                            <input type="text" name='lastName' placeholder="Apellido" value={ user.lastName } onChange={(e) => handleInputChange(e)} />
+                        <div>
+                            <label className={`${styles.label} `} >Apellido</label>
+                            <input className={`${styles.input} `} type="text" name='lastName' placeholder="Apellido" value={ user.lastName } onChange={(e) => handleInputChange(e)} />
                         </div>
-                        <div className={`${styles.input} `}>
-                            <label className={`${styles.formLabel} `} >Documento de identidad</label>
-                            <input type="text" name='docIdentity' placeholder="Documento de identidad" value={ user.docIdentity } onChange={(e) => handleInputChange(e)} />
+                        <div>
+                            <label className={`${styles.label} `} >Documento de identidad</label>
+                            <input className={`${styles.input} `} type="text" name='docIdentity' placeholder="Documento de identidad" value={ user.docIdentity } onChange={(e) => handleInputChange(e)} />
                         </div>
-                        <div className={`${styles.input} `}>
-                            <label className={`${styles.formLabel} `} >Email</label>
-                            <input type="text" name='email' placeholder="Email" value={ user.email } onChange={(e) => handleInputChange(e)} />
+                        <div>
+                            <label className={`${styles.label} `} >Email</label>
+                            <input className={`${styles.input} `} type="text" name='email' placeholder="Email" value={ user.email } onChange={(e) => handleInputChange(e)} />
                         </div>
-                        <div className={`${styles.input} `}>
-                            <label className={`${styles.formLabel} `} >Teléfono</label>
-                            <input type="text" name='phone' placeholder="Teléfono" value={ user.phone } onChange={(e) => handleInputChange(e)} />
+                        <div>
+                            <label className={`${styles.label} `} >Teléfono</label>
+                            <input className={`${styles.input} `} type="text" name='phone' placeholder="Teléfono" value={ user.phone } onChange={(e) => handleInputChange(e)} />
                         </div>
-                        <div className={`${styles.buttons} centerColumn`}>
+                        <div className={` centerColumn `} >
                             <button type="submit" className={`${styles.button} `} >Actualizar usuario</button>
-                            <div><Link to='/panelUser/allInfoUser'><button className={`${styles.backButton} `}>Volver</button></Link></div>
+                            <button className={`${styles.backButton} `}>Volver</button>
                         </div> 
                     </form>
                 </div>
-            </div>
- 
+            </div> 
         </div>
     );
 };

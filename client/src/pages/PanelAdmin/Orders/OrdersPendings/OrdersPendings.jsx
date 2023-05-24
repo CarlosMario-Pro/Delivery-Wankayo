@@ -8,7 +8,6 @@ export default function OrdersPendings() {
     const [message, setMessage] = useState({
         cancelMessage: ''
     });
-    console.log(message)
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -18,9 +17,9 @@ export default function OrdersPendings() {
         });
     };
 
-
     const dispatch = useDispatch();
     const ordersPendings = useSelector((state) => state.ordersPendings);
+    console.log(ordersPendings)
   
     //Trae todas las órdenes pendientes (La nuevas órdenes)
     useEffect(() => {
@@ -72,11 +71,11 @@ export default function OrdersPendings() {
                             <div>
                                 <h2>{order.user.name} {order.user.lastName}</h2>
                                 <h2>{order._id}</h2>
-                                <h4><span className={styles.spanTitle}>Dirección de entrega: </span>{order.address[0].street}, {order.address[0].city}</h4>
-                                <p><span className={styles.spanTitle}>Teléfono: </span>{order.user.phone}</p>
-                                <p><span className={styles.spanTitle}>Fecha de pedido: </span>{new Date(order.shippingDate).toLocaleString('es-ES', { day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: 'numeric' })} horas, {/* <Link className={styles.link} to={`/orders/${order._id}`}>Ver detalles</Link> */}</p>
-                                <p><span className={styles.spanTitle}>Observación: </span></p>
-                                <p>{order.comment}</p>
+                                {/* <h4><span className={styles.spanTitle}>Dirección de entrega: </span>{order.address[0].street}, {order.address[0].city}</h4> */}
+                                {/* <p><span className={styles.spanTitle}>Teléfono: </span>{order.user.phone}</p> */}
+                                {/* <p><span className={styles.spanTitle}>Fecha de pedido: </span>{new Date(order.shippingDate).toLocaleString('es-ES', { day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: 'numeric' })} horas, <Link className={styles.link} to={`/orders/${order._id}`}>Ver detalles</Link></p> */}
+                                {/* <p><span className={styles.spanTitle}>Observación: </span></p> */}
+                                {/* <p>{order.comment}</p> */}
                             </div>
                             
                             <div className={`${styles.fff} `}>
