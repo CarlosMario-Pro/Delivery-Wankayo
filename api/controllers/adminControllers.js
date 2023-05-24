@@ -86,7 +86,6 @@ const getProductsLogical = async (req, res) => {
     }
 }; // GET - http://localhost:3001/admin/getProductsLogical
 
-
 //Obtener un producto por id
 const getIdProduct = async (req, res) => {
     const { idProduct } = req.params;
@@ -106,7 +105,6 @@ const getIdProduct = async (req, res) => {
         await session.endSession();
     }
 }; //GET http://localhost:3001/admin/:idProduct
-
 
 //Actualizar un producto
 const putProduct = async (req, res) => {
@@ -143,7 +141,6 @@ const putProduct = async (req, res) => {
     }
 }; //PUT http://localhost:3001/admin/:idProduct con  { "name": "Super Hamburguesa", "image": "https://res.cloudinary.com/dmkklptzi/image/upload/v1677732823/images/se0ku9gfmbkcxqywtjad.jpg", "description": "Hamburguesa doble carne con peperoni y queso", "price": 20, "category": "643017f46a0e3aa31703e961" }
 
-
 //Elimina permanentemente un producto
 const deleteProduct = async (req, res) => {
     const { idProduct } = req.params;
@@ -167,7 +164,6 @@ const deleteProduct = async (req, res) => {
         await session.endSession();
     }
 }; //DELETE http://localhost:3001/admin/:idProduct
-
 
 //Busca un producto por nombre
 const getNameProducts = async (req, res) => {
@@ -197,7 +193,6 @@ const getNameProducts = async (req, res) => {
     }
 }; // GET - http://localhost:3001/admin/getNameProducts?name=cono
 
-
 //Elimina un producto con borrado lógico
 const trueLogicalDeletionProduct = async (req, res) => {
     const { idProduct } = req.params;
@@ -217,7 +212,6 @@ const trueLogicalDeletionProduct = async (req, res) => {
         return res.status(status).send({ message });
     }
 }; // PUT - http://localhost:3001/admin/trueLogicalDeletionProduct/:idProduct
-
 
 //Activa un producto eliminado con borrado lógico
 const falseLogicalDeletionProduct = async (req, res) => {
@@ -286,7 +280,6 @@ const postUserAdmin = async (req, res) => {
     }
 }; //POST http://localhost:3001/admin/postUserAdmin con { "name": "Carlos Mario", "lastName": "Reyes", "docIdentity": "ABC1536455D5DDF", "email": "carlosmario.reyesp@gmail.com", "password": "Carlos15.", "phone": "+57 3004005566", "role": "superAdmin" }
 
-
 //Obtiene todos los usuarios con rol "superAdmin" y "admin"
 const getUserAdmin = async (req, res) => {
     const session = await mongoose.startSession();
@@ -304,7 +297,6 @@ const getUserAdmin = async (req, res) => {
         await session.endSession();
     }
 }; //GET http://localhost:3001/admin/getUserAdmin
-
 
 //Obtiene un usuario administrador por id
 const getIdUserAdmin = async (req, res) => {
@@ -328,7 +320,6 @@ const getIdUserAdmin = async (req, res) => {
       await session.endSession();
     }
 }; //GET - http://localhost:3001/admin/getIdUserAdmin/:idAdmin
-
 
 //Actualiza un usuario administrador
 const putUserAdmin = async (req, res) => {
@@ -368,7 +359,6 @@ const putUserAdmin = async (req, res) => {
     }
 }; // PUT http://localhost:3001/admin/putUserAdmin/:idAdmin con { "name": "Mar Caribe", "lastName": "Playas hermosas", "docIdentity": "Carlos12345678", "email": "prueba@gmail.com", "password": "Caribean123.", "phone": "5555555", "role": "admin" }
 
-
 //Elimina permanentemente un usuario administrador
 const deleteUserAdmin = async (req, res) => {
     const { idAdmin } = req.params;
@@ -393,7 +383,6 @@ const deleteUserAdmin = async (req, res) => {
     }
 }; //DELETE http://localhost:3001/admin/deleteUserAdmin/:idAdmin
 
-
 //VER LA POSIBILIDAD DE HABILITAR LUEGO DE SER BORRADO LOGICAMENTE
 //Elimina un usuario administrador con borrado lógico
 const trueLogicalDeletionAdmin = async (req, res) => {              //!NO IMPLEMENTADO AUN
@@ -417,7 +406,6 @@ const trueLogicalDeletionAdmin = async (req, res) => {              //!NO IMPLEM
     }
 }; //PUT http://localhost:3001/admin/trueLogicalDeletionAdmin/:idAdmin
 
-
 //Activa un producto eliminado con borrado lógico
 const falseLogicalDeletionAdmin = async (req, res) => {             //!NO IMPLEMENTADO AUN
     const { idAdmin } = req.params;
@@ -440,7 +428,6 @@ const falseLogicalDeletionAdmin = async (req, res) => {             //!NO IMPLEM
     }
 }; //PUT http://localhost:3001/admin/falseLogicalDeletionAdmin/:idAdmin
 
-
 //Bloquea un usuaruio administrador
 const blockedAdmin = async (req, res) => {                  //!NO IMPLEMENTADO AUN
     const { idAdmin } = req.params;
@@ -462,7 +449,6 @@ const blockedAdmin = async (req, res) => {                  //!NO IMPLEMENTADO A
         return res.status(status).send({ message });
     }
 }; //PUT http://localhost:3001/admin/blockedAdmin/:idAdmin
-
 
 //Desbloquea un usuaruio administrador
 const unlockedAdmin = async (req, res) => {                 //!NO IMPLEMENTADO AUN
@@ -487,6 +473,8 @@ const unlockedAdmin = async (req, res) => {                 //!NO IMPLEMENTADO A
 }; //PUT http://localhost:3001/admin/unlockedAdmin/:idAdmin
 
 
+
+
 //^CATEGORIES
 //Crea una categoría
 const postCategory = async (req, res) => {
@@ -500,7 +488,6 @@ const postCategory = async (req, res) => {
     }
 }; //POST http://localhost:3001/admin/postCategory con { "category": "Papitas" }
 
-
 //Obtiene todas las categoría
 const getCategories = async (req, res) => {
     try {
@@ -511,7 +498,6 @@ const getCategories = async (req, res) => {
         res.status(500).send("Error obteniendo categorías");
     }
 }; //GET http://localhost:3001/admin/getCategories
-
 
 //Actualizar una categoría
 const putCategory = async (req, res) => {
@@ -543,7 +529,6 @@ const putCategory = async (req, res) => {
     }
 }; // PUT http://localhost:3001/admin/putCategory/:idCategory con { "category": "Papitas con salsa de tomate" }
 
-
 //Elimina permanentemente una categoría
 const deleteCategory = async (req, res) => {
     const { idCategory } = req.params;
@@ -567,6 +552,8 @@ const deleteCategory = async (req, res) => {
         await session.endSession();
     }
 }; // DELETE http://localhost:3001/admin/deleteCategory/:idCategory
+
+
 
 
 //^DRINKS
@@ -767,6 +754,7 @@ const falseLogicalDeletionDrink = async (req, res) => {
 
 
 
+
 //^ACOMPAÑAMIENTOS
 //Crea acompañamientos
 const postAccompanyings = async (req, res) => {
@@ -960,6 +948,7 @@ const falseLogicalDeletionAccompanying = async (req, res) => {
         return res.status(status).send({ message });
     }
 }; // PUT - http://localhost:3001/admin/falseLogicalDeletionAccompanying/:idAccompanying
+
 
 
 
@@ -1161,6 +1150,7 @@ const falseLogicalDeletionExtras = async (req, res) => {
 
 
 
+
 //^Salsas
 //Crea una salsa
 const postSauces = async (req, res) => {
@@ -1351,6 +1341,7 @@ const falseLogicalDeletionSauces = async (req, res) => {
 
 
 
+
 //^ORDENES
 // Obtener todas las órdenes de todos los usuarios
 const getOrders = async (req, res) => {                 //!NO IMPLEMENTADA
@@ -1370,7 +1361,6 @@ const getOrders = async (req, res) => {                 //!NO IMPLEMENTADA
     }
 }; //GET - http://localhost:3001/admin/getOrders
 
-
 // Obtener todas las órdenes de todos los usuarios en status PENDIENTE
 const getOrdersPendings = async (req, res) => {
     const session = await mongoose.startSession();    
@@ -1388,7 +1378,6 @@ const getOrdersPendings = async (req, res) => {
         await session.endSession();
     }
 }; //GET - http://localhost:3001/admin/getOrdersPendings
-
 
 // Obtener todas las órdenes de todos los usuarios en status EN PREPARACION
 const getOrdersInPreparation = async (req, res) => {
@@ -1408,7 +1397,6 @@ const getOrdersInPreparation = async (req, res) => {
     }
 }; //GET - http://localhost:3001/admin/getOrdersInPreparation
 
-
 // Obtener todas las órdenes de todos los usuarios en status EN CAMINO
 const getOrdersOnTheWay = async (req, res) => {
     const session = await mongoose.startSession();    
@@ -1426,9 +1414,6 @@ const getOrdersOnTheWay = async (req, res) => {
         await session.endSession();
     }
 }; //GET - http://localhost:3001/admin/getOrdersOnTheWay
-
-
-
 
 // Obtener todas las órdenes archivadas en el PANEL DEL ADMIN
 const getOrdersHistoryDelivered = async (req, res) => {
@@ -1448,7 +1433,6 @@ const getOrdersHistoryDelivered = async (req, res) => {
         await session.endSession();
     }
 }; //GET - http://localhost:3001/admin/getOrdersHistoryDelivered
-
 
 // Obtener todas las órdenes archivadas en el PANEL DEL ADMIN
 const getOrdersHistory = async (req, res) => {
@@ -1471,7 +1455,6 @@ const getOrdersHistory = async (req, res) => {
     }
 }; //GET - http://localhost:3001/admin/getOrdersHistory
 
-
 //Marca una orden como archivada
 const trueLogicalOrdersHistory = async (req, res) => {
     const { idOrder } = req.params;
@@ -1492,7 +1475,6 @@ const trueLogicalOrdersHistory = async (req, res) => {
     }
 }; // PUT - http://localhost:3001/admin/trueLogicalOrdersHistory/:idOrder
 
-
 //Desmarca una orden del archivo
 const falseLogicalOrdersHistory = async (req, res) => {
     const { idOrder } = req.params;
@@ -1512,7 +1494,6 @@ const falseLogicalOrdersHistory = async (req, res) => {
         return res.status(status).send({ message });
     }
 }; // PUT - http://localhost:3001/admin/falseLogicalOrdersHistory/:idOrder
-
 
 // Elimina permanentemente una orden de un usuario
 const deleteOrder = async (req, res) => {
@@ -1537,7 +1518,6 @@ const deleteOrder = async (req, res) => {
         await session.endSession();
     }
 }; // DELETE - http://localhost:3001/admin/deleteOrder/:idOrder
-
 
 // Elimina una orden de un usuario
 const cancelOrder = async (req, res) => {
@@ -1572,7 +1552,6 @@ const cancelOrder = async (req, res) => {
         await session.endSession();
     }
 }; // PUT - http://localhost:3001/admin/cancelOrder/:idOrder con { "status": "Cancelada", "cancelMessage": "No tenemos los ingredientes secretos para preparar tu orden" }
-
 
 // Cambia el status de una orden y envío de correo
 const changeStatusOrder = async (req, res) => {
@@ -1620,7 +1599,6 @@ const changeStatusOrder = async (req, res) => {
         return res.status(status).send({ message });
     }
 }; //PUT - http://localhost:3001/admin/changeStatusOrder/:idOrder con { "status": "En preparación" }
-
 
 // Cambia al status previo en caso de equivocación al cambiarlo por parte del admin
 const changeStatusOrderPrevious = async (req, res) => {

@@ -367,7 +367,7 @@ const products = [
     },
     {
         code: "BF-60-107",
-        name: "Chicha morada",
+        name: "Chicha morada 16 oz",
         image: "https://res.cloudinary.com/dmkklptzi/image/upload/v1684286230/images/w6ngiytxo9h5oluqdkea.png",
         description: "16 oz",
         category: "Bebidas",
@@ -375,7 +375,7 @@ const products = [
     },
     {
         code: "BF-60-108",
-        name: "Maracuya ",
+        name: "Maracuya 16 oz",
         image: "https://res.cloudinary.com/dmkklptzi/image/upload/v1684286230/images/efmi3svmrrk0a1wtgz75.png",
         description: "16 oz",
         category: "Bebidas",
@@ -383,7 +383,7 @@ const products = [
     },
     {
         code: "BF-60-109",
-        name: "Guarana ",
+        name: "Guarana 450ml",
         image: "https://res.cloudinary.com/dmkklptzi/image/upload/v1684777679/images/basyoex2qd83wxepeuzg.jpg",
         description: "450ml",
         category: "Bebidas",
@@ -391,15 +391,15 @@ const products = [
     },
     {
         code: "BF-60-110",
-        name: "Sprite",
+        name: "Sprite 500ml",
         image: "https://res.cloudinary.com/dmkklptzi/image/upload/v1684286230/images/nh6yc4ttsgq3wz6ecs5f.png",
-        description: "500ml",
+        description: " ",
         category: "Bebidas",
         price: 4
     },
     {
         code: "BF-60-111",
-        name: "Fanta",
+        name: "Fanta 500ml",
         image: "https://res.cloudinary.com/dmkklptzi/image/upload/v1684286230/images/dbdjhxbxb7iey32ygrtf.png",
         description: "500ml",
         category: "Bebidas",
@@ -407,7 +407,7 @@ const products = [
     },
     {
         code: "BF-60-112",
-        name: "Inca Kola",
+        name: "Inca Kola 600ml",
         image: "https://res.cloudinary.com/dmkklptzi/image/upload/v1684286230/images/spxmhmzgxjgtrnjqohjx.png",
         description: "600ml",
         category: "Bebidas",
@@ -415,7 +415,7 @@ const products = [
     },
     {
         code: "BF-60-113",
-        name: "Coca Cola",
+        name: "Coca Cola 600ml",
         image: "https://res.cloudinary.com/dmkklptzi/image/upload/v1684286230/images/ivu367h0322zl1g6owxk.png",
         description: "600ml",
         category: "Bebidas",
@@ -423,7 +423,7 @@ const products = [
     },
     {
         code: "BF-60-114",
-        name: "Inca Kola",
+        name: "Inca Kola 1L",
         image: "",
         description: "1L",
         category: "Bebidas",
@@ -431,7 +431,7 @@ const products = [
     },
     {
         code: "BF-60-115",
-        name: "Coca Cola",
+        name: "Coca Cola 1L",
         image: "",
         description: "1L",
         category: "Bebidas",
@@ -439,7 +439,7 @@ const products = [
     },
     {
         code: "BF-60-116",
-        name: "Inca Kola",
+        name: "Inca Kola 1.5L",
         image: "",
         description: "1.5L",
         category: "Bebidas",
@@ -447,7 +447,7 @@ const products = [
     },
     {
         code: "BF-60-117",
-        name: "Coca Cola",
+        name: "Coca Cola 1.5L",
         image: "",
         description: "1.5L",
         category: "Bebidas",
@@ -455,7 +455,7 @@ const products = [
     },
     {
         code: "BF-60-118",
-        name: "Inca Kola",
+        name: "Inca Kola 3L",
         image: "",
         description: "3L",
         category: "Bebidas",
@@ -463,7 +463,7 @@ const products = [
     },
     {
         code: "BF-60-119",
-        name: "Coca Cola",
+        name: "Coca Cola 3L",
         image: "",
         description: "3L",
         category: "Bebidas",

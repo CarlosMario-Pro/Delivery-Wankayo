@@ -51,7 +51,6 @@ const registerUsers = async (req, res) => {
     }
 }; // POST - http://localhost:3001/user/register con { "name": "Carlos", "lastName": "Reyes", "email": "carlosmario.reyesp@gmail.com", "docIdentity": "AAA-1151111", "password": "Carlos..15", "phone": "3128052002" }
 
-
 //Marca una orden como archivada
 const unblockUser = async (req, res) => {
     const { idUser } = req.params;
@@ -72,7 +71,6 @@ const unblockUser = async (req, res) => {
         return res.status(status).send({ message });
     }
 }; // PUT - http://localhost:3001/user/unblockUser/:idUser
-
 
 //Elimina la cuenta de un usuario
 const deleteAccountUser = async (req, res) => {
@@ -97,7 +95,6 @@ const deleteAccountUser = async (req, res) => {
     }
 }; // DELETE - http://localhost:3001/user/deleteAccount/:idUser
 
-
 //Eliminado lógico de un usuario
 const logicalDeletionUser = async (req, res) => {           //!NO IMPLEMENTADA
     const { idUser } = req.params;
@@ -118,8 +115,7 @@ const logicalDeletionUser = async (req, res) => {           //!NO IMPLEMENTADA
         const message = error.message || "Ocurrió un error al eliminar (ocultar) el producto";
         return res.status(status).send({ message });
     }
-};// PUT http://localhost:3001/user/logicalDeletionUser/:idUser
-
+};// PUT - http://localhost:3001/user/logicalDeletionUser/:idUser
 
 //Activar cuenta y cambiar contraseña de un usuario
 const recoverPassword = async (req, res) => {
@@ -176,7 +172,6 @@ const recoverPassword = async (req, res) => {
     }
 };  //PUT - http://localhost:3001/user/recoverPassword/:idUser con { "password" : "Carlos..1000" }
 
-
 //Cambia la contraseña de un usuario
 const changePasswordr = async (req, res) => {
     const { email } = req.body;
@@ -208,7 +203,6 @@ const changePasswordr = async (req, res) => {
     }
 };  //PUT - http://localhost:3001/user/changePasswordr/:idUser con { "password" : "Carlos..1000"}
 
-
 //Obtener toda la información de un solo usuario por ID
 const getAllInfoUser = async (req, res) => {
     const { idUser } = req.params;
@@ -230,7 +224,6 @@ const getAllInfoUser = async (req, res) => {
         await session.endSession();
     }
 }; // GET - http://localhost:3001/user/getAllInfoUser/:idUser
-
 
 //Actualiza la información de un usuario
 const putUserInfo = async (req, res) => {
@@ -266,6 +259,9 @@ const putUserInfo = async (req, res) => {
 }; // PUT - http://localhost:3001/user/putUserInfo/:idUser con {  "name": "Carlos", "lastName": "Dev",  "docIdentity": "55555555", "email": "carlosmario.reyesp@gmail.com", "phone": "3004005566" }
 
 
+
+
+//^ADDRESS
 //Crea una dirección para el usuario
 const postAddress = async (req, res) => {
     const { idUser } = req.params;
@@ -293,7 +289,6 @@ const postAddress = async (req, res) => {
     }
 }; // POST - http://localhost:3001/user/postAddress/:idUser con { "country": "Colombia", "state": "Bogotá", "city": "Bogotá", "street": "Calle 40 con Cra 10" }
 
-
 //Obtiene todas las direcciones del usuario
 const getAddress = async (req, res) => {
     const { idUser } = req.params;
@@ -312,7 +307,6 @@ const getAddress = async (req, res) => {
         await session.endSession();
     }
 }; // GET - http://localhost:3001/user/getAddress/:idUser
-
 
 //Obtiene una dirección en específico por ID
 const getIdAddress = async (req, res) => {
@@ -334,8 +328,7 @@ const getIdAddress = async (req, res) => {
     } finally {
       await session.endSession();
     }
-}; //GET http://localhost:3001/user/getIdAddress/:idAddress
-
+}; //GET - http://localhost:3001/user/getIdAddress/:idAddress
 
 //Actualizar una dirección del usuario
 const putAddress = async (req, res) => {
@@ -361,7 +354,6 @@ const putAddress = async (req, res) => {
     }
 }; // PUT - http://localhost:3001/user/putAddress/:idUser/:idAddress
 
-
 //Elimina una dirección del usuario
 const deleteAddress = async (req, res) => {     //!IMPLEMENTADA CON OTRO NOMBRE
     const { idUser, idAddress } = req.params;
@@ -376,21 +368,21 @@ const deleteAddress = async (req, res) => {     //!IMPLEMENTADA CON OTRO NOMBRE
 }; // DELETE - http://localhost:3001/user/deleteAddress/:idAddress
 
 
+
+
 //^ORDENES
 // Crea una orden y envía el correo de confirmación con todos los productos escogidos
 const postOrders = async (req, res) => {
-    const { products, total, user, address, comment, cancelMessage  } = req.body;
-    console.log(products, total, user, address, comment, cancelMessage)
+    const { idUser } = req.params;
+    const { products, total, user, address, comment, cancelMessage } = req.body;
     try {
-        const order = new Orders({ products, total, user, address, comment, cancelMessage  });
+        const order = new Orders({ products, total, user, address, comment, cancelMessage });
         await order.save();
 
-        const idUser = user;
         const userInfo = await User.findById(idUser);
         const emailUser = userInfo.email;
 
-        const idAddress = address;
-        const addressInfo = await Address.findById(idAddress);
+        const addressInfo = await Address.findById(address);
         const addressUserCity = addressInfo.city;
         const addressUser = addressInfo.street;
 
@@ -408,7 +400,6 @@ const postOrders = async (req, res) => {
         res.status(500).send({ message: "Error al crear la orden" });
     }
 }; // POST - http://localhost:3001/user/postOrders/:idUser con { "products": [ { "nameProduct": "Cono La Justa", "quantity": 1, "unitPrice": 8, "price": 8, "IdProduct": "6462f0a748d326c1ad0c0743" }, { "nameProduct": "Cono La Peque", "quantity": 2, "unitPrice": 6, "price": 12, "IdProduct": "6462f0a748d326c1ad0c0744" }, { "nameProduct": "Mayonesa", "quantity": 1, "unitPrice": 0, "price": 0, "IdProduct": "6462f0a948d326c1ad0c0791" } ], "total": 20, "user": "6462f108a3ae3a28738f3e8f", "address": "6462f164a3ae3a28738f3e9b", "comment": "Yo lo recojo en tienda, por favor, tenerla lista para las 5pm", "cancelMessage": "" }
-
 
 //Obtener todas las órdenes vigentes de un usuario a excepción de las ENTREGADAS
 const getIdUserOrders = async (req, res) => {
@@ -522,39 +513,6 @@ const getUserOrdersDelivered  = async (req, res) => {               //!SE IMPLEM
         return res.status(status).send({ message });
     }
 }; //GET - http://localhost:3001/user/getUserOrdersDelivered/:idUser
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 module.exports = {
