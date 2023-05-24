@@ -63,7 +63,28 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 .icon {
     font-size: 25px;
+}
+
+
+
+.cartCount {
+    border: 1px solid red;
+    position: absolute;
+    z-index: 1;
+    top: -8px;
+    right: -8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
 }

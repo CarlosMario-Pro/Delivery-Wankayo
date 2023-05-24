@@ -14,12 +14,14 @@ export default function NavBar() {
     const isAdmin = userInfoLogin.role === 'superAdmin' || userInfoLogin.role === 'admin';
     const isUser = userInfoLogin.role === 'user';
 
+    const order = localStorage.getItem('order');
+
 
     return (
         <div className={`${styles.navBar} `}>
             <div className={`${styles.navBar__container} jcspaceBetween `}>
                 <div>
-                    <Link to='/' >
+                    <Link to='/'>
                         <div className={`${styles.logo} center `}>
                             <img className={`${styles.imageLogo} center `} src={Logo} alt="Logo" />
                         </div>
@@ -30,34 +32,37 @@ export default function NavBar() {
                     {isAdmin &&
                         <div className={`${styles.userPanel} `}>
                             <Link className={`${styles.linkUserPanel} linkTitle center`} to={`/panelAdmin/products`} >
-                                <div className={`${styles.login}  `}><TfiPanel className={`${styles.icon}`}/><span className={`${styles.span}`}>Panel</span></div>
+                                <div className={`${styles.login}  `}><TfiPanel className={`${styles.icon}`} /><span className={`${styles.span}`}>Panel</span></div>
                             </Link>
                         </div>
                     }
                     {isUser &&
                         <div className={`${styles.userPanel}`}>
                             <Link className={`${styles.linkUserPanel} linkTitle center`} to={`/panelUser/allInfoUser/${idUser}`} >
-                                <div className={`${styles.login} `}><TfiPanel className={`${styles.icon}`}/>Panel</div>
+                                <div className={`${styles.login} `}><TfiPanel className={`${styles.icon}`} />Panel</div>
                             </Link>
                         </div>
                     }
-                        {Object.keys(userInfoLogin).length === 0 ?
-                            (
-                                <Link className={`${styles.linkUserPanel} linkTitle center`} to='/login'>
-                                    <div className={`${styles.login}`}><FaUserCircle className={`${styles.icon}`}/>Login</div>
-                                </Link>
-                            ): ""
-                        }
-                        {Object.keys(userInfoLogin).length === 0 ?
-                            (
-                                <Link className={`${styles.linkUserPanel} linkTitle center`} to='/register'>
-                                    <div className={`${styles.register}`}><FaUserCircle className={`${styles.icon}`}/>Registro</div>
-                                </Link>
-                            ): ""
-                        }
-                        <Link className={`${styles.linkUserPanel} linkTitle center`} to='/'>
-                            <div className={`${styles.car}`}><IoMdCart className={`${styles.icon}`}/></div>
+                    {Object.keys(userInfoLogin).length === 0 ?
+                        (
+                        <Link className={`${styles.linkUserPanel} linkTitle center`} to='/login'>
+                            <div className={`${styles.login}`}><FaUserCircle className={`${styles.icon}`} />Login</div>
                         </Link>
+                        ) : ""
+                    }
+                    {Object.keys(userInfoLogin).length === 0 ?
+                        (
+                        <Link className={`${styles.linkUserPanel} linkTitle center`} to='/register'>
+                            <div className={`${styles.register}`}><FaUserCircle className={`${styles.icon}`} />Registro</div>
+                        </Link>
+                        ) : ""
+                    }
+                    <Link className={`${styles.linkUserPanel} linkTitle center`} to='/shoppingCart'>
+                        <div className={`${styles.car}`}>
+                            <IoMdCart className={`${styles.icon}`} />
+                            {order.length > 0 && <span className={`${styles.cartCount}`}>1</span>}
+                        </div>
+                    </Link>
                 </div>
             </div>
         </div>

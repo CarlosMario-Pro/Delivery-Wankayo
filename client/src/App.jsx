@@ -14,6 +14,7 @@ import Detail from './pages/Detail/Detail';
 import SearchResults from './pages/SearchResults/SearchResults';
 import RecoverPassword from './pages/PanelUser/InfoUser/RecoverPassword/RecoverPassword';
 import ChangePassword from './pages/PanelUser/InfoUser/ChangePassword/ChangePassword';
+import ShoppingCart from './pages/Detail/ShoppingCart/ShoppingCart';
 import Error404 from './pages/Error404/Error404';
 
 import Footer from './components/Footer/Footer';
@@ -120,6 +121,7 @@ export default function App() {
                 <Route path='/searchResults' element={ <SearchResults /> } />
                 <Route path='/recoverPassword/:idUser' element={ <RecoverPassword /> } />
                 <Route path='/changePassword' element={ <ChangePassword /> } />
+                <Route path='/shoppingCart/' element={ <ShoppingCart /> } />
 
 
                 {/* PANEL ADMIN */}

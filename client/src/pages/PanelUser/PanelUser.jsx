@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import styles from './PanelUser.module.css';
+import axios from 'axios';
+
 
 export default function PanelUser () {
     const location = useLocation();
@@ -15,6 +17,10 @@ export default function PanelUser () {
 
     const idUser = userInfoLogin.id;
 
+    const logout = async () =>{
+        const response = await axios("http://localhost:3001/logout");
+        console.log(response)
+    }
 
     return (
         <div className={`${styles.panelAdmin} `}>
@@ -29,6 +35,7 @@ export default function PanelUser () {
                 <Link className={`${styles.link} centerColumn ${location.pathname.includes(`/panelUser/ordersHistoryUser/${idUser}`) ? styles.active : ''}`} to={`/panelUser/ordersHistoryUser/${idUser}`} onClick={() => handleLinkClick('ordersHistoryUser')} >
                     <p className={`${styles.paragraph}`}>Historial de Órdenes</p>
                 </Link>
+                <button onClick={ logout }>Loguot</button>
             </div>
         </div>
     );

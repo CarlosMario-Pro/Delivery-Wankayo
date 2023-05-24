@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { changePasswordr } from "../../../../redux/actions/index";
+import { changePassword } from "../../../../redux/actions/index";
 import styles from "./ChangePassword.module.css";
 
 
@@ -19,7 +19,7 @@ export default function ChangePassword() {
     const onSubmit = async (e) => {
         e.preventDefault();
         try {
-            dispatch(changePasswordr(email));
+            dispatch(changePassword(email));
         } catch (error) {
             console.log(error);
         }

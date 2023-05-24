@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAccompanyings, deleteAccompanyings } from '../../../../redux/actions/index';
+import { getAccompanyings, deleteAccompanyings, trueLogicalDeletionAccompanying, falseLogicalDeletionAccompanying } from '../../../../redux/actions/index';
 import { Link, useLocation } from 'react-router-dom';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import PanelAdmin from '../../PanelAdmin';
@@ -44,6 +44,41 @@ export default function Accompanyings () {
     };
 
 
+    //Elimina el producto con borrado lógico
+    const [showDeleteTrueLogicalModal, setShowDeleteTrueLogicalModal] = useState({});
+    const handleShowDeleteTrueLogicalModal = (idAccompanyings) => {
+        setShowDeleteTrueLogicalModal((prevState) => ({
+            ...prevState,
+            [idAccompanyings]: true,
+        }));
+    };
+
+    const handleConfirmDeleteTrueLogical = (idAccompanyings) => {
+        dispatch(trueLogicalDeletionAccompanying(idAccompanyings, session));
+        setShowDeleteTrueLogicalModal((prevState) => ({
+            ...prevState,
+            [idAccompanyings]: false,
+        }));
+    };
+
+    //Retita un producto eliminado con borrado lógico
+    const [showDeleteFalseLogicalModal, setShowDeleteFalseLogicalModal] = useState({});
+    const handleShowDeleteFalseLogicalModal = (idAccompanyings) => {
+        setShowDeleteFalseLogicalModal((prevState) => ({
+            ...prevState,
+            [idAccompanyings]: true,
+        }));
+    };
+
+    const handleConfirmDeleteFalseLogical = (idAccompanyings) => {
+        dispatch(falseLogicalDeletionAccompanying(idAccompanyings, session));
+        setShowDeleteFalseLogicalModal((prevState) => ({
+            ...prevState,
+            [idAccompanyings]: false,
+        }));
+    };
+
+
     return (
         <div className={`${styles.general} flex `}>
             <div className={` flex `}>
@@ -63,29 +98,67 @@ export default function Accompanyings () {
                     <div>
                         {accompanyings?.map((el) => {
                             return (
-                                <div className={`${styles.all} `} key={ el._id }>
-                                    <div>
-                                        <h4>{el.name}</h4>
-                                        <p>{el.description}</p>
-                                        <div className={` flex`}>
-                                            <h4 className={el.promoPrice ? styles.strikethrough : ''}>Precio { el.price } Soles</h4>
-                                        </div>
-                                        {el.promoPrice ? <h4>S/ { el.promoPrice }</h4> : ''}
-                                    </div>
-                                    <div className={`${styles.container__buttons} flex `}>
-                                        <button className={`${styles.buttonDelete} `} onClick={() => handleShowDeleteModal(el._id)}><RiDeleteBin6Line className={`${styles.iconDelete} `}/></button>
-                                        <Link className={`${styles.link} `} to={'/panelAdmin/products/accompanyings/putAccompanyings/' + el._id}  ><button className={`${styles.buttonUpdate} center`}>Actualizar</button></Link>
-                                    </div>
-                                    {/* mostramos la ventana modal solo si el estado de la orden es verdadero */}
-                                    {showDeleteModal[el._id] && (
-                                        <div className={`${styles.modal} centerColumn`}>
-                                            <p>¿Deseas eliminar esta categoría?</p>
-                                            <div>
-                                                <button className={`${styles.approve} `} onClick={() => handleConfirmDelete(el._id)}>Sí</button>
-                                                <button className={`${styles.disapprove} `} onClick={() => setShowDeleteModal((prevState) => ({ ...prevState, [el._id]: false }))}>No</button>
+                                <div key={ el._id } className={`${styles.cards} center`}>
+                                    <div className={`${styles.text__container} ${el.isDeleted ? `${styles.isDeleted}` : ''}`}>
+                                        <div className={`${styles.container_Image} ${el.isDeleted ? `${styles.isDeletedContainerImage}` : ''}`}>
+                                            <img className={`${styles.image} ${el.isDeleted ? `${styles.isDeletedImage}` : ''}`} src={ el.image } alt="Imagen" />
+                                            <div className={`${styles.pppppppppppp} `}>
+                                                {el.isDeleted && <button className={`${styles.buttonModale} `} onClick={() => handleShowDeleteFalseLogicalModal(el._id)}>Retirar de Agotados</button>}
+                                                {!el.isDeleted && <button className={`${styles.buttonModale} `} onClick={() => handleShowDeleteTrueLogicalModal(el._id)}>Marcar como agotado</button>}
                                             </div>
                                         </div>
-                                    )}
+                                        <div className={`${styles.fff} `}>
+                                            <div className={`${styles.buttons} flex `}>
+                                                <button className={`${styles.buttonDelete} ${el.isDeleted ? `${styles.isDeletedButton}` : ''}`} onClick={() => handleShowDeleteModal(el._id)} disabled={el.isDeleted}><RiDeleteBin6Line className={`${styles.iconDelete} `}/></button>
+                                                <Link className={`${styles.link} `} to={'/panelAdmin/products/putProduct/' + el._id}><button className={`${styles.paragraph} ${el.isDeleted ? `${styles.isDeletedButton}` : ''} center`} disabled={el.isDeleted}>Actualizar</button></Link>
+                                            </div>
+    
+                                            {/* Eliminar permanentemente un producto de la base de datos */}
+                                            {showDeleteModal[el._id] && (
+                                                <div className={`${styles.modal} centerColumn`}>
+                                                    <p>¿Estás seguro de que deseas eliminar este producto?</p>
+                                                    <div className={styles.modalButtons}>
+                                                        <button className={`${styles.buttonModale} `} onClick={() => handleConfirmDelete(el._id)}>Sí</button>
+                                                        <button className={`${styles.buttonUpdate} `} onClick={() => setShowDeleteModal((prevState) => ({ ...prevState, [el._id]: false }))}>No</button>
+                                                    </div>
+                                                </div>
+                                            )}
+    
+                                            <div className={`${styles.modalPPPPPP} `}>
+                                                {/* Eliminar un producto con borrado lógico de la base de datos */}
+                                                {showDeleteTrueLogicalModal[el._id] && (
+                                                    <div className={`${styles.modal} centerColumn`}>
+                                                        <p>¿Estás seguro de que deseas marcar como Agotado este producto?</p>
+                                                        <div className={styles.modalButtons}>
+                                                            <button className={`${styles.buttonModale} `} onClick={() => handleConfirmDeleteTrueLogical(el._id)}>Sí</button>
+                                                            <button className={`${styles.buttonUpdate} `} onClick={() => setShowDeleteTrueLogicalModal((prevState) => ({ ...prevState, [el._id]: false }))}>No</button>
+                                                        </div>
+                                                    </div>
+                                                )}
+                                                {/* Retirar un producto eliminado con borrado lógico de la base de datos */}
+                                                {showDeleteFalseLogicalModal[el._id] && (
+                                                    <div className={`${styles.modal} centerColumn`}>
+                                                        <p>¿Estás seguro de que deseas retirar como Agotado este producto?</p>
+                                                        <div className={styles.modalButtons}>
+                                                            <button className={`${styles.buttonModale} `} onClick={() => handleConfirmDeleteFalseLogical(el._id)}>Sí</button>
+                                                            <button className={`${styles.buttonUpdate} `} onClick={() => setShowDeleteFalseLogicalModal((prevState) => ({ ...prevState, [el._id]: false }))}>No</button>
+                                                        </div>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </div>
+                                        <div className={`${styles.text} `}>
+                                            <h4>{ el.name }</h4>
+                                            <h4>{ el.pseudoName }</h4>
+                                            {!el.pseudoName && <h4>No tiene Segundo Nombre</h4>}
+                                            <h5>Código: { el.code }</h5>
+                                            <div className={` flex`}>
+                                                <h4 className={el.promoPrice ? styles.strikethrough : ''}>Precio: S/ {el.price.toFixed(2)}</h4>
+                                                {el.promoPrice ? <h4>Nuevo Precio: S/ {el.promoPrice.toFixed(2)}</h4> : ''}
+                                            </div>
+                                            <p>{ el.description }</p>
+                                        </div>                              
+                                    </div>
                                 </div>
                             );
                         })}

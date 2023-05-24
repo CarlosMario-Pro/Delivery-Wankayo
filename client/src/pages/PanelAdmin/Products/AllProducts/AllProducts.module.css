@@ -1,5 +1,17 @@
-.productList {
+.general {
     width: 800px;
+}
+.options {
+    width: 300px;
+    text-decoration: none;
+    margin: 0 0 30px 20px;
+}
+.create__product {
+    border: 1px solid #dee2e6;
+    padding: 10px 20px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-radius: 5px;
 }
 .container h1 {
     text-align: start;
@@ -10,7 +22,7 @@
     margin: 0 0 0 25px;
     color: #f8f9fa;
 }
-.containerDescription {
+.container__description {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -24,6 +36,13 @@
     width: 340px;
     padding: 0 0 15px 0;
 }
+.isDeleted {
+    position: relative;
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    color: grey;
+    overflow: hidden;
+}
 .container_Image {
     position: relative;
     border-radius: 10px;
@@ -32,8 +51,33 @@
     overflow: hidden;
     border-bottom: 1px solid #dee2e6;
 }
+.isDeletedContainerImage {
+    border: none;
+    border-bottom: 1px solid #dee2e6;
+}
 .image {
     height: 200px;
+}
+.isDeletedImage {
+    filter: grayscale(60%);
+}
+.deleted {
+    top: 10px;
+    right: 10px;
+    position: absolute;
+    z-index: 1;
+}
+.buttonModale {
+    border: none;
+    background: #0081a7;
+    padding: 10px 20px;
+    color: #f8f9fa;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.containers__modals {
+    position: relative;
 }
 .buttons {
     padding: 10px 15px 5px 15px;
@@ -50,14 +94,12 @@
     cursor: pointer;
     border-radius: 5px;
 }
-.buttonModale {
-    border: none;
-    background: #0081a7;
-    padding: 10px 20px;
-    color: #f8f9fa;
-    letter-spacing: 2px;
-    cursor: pointer;
-    border-radius: 5px;
+.isDeletedButton {
+    position: relative;
+    background: grey;
+}
+.iconDelete {
+    font-size: 20px;
 }
 .link {
     text-decoration: none;
@@ -70,26 +112,6 @@
     letter-spacing: 2px;
     cursor: pointer;
     border-radius: 5px;
-}
-.strikethrough {
-    color: red;
-    text-decoration: line-through;
-}
-.iconDelete {
-    font-size: 20px;
-}
-
-.buttonUpdate {
-    border: none;
-    background: #522D6D;
-    padding: 10px 20px;
-    color: #f8f9fa;
-    letter-spacing: 2px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-.fff {
-    position: relative;
 }
 .modal {
     position: absolute;
@@ -105,42 +127,12 @@
 .modalButtons button {
     margin: 0 15px 0 0;
 }
-
 .text {
     padding: 5px 15px;
     height: 155px;
     overflow: hidden;
 }
-.description {
-    padding: 5px 15px;
-    height: 155px;
-    overflow: hidden;
-}
-
-.pppppppppppp {
-    top: 10px;
-    right: 10px;
-    position: absolute;
-    z-index: 1;
-}
-
-
-.isDeleted {
-    position: relative;
-    border: 1px solid #dee2e6;
-    border-radius: 10px;
-    color: grey;
-    overflow: hidden;
-}
-
-.isDeletedButton {
-    position: relative;
-    background: grey;
-}
-.isDeletedContainerImage {
-    border: none;
-    border-bottom: 1px solid #dee2e6;
-}
-.isDeletedImage {
-    filter: grayscale(60%);
+.strikethrough {
+    color: red;
+    text-decoration: line-through;
 }
