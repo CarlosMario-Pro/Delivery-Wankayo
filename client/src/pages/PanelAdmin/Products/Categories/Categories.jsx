@@ -36,6 +36,7 @@ export default function Categories () {
 
     
     const location = useLocation();
+    const [activeSection, setActiveSection] = useState('');
     const isCategoryActive = () => {
         return location.pathname.startsWith('/panelAdmin/products/categories');
     };
@@ -43,6 +44,11 @@ export default function Categories () {
     const isActive = (path) => {
         return location.pathname === path ? `${styles.active}` : '';
     };
+    
+    const handleLinkClick = (section) => {
+        setActiveSection(section);
+    };
+
 
 
     return (
@@ -58,7 +64,7 @@ export default function Categories () {
                 <div className={`${styles.container}   `}>
                     <div className={` flex jcspaceBetween`}>
                         <Link className={`${styles.options} ${isActive('/panelAdmin/products/categories')} ${isCategoryActive('/panelAdmin/products/categories') ? styles.active : ''}`} to='/panelAdmin/products/categories'><p className={`${styles.paragraph} center`}>Categorías</p></Link>
-                        <Link className={`${styles.options}  ${isActive('/panelAdmin/products/categories/postCategories')}`} to='/panelAdmin/products/categories/postCategories'><p className={`${styles.paragraph} center`}>Crear Categoría</p></Link>
+                        <Link className={`${styles.options} ${isActive('/panelAdmin/products/categories/postCategories')}`} to='/panelAdmin/products/categories/postCategories'><p className={`${styles.paragraph} center`}>Crear Categoría</p></Link>
                     </div>
                     <h1>Categorías</h1>
                     <div>
@@ -67,8 +73,9 @@ export default function Categories () {
                                 <p>{el.category}</p>
                                 <div className={`${styles.container__buttons} `}>
                                     <button className={`${styles.buttonDelete} `} onClick={() => handleShowDeleteModal(el._id)}><RiDeleteBin6Line className={`${styles.iconDelete} `}/></button>
-                                    <Link className={`${styles.link} `}to={'/panelAdmin/products/categories/putCategory/' + el._id }><button className={`${styles.buttonUpdate} center`}>Actualizar</button></Link>
+                                    <Link className={`${styles.link} `} to={'/panelAdmin/products/categories/putCategory/' + el._id }><button className={`${styles.buttonUpdate} center`}>Actualizar</button></Link>
                                 </div>
+                                
                                 {/* mostramos la ventana modal solo si el estado de la orden es verdadero */}
                                 {showDeleteModal[el._id] && (
                                     <div className={`${styles.modal} centerColumn`}>

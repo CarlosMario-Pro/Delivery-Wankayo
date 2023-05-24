@@ -14,6 +14,12 @@
     padding: 1rem;
     border: 1px solid #bbd0ff;
     border-radius: 5px;
+    color: #212529;
+}
+.requirement {
+    color: #e63946;
+    font-weight: 500;
+    font-size: 20px;
 }
 .label {
     display: block;
@@ -53,6 +59,7 @@
 .registerLink {
     text-decoration: none;
     font-weight: 500;
+    color: #7209b7;
 }
 .blockedAccount {
     text-align: center;

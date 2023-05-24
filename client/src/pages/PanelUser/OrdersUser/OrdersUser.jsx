@@ -38,20 +38,19 @@ export default function OrdersUser() {
                             <p><span className={styles.spanTitle}>Fecha de pedido: </span>{new Date(order.shippingDate).toLocaleString('es-ES', { day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: 'numeric' })} horas,</p>
 
                             <div className={styles.products}>
-                            <h3>Productos</h3>
-                            <div>
-                                {order.products.map((product) => (
-                                    <div key={product.IdProduct} className={styles.product}>
-                                    <h4>{product.nameProduct}</h4>
-                                    <p><span className={styles.spanTitle}>Cantidad:</span> {product.quantity}</p>
-                                    <p><span className={styles.spanTitle}>Precio unitario: </span>S/ {product.unitPrice}</p>
-                                    <p><span className={styles.spanTitle}>Sub total: </span>S/ {product.price}</p>
+                                <h3>Productos</h3>
+                                <div>
+                                    {order.products.map((product) => (
+                                        <div key={product.IdProduct} className={styles.product}>
+                                        <h4>{product.nameProduct}</h4>
+                                        <p><span className={styles.spanTitle}>Cantidad:</span> {product.quantity}</p>
+                                        <p><span className={styles.spanTitle}>Precio unitario: </span>S/ {product.unitPrice}</p>
+                                        <p><span className={styles.spanTitle}>Sub total: </span>S/ {product.price}</p>
+                                    </div>
+                                    ))}
                                 </div>
-                                ))}
+                                <h2><span className={styles.spanTitle}>Valor total a pagar:</span> S/ {order.total}</h2>
                             </div>
-                            <h2><span className={styles.spanTitle}>Valor total a pagar:</span> S/ {order.total}</h2>
-                        </div>
-
                         </div>
                     ))}
                 </div>

@@ -9,7 +9,7 @@ import styles from './PostAddress.module.css';
 
 export default function PostAddress () {
     const dispatch = useDispatch();
-    const [address, setAddress] = useState({
+    const [ address, setAddress ] = useState({
         country: '',
         state: '',
         city: '',
@@ -42,7 +42,6 @@ export default function PostAddress () {
             console.log(error);
         }
     };
-
  
 
     return (

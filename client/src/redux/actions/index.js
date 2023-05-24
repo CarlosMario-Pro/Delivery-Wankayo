@@ -17,7 +17,7 @@ export function postProduct(payload) {
     }
 };
 
-//Trae todos los productos con borrado lógico (Son los que se muestran al público)
+//Obtener todos los productos incluyendo los de borrado lógico (Para panel del Admin)
 export function getProducts (){
     try {
         return async function (dispatch) {
@@ -29,7 +29,7 @@ export function getProducts (){
     }
 };
 
-//Trae todos los productos incluyendo los de borrado lógico
+//Obtener todos los productos a a excepción de los marcados con borrado lógico (Son los que se muestran al público)
 export function getProductsLogical (){
     try {
         return async function (dispatch) {
@@ -67,7 +67,6 @@ export const putProduct = (idProduct, product) => async (dispatch) => {
 //Elimina permanentemente un producto
 export const deleteProduct = (idProduct, session) => async (dispatch) => {
     try {
-        // Crea un objeto de configuración con los encabezados
         const config = { headers: { "x-user-session": JSON.stringify(session) }, };
         const { data } = await axios.delete(`http://localhost:3001/admin/${idProduct}`, config);        
         window.location.reload();
@@ -80,7 +79,6 @@ export const deleteProduct = (idProduct, session) => async (dispatch) => {
 //Elimina un producto con borrado lógico
 export const trueLogicalDeletionProduct = (idProduct, session) => async (dispatch) => {
     try {
-        // Crea un objeto de configuración con los encabezados
         const config = { headers: { "x-user-session": JSON.stringify(session) }, };
         const { data } = await axios.put(`http://localhost:3001/admin/trueLogicalDeletionProduct/${idProduct}`, config);        
         window.location.reload();
@@ -93,7 +91,6 @@ export const trueLogicalDeletionProduct = (idProduct, session) => async (dispatc
 //Activa un producto eliminado con borrado lógico
 export const falseLogicalDeletionProduct = (idProduct, session) => async (dispatch) => {
     try {
-        // Crea un objeto de configuración con los encabezados
         const config = { headers: { "x-user-session": JSON.stringify(session) }, };
         const { data } = await axios.put(`http://localhost:3001/admin/falseLogicalDeletionProduct/${idProduct}`, config);        
         window.location.reload();
@@ -245,12 +242,24 @@ export function postDrinks(payload){
     }
 };
 
-//Trae todas las bebidas
+//Obtener todos los productos incluyendo los de borrado lógico (Para panel del Admin)
 export function getDrinks(){
     try {
         return async function (dispatch) {
             const { data } = await axios.get(`http://localhost:3001/admin/getDrinks`);
             return dispatch({ type: 'GET_DRINKS', payload: data });
+        };
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+//Obtener todos los productos a a excepción de los marcados con borrado lógico (Son los que se muestran al público)
+export function getDrinksLogical (){
+    try {
+        return async function (dispatch) {
+            const { data } = await axios.get(`http://localhost:3001/admin/getDrinksLogical`);
+            return dispatch({ type: 'GET_DRINKS_LOGICAL', payload: data });
         };
     } catch (error) {
         console.log(error);
@@ -293,6 +302,30 @@ export function deleteDrinks(idDrinks){
     }
 };
 
+//Elimina una bebida con borrado lógico
+export const trueLogicalDeletionDrink = (idDrinks, session) => async (dispatch) => {
+    try {
+        const config = { headers: { "x-user-session": JSON.stringify(session) }, };
+        const { data } = await axios.put(`http://localhost:3001/admin/trueLogicalDeletionDrink/${idDrinks}`, config);        
+        window.location.reload();
+        dispatch({ type: 'TRUE_LOGICAL_DELETION_DRINK', payload: data });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+//Activa una bebida eliminada con borrado lógico
+export const falseLogicalDeletionDrink = (idDrinks, session) => async (dispatch) => {
+    try {
+        const config = { headers: { "x-user-session": JSON.stringify(session) }, };
+        const { data } = await axios.put(`http://localhost:3001/admin/falseLogicalDeletionDrink/${idDrinks}`, config);        
+        window.location.reload();
+        dispatch({ type: 'FALSE_LOGICAL_DELETION_DRINK', payload: data });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 
 
 //^ACCOMPANYINGS--------------------------------------------------------------------------------
@@ -303,6 +336,17 @@ export function postAccompanyings(payload){
             const { data } = await axios.post(`http://localhost:3001/admin/postAccompanyings`, payload);
             window.location.href =  '/panelAdmin/products/accompanyings';
             return dispatch({ type: 'POST_ACCOMPANYINGS', payload: data });
+        };
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export function getAccompanyingsLogical (){
+    try {
+        return async function (dispatch) {
+            const { data } = await axios.get(`http://localhost:3001/admin/getAccompanyingsLogical`);
+            return dispatch({ type: 'GET_ACCOMPANYING_LOGICAL', payload: data });
         };
     } catch (error) {
         console.log(error);
@@ -357,6 +401,30 @@ export function deleteAccompanyings(idAccompanyings){
     }
 };
 
+//Elimina un acompañamiento con borrado lógico
+export const trueLogicalDeletionAccompanying = (idAccompanying, session) => async (dispatch) => {
+    try {
+        const config = { headers: { "x-user-session": JSON.stringify(session) }, };
+        const { data } = await axios.put(`http://localhost:3001/admin/trueLogicalDeletionAccompanying/${idAccompanying}`, config);        
+        window.location.reload();
+        dispatch({ type: 'TRUE_LOGICAL_DELETION_ACCOMPANYNG', payload: data });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+//Activa un acompañamiento eliminado con borrado lógico
+export const falseLogicalDeletionAccompanying = (idAccompanying, session) => async (dispatch) => {
+    try {
+        const config = { headers: { "x-user-session": JSON.stringify(session) }, };
+        const { data } = await axios.put(`http://localhost:3001/admin/falseLogicalDeletionAccompanying/${idAccompanying}`, config);        
+        window.location.reload();
+        dispatch({ type: 'FALSE_LOGICAL_DELETION_ACCOMPANYNG', payload: data });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 
 
 //^EXTRAS--------------------------------------------------------------------------------
@@ -379,6 +447,18 @@ export function getExtras(){
         return async function (dispatch) {
             const { data } = await axios.get(`http://localhost:3001/admin/getExtras`);
             return dispatch({ type: 'GET_EXTRAS', payload: data });
+        };
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+//Obtener todos los productos a a excepción de los marcados con borrado lógico (Son los que se muestran al público)
+export function getExtrasLogical (){
+    try {
+        return async function (dispatch) {
+            const { data } = await axios.get(`http://localhost:3001/admin/getExtrasLogical`);
+            return dispatch({ type: 'GET_EXTRAS_LOGICAL', payload: data });
         };
     } catch (error) {
         console.log(error);
@@ -421,6 +501,30 @@ export function deleteExtras(idExtras){
     }
 };
 
+//Elimina una bebida con borrado lógico
+export const trueLogicalDeletionExtras = (idExtras, session) => async (dispatch) => {
+    try {
+        const config = { headers: { "x-user-session": JSON.stringify(session) }, };
+        const { data } = await axios.put(`http://localhost:3001/admin/trueLogicalDeletionExtras/${idExtras}`, config);        
+        window.location.reload();
+        dispatch({ type: 'TRUE_LOGICAL_DELETION_EXTRAS', payload: data });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+//Activa una bebida eliminada con borrado lógico
+export const falseLogicalDeletionExtras = (idExtras, session) => async (dispatch) => {
+    try {
+        const config = { headers: { "x-user-session": JSON.stringify(session) }, };
+        const { data } = await axios.put(`http://localhost:3001/admin/falseLogicalDeletionExtras/${idExtras}`, config);        
+        window.location.reload();
+        dispatch({ type: 'FALSE_LOGICAL_DELETION_EXTRAS', payload: data });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 
 
 //^SAUCES--------------------------------------------------------------------------------
@@ -443,6 +547,19 @@ export function getSauces(){
         return async function (dispatch) {
             const { data } = await axios.get(`http://localhost:3001/admin/getSauces`);
             return dispatch({ type: 'GET_SAUCES', payload: data });
+        };
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+//Obtener todos los productos a a excepción de los marcados con borrado lógico (Son los que se muestran al público)
+export function getSaucesLogical (){
+    try {
+        return async function (dispatch) {
+            const { data } = await axios.get(`http://localhost:3001/admin/getSaucesLogical`);
+            // console.log(data)
+            return dispatch({ type: 'GET_SAUCES_LOGICAL', payload: data });
         };
     } catch (error) {
         console.log(error);
@@ -485,9 +602,60 @@ export function deleteSauces(idSauces){
     }
 };
 
+//Elimina una salsa con borrado lógico
+export const trueLogicalDeletionSauces = (idSauces, session) => async (dispatch) => {
+    try {
+        const config = { headers: { "x-user-session": JSON.stringify(session) }, };
+        const { data } = await axios.put(`http://localhost:3001/admin/trueLogicalDeletionSauces/${idSauces}`, config);        
+        window.location.reload();
+        dispatch({ type: 'TRUE_LOGICAL_DELETION_SAUCES', payload: data });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+//Activa una salsa eliminada con borrado lógico
+export const falseLogicalDeletionSauces = (idSauces, session) => async (dispatch) => {
+    try {
+        const config = { headers: { "x-user-session": JSON.stringify(session) }, };
+        const { data } = await axios.put(`http://localhost:3001/admin/falseLogicalDeletionSauces/${idSauces}`, config);        
+        window.location.reload();
+        dispatch({ type: 'FALSE_LOGICAL_DELETION_SAUCES', payload: data });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+
 
 
 //^ORDERS PANEL ADMIN--------------------------------------------------------------------------------
+//Agrega productos al estado 'selectProducts' para llamarlo en el componente 'ShoppingCart'
+export function selectProducts(products){
+    try {
+        return async function (dispatch) {
+            return dispatch({ type: 'SELECT_PRODUCTS', payload: products });
+        }
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+//Crea una orden
+export function postOrders(idUser, payload){
+    // console.log('Hola ')
+    try {
+        return async function (dispatch) {
+            const { data } = await axios.post(`http://localhost:3001/user/postOrders/${idUser}`, payload);
+            console.log('Data ', data)
+            window.location.href =  `/panelUser/ordersUser/${idUser}`;
+            return dispatch({ type: 'POST_ORDER', payload: data });
+        };
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 //Trae todas las órdenes PENDIENTES al Panel del Admin
 export function getOrdersPendings(){
     try {
@@ -624,36 +792,12 @@ export const falseLogicalOrdersHistory = (idOrder, session) => async (dispatch) 
     }
 };
 
-//Trae todas las ORDENES PENDIENTES de un usuario               //!NO IMPLEMENTADA
-export function getUserOrdersActivesPending(idUser){
+//Trae todos los Usuarios con rol "user"
+export function getAllUsers(){              //!NO IMPLEMENTADA
     try {
         return async function (dispatch) {
-            const { data } = await axios.get(`http://localhost:3001/user/getUserOrdersActivesPending/${idUser}`);
-            return dispatch({ type: 'GET_USER_ORDER_ACTIVES_PENDING', payload: data });
-        };
-    } catch (error) {
-        console.log(error);
-    }
-};
-
-//Trae todas las ORDENES EN PREPARACION de un usuario           //!NO IMPLEMENTADA
-export function getUserOrdersActivesInPreparation(idUser){
-    try {
-        return async function (dispatch) {
-            const { data } = await axios.get(`http://localhost:3001/user/getUserOrdersActivesInPreparation/${idUser}`);
-            return dispatch({ type: 'GET_USER_ORDER_ACTIVES_IN_PREPARATION', payload: data });
-        };
-    } catch (error) {
-        console.log(error);
-    }
-};
-
-//Trae todas las ORDENES EN PREPARACION de un usuario           //!NO IMPLEMENTADA
-export function getUserOrdersActivesOnTheWay(idUser){
-    try {
-        return async function (dispatch) {
-            const { data } = await axios.get(`http://localhost:3001/user/getUserOrdersActivesOnTheWay/${idUser}`);
-            return dispatch({ type: 'GET_USER_ORDER_ACTIVES_ON_THE_WAY', payload: data });
+            const { data } = await axios.get(`http://localhost:3001/user/getAllUsers`);
+            return dispatch({ type: 'GET_ALL_USER', payload: data });
         };
     } catch (error) {
         console.log(error);
@@ -672,7 +816,7 @@ export function registerUser(payload) {
             toast.success('Registrado correctamente');
             setTimeout(() => {
                 window.location.href = '/login';
-            }, 5000); // 5000 milisegundos = 5 segundos
+            }, 5000);
         } catch (error) {
             if (error.response && error.response.status === 409) {
                 toast.error('El correo electrónico ya está registrado');
@@ -682,17 +826,6 @@ export function registerUser(payload) {
         }
     }
 }
-// export function registerUser (payload) {
-//     console.log(payload)
-//     try {
-//         return async function (dispatch) {
-//             const { data } = await axios.post(`http://localhost:3001/user/register`, payload);
-//             return dispatch({ type: 'REGISTER_USER', payload: data });
-//         };        
-//     } catch (error) {
-//         console.log(error);
-//     }
-// }
 
 //Elimina permanentemente la cuenta de un usuario
 export function deleteAccountUser (idUser){
@@ -719,7 +852,7 @@ export function getUserInfo(dispatch, data){
 
 //!IMPLEMENTAR deleteAccountUser o logicalDeletionUser
 
-//Actualiza la constraseña de un usuario
+//Se usa para recuperar contraseña cuando el usuario bloquea la cuenta
 export function recoverPassword (idUser, payload){
     try {
         return async function (dispatch) {
@@ -733,25 +866,12 @@ export function recoverPassword (idUser, payload){
 };
 
 //Actualiza la constraseña de un usuario
-export function changePasswordr (payload){
+export function changePassword (payload){
     try {
         return async function (dispatch) {
             const { data } = await axios.put(`http://localhost:3001/user/changePasswordr`, payload);
             window.location.href =  '/login';
             return dispatch({ type: 'CHANGE_PASSWORD', payload: data });
-        };
-    } catch (error) {
-        console.log(error);
-    }
-};
-
-
-//Trae todos los Usuarios con rol "user"
-export function getAllUsers(){              //!NO IMPLEMENTADA
-    try {
-        return async function (dispatch) {
-            const { data } = await axios.get(`http://localhost:3001/user/getAllUsers`);
-            return dispatch({ type: 'GET_ALL_USER', payload: data });
         };
     } catch (error) {
         console.log(error);

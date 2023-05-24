@@ -6,24 +6,29 @@ const initialState = {
     categoriesId: [],
             
     productsLogical: [],
-    allProductsLogical: [],
+    allProductsLogical: [],//
+
     categoriesLogical: {},
 
     accompanyings: [],
+    accompanyingsLogical: [],
     accompanyingsDetails: {},
 
     drinks: [],
+    drinksLogical: [],
     drinksDetails: {},
     
     extras: [],
+    extrasLogical: [],
     extrasDetails: {},
     
     sauces: [],
+    saucesLogical: [],
     saucesDetails: {},
     
     user: [],
     adminDetails: {},
-    userSession: null,
+
     userInfoLogin: {},
 
     ordersPendings: [],
@@ -34,7 +39,7 @@ const initialState = {
     ordersHistory: [],
     changeStatusOrder: {},
 
-    getAllUser: [],
+    getAllUser: [],//No tiene 'Case en el Reducer'
     allInfoUser: {},
 
     addressUser: [],
@@ -42,10 +47,9 @@ const initialState = {
     
     orderHistoryUser: [],
 
-    userOrderActivesPending: [],
-    userOrderActivesInPreparation: [],
-    userOrderActivesOnTheWay: [],
+    postOrder: [],
 
+    selectedProducts: [],
 };
 
 
@@ -92,7 +96,6 @@ export default function rootReducer (state= initialState, action) {
                 ...state,
                 products: action.payload,
             };
-                // allProducts: action.payload
         case 'POST_PRODUCT':
             return {
                 ...state,
@@ -150,7 +153,6 @@ export default function rootReducer (state= initialState, action) {
 
         //CATEGORIAS
         case 'GET_CATEGORIES':
-            // console.log('Action ', action.payload)
             return {
                 ...state,
                 categoriesId: action.payload
@@ -177,6 +179,11 @@ export default function rootReducer (state= initialState, action) {
                 ...state,
                 drinks: action.payload
             }
+        case 'GET_DRINKS_LOGICAL':
+            return {
+                ...state,
+                drinksLogical: action.payload
+            }
         case 'GET_DRINK_DETAIL':
             return{
                 ...state,
@@ -195,6 +202,17 @@ export default function rootReducer (state= initialState, action) {
             return {
                 ...state
             }
+        case 'TRUE_LOGICAL_DELETION_DRINK': 
+            return {
+                ...state,
+            };
+        case 'FALSE_LOGICAL_DELETION_DRINK': 
+            return {
+                ...state,
+            };
+
+
+
 
 
 
@@ -203,6 +221,11 @@ export default function rootReducer (state= initialState, action) {
             return {
                 ...state,
                 accompanyings: action.payload
+            }
+        case 'GET_ACCOMPANYING_LOGICAL':
+            return {
+                ...state,
+                accompanyingsLogical: action.payload
             }
         case 'GET_ACCOMPANYING_DETAIL':
             return{
@@ -221,7 +244,15 @@ export default function rootReducer (state= initialState, action) {
         case 'DELETE_ACCOMPANYINGS':
             return {
                 ...state
-            }
+            }        
+        case 'TRUE_LOGICAL_DELETION_ACCOMPANYNG': 
+            return {
+                ...state,
+            };
+        case 'FALSE_LOGICAL_DELETION_ACCOMPANYNG': 
+            return {
+                ...state,
+            };
 
 
 
@@ -230,6 +261,11 @@ export default function rootReducer (state= initialState, action) {
             return {
                 ...state,
                 extras: action.payload
+            }
+        case 'GET_EXTRAS_LOGICAL':
+            return {
+                ...state,
+                extrasLogical: action.payload
             }
         case 'GET_EXTRA_DETAIL':
             return{
@@ -249,6 +285,15 @@ export default function rootReducer (state= initialState, action) {
             return {
                 ...state
             }
+        case 'TRUE_LOGICAL_DELETION_EXTRAS': 
+            return {
+                ...state,
+            };
+        case 'FALSE_LOGICAL_DELETION_EXTRAS': 
+            return {
+                ...state,
+            };
+
 
 
 
@@ -257,6 +302,11 @@ export default function rootReducer (state= initialState, action) {
             return {
                 ...state,
                 sauces: action.payload
+            }
+        case 'GET_SAUCES_LOGICAL':
+            return {
+                ...state,
+                saucesLogical: action.payload
             }
         case 'GET_SAUCE_DETAIL':
             return{
@@ -276,38 +326,33 @@ export default function rootReducer (state= initialState, action) {
             return {
                 ...state
             }
-
-
-
-        //LOGIN
-        case 'LOGIN_SUCCESS':
+        case 'TRUE_LOGICAL_DELETION_SAUCES': 
             return {
                 ...state,
-                userSession: action.payload
-            }
+            };
+        case 'FALSE_LOGICAL_DELETION_SAUCES': 
+            return {
+                ...state,
+            };
+
+
+
             
+        //REGISTER
         case 'REGISTER_USER': {
             return {
-                ...state,
-                user: action.payload,
-                userSession: action.payload
-            }
-        }
-        case 'DELETE_ACCOUNT': {
-            return {
-                ...state,
+                ...state
             }
         }
 
 
-        
+
         //GET INFO USER
         case 'GET_USER_INFO':
             return {
                 ...state,
                 userInfoLogin: action.payload
-            }
-
+            }            
         case 'CHANGE_PASSWORD_USER':
             return {
                 ...state,
@@ -316,6 +361,11 @@ export default function rootReducer (state= initialState, action) {
             return {
                 ...state,
             }
+        case 'DELETE_ACCOUNT': 
+            return {
+                ...state,
+            }
+        
 
 
     
@@ -325,18 +375,29 @@ export default function rootReducer (state= initialState, action) {
                 ...state,
                 allInfoUser: action.payload
             }
-        //GET INFO USER
         case 'PUT_INFO_USER':
             return {
                 ...state,
             }
-
-
-
-
-
-
-
+        case 'GET_ADDRESS':
+            return {
+                ...state,
+                addressUser: action.payload
+            }
+        case 'POST_ADDRESS':
+            return {
+                ...state,
+                addressUser: action.payload
+            }
+        case 'GET_ID_ADDRESS':
+            return {
+                ...state,
+                idAddressUser: action.payload
+            }
+        case 'PUT_ADDRESS': 
+            return {
+                ...state,
+            };
 
 
 
@@ -346,7 +407,6 @@ export default function rootReducer (state= initialState, action) {
                 ...state,
                 ordersPendings: action.payload
             }
-
         case 'GET_ORDERS_INPREPARATION':
             return {
                 ...state,
@@ -357,7 +417,7 @@ export default function rootReducer (state= initialState, action) {
                 ...state,
                 ordersOnTheWay: action.payload
             }
-        case 'GET_ORDERS_DELIVERED':    //^PARA EL PANEL DEL USUARIO
+        case 'GET_ORDERS_DELIVERED':
             return {
                 ...state,
                 ordersDelivered: action.payload
@@ -372,72 +432,46 @@ export default function rootReducer (state= initialState, action) {
                 ...state,
                 ordersHistory: action.payload
             }
-
-
-
-
         case 'CHANGE_STATUS_ORDER':
             return {
                 ...state,
                 changeStatusOrder: action.payload
             }
-
         case 'CHANGE_STATUS_ORDER_PREVIUS':
             return {
                 ...state,
                 changeStatusOrder: action.payload
             }
-
-
-
-        case 'GET_ADDRESS':
+        case 'GET_ORDERS_HISTORY_USER':
             return {
                 ...state,
-                addressUser: action.payload
-            }
-        case 'POST_ADDRESS':
-            return {
-                ...state,
-                addressUser: action.payload
+                orderHistoryUser: action.payload
             }
 
-        case 'GET_ID_ADDRESS':
+
+
+
+        //ORDER
+        case 'POST_ORDER':
             return {
                 ...state,
-                idAddressUser: action.payload
+                postOrder: action.payload
             }
-            case 'PUT_ADDRESS': 
+        // case 'SELECT_PRODUCTS':
+        //     return {
+        //         ...state,
+        //         selectedProducts: action.payload,
+        //     };
+        case 'SELECT_PRODUCTS':
             return {
                 ...state,
+                selectedProducts: [
+                    ...state.selectedProducts,
+                    ...action.payload
+                ],
             };
-            
-            
-            
-            
-            
-            
-            case 'GET_ORDERS_HISTORY_USER':
-                return {
-                    ...state,
-                    orderHistoryUser: action.payload
-                }
-            case 'GET_USER_ORDER_ACTIVES_PENDING':
-                return {
-                    ...state,
-                    userOrderActivesPending: action.payload
-                }
-            case 'GET_USER_ORDER_ACTIVES_IN_PREPARATION':
-                return {
-                    ...state,
-                    userOrderActivesInPreparation: action.payload
-                }
-            case 'GET_USER_ORDER_ACTIVES_ON_THE_WAY':
-                return {
-                    ...state,
-                    userOrderActivesOnTheWay: action.payload
-                }
-     
 
+            
         default:
             return state;
     };

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getSauces, deleteSauces } from '../../../../redux/actions/index';
+import { getSauces, deleteSauces, trueLogicalDeletionSauces, falseLogicalDeletionSauces } from '../../../../redux/actions/index';
 import { Link, useLocation } from 'react-router-dom';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import PanelAdmin from '../../PanelAdmin';
@@ -43,6 +43,40 @@ export default function Sauces () {
         return location.pathname === path ? `${styles.active}` : '';
     };
 
+    //Elimina el producto con borrado lógico
+    const [showDeleteTrueLogicalModal, setShowDeleteTrueLogicalModal] = useState({});
+    const handleShowDeleteTrueLogicalModal = (idSauces) => {
+        setShowDeleteTrueLogicalModal((prevState) => ({
+            ...prevState,
+            [idSauces]: true,
+        }));
+    };
+
+    const handleConfirmDeleteTrueLogical = (idSauces) => {
+        dispatch(trueLogicalDeletionSauces(idSauces, session));
+        setShowDeleteTrueLogicalModal((prevState) => ({
+            ...prevState,
+            [idSauces]: false,
+        }));
+    };
+
+    //Retita un producto eliminado con borrado lógico
+    const [showDeleteFalseLogicalModal, setShowDeleteFalseLogicalModal] = useState({});
+    const handleShowDeleteFalseLogicalModal = (idSauces) => {
+        setShowDeleteFalseLogicalModal((prevState) => ({
+            ...prevState,
+            [idSauces]: true,
+        }));
+    };
+
+    const handleConfirmDeleteFalseLogical = (idSauces) => {
+        dispatch(falseLogicalDeletionSauces(idSauces, session));
+        setShowDeleteFalseLogicalModal((prevState) => ({
+            ...prevState,
+            [idSauces]: false,
+        }));
+    };
+
 
     return (
         <div className={`${styles.general} flex `}>
@@ -67,6 +101,10 @@ export default function Sauces () {
                                         <h4>{el.name}</h4>
                                         <p>{el.description}</p>
                                     </div>
+                                    <div className={`${styles.pppppppppppp} `}>
+                                            {el.isDeleted && <button className={`${styles.buttonModale} `} onClick={() => handleShowDeleteFalseLogicalModal(el._id)}>Retirar de Agotados</button>}
+                                            {!el.isDeleted && <button className={`${styles.buttonModale} `} onClick={() => handleShowDeleteTrueLogicalModal(el._id)}>Marcar como agotado</button>}
+                                        </div>
                                     <div className={`${styles.container__buttons} flex`}>
                                         <button className={`${styles.buttonDelete} `} onClick={() => handleShowDeleteModal(el._id)}><RiDeleteBin6Line className={`${styles.iconDelete} `}/></button>
                                         <Link className={`${styles.link} `} to={'/panelAdmin/products/sauces/putSauces/' + el._id}  ><button className={`${styles.buttonUpdate} center`}>Actualizar</button></Link>
@@ -81,6 +119,28 @@ export default function Sauces () {
                                             </div>
                                         </div>
                                     )}
+                                    <div>
+                                        {/* Eliminar un producto con borrado lógico de la base de datos */}
+                                        {showDeleteTrueLogicalModal[el._id] && (
+                                            <div className={`${styles.modal} centerColumn`}>
+                                                <p>¿Estás seguro de que deseas marcar como Agotado este producto?</p>
+                                                <div className={styles.modalButtons}>
+                                                    <button className={`${styles.buttonModale} `} onClick={() => handleConfirmDeleteTrueLogical(el._id)}>Sí</button>
+                                                    <button className={`${styles.buttonUpdate} `} onClick={() => setShowDeleteTrueLogicalModal((prevState) => ({ ...prevState, [el._id]: false }))}>No</button>
+                                                </div>
+                                            </div>
+                                        )}
+                                        {/* Retirar un producto eliminado con borrado lógico de la base de datos */}
+                                        {showDeleteFalseLogicalModal[el._id] && (
+                                            <div className={`${styles.modal} centerColumn`}>
+                                                <p>¿Estás seguro de que deseas retirar como Agotado este producto?</p>
+                                                <div className={styles.modalButtons}>
+                                                    <button className={`${styles.buttonModale} `} onClick={() => handleConfirmDeleteFalseLogical(el._id)}>Sí</button>
+                                                    <button className={`${styles.buttonUpdate} `} onClick={() => setShowDeleteFalseLogicalModal((prevState) => ({ ...prevState, [el._id]: false }))}>No</button>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
                                 </div>
                             );
                         })}

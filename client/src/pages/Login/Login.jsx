@@ -19,11 +19,10 @@ function validate (input) {
     return errors;
 };
 
-
 export default function Login() {
     const [ errors, setErrors ] = useState({});
-    const [touched, setTouched] = useState({});
-    const navigate = useNavigate()
+    const [ touched, setTouched ] = useState({});
+    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const [formData, setFormData] = useState({
@@ -85,21 +84,21 @@ export default function Login() {
                 <form className={`${styles.form} `} onSubmit={onSubmit}>
                     <div>
                         <div>
-                            <label className={styles.label} htmlFor="email">Email</label>
-                            <input className={styles.input} type="email" name="email" value={email} onChange={onChange} />
+                            <label className={styles.label} htmlFor="email">Email <span className={styles.requirement}>*</span></label>
+                            <input className={styles.input} placeholder="Correo electrónico" type="email" name="email" value={email} onChange={onChange} />
                             {touched.email && errors.email && <p className={`${styles.danger} `}>{errors.email}</p>}
                         </div>
 
                         <div className={styles.password}>
                             <div className={`${styles.passwordInput} jcspaceBetween`}>
-                                <label className={`${styles.label} `} htmlFor="password">Contraseña</label>
+                                <label className={`${styles.label} `} htmlFor="password">Contraseña <span className={styles.requirement}>*</span></label>
                                 {showPassword ? (
                                         <RiEyeOffFill onClick={toggleShowPassword} className={`${styles.passwordIcon}`} />
                                     ) : (
                                         <RiEyeFill onClick={toggleShowPassword} className={`${styles.passwordIcon}`} />
                                 )}
                             </div>
-                            <input className={`${styles.input} `} type={showPassword ? "text" : "password"} name="password" value={password} onChange={onChange} />
+                            <input className={`${styles.input} `} placeholder="Contraseña" type={showPassword ? "text" : "password"} name="password" value={password} onChange={onChange} />
                             {errors.password && <p className={`${styles.danger} `}>{ errors.password }</p>}
                         </div>
                         {
