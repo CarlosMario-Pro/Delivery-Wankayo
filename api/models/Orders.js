@@ -35,7 +35,8 @@ const orderSchema = new Schema({
     },
     comment: {
         type: String,
-        required: false
+        required: false,
+        default: "Sin observaciones del cliente"
     },
     cancelMessage: {
         type: String,

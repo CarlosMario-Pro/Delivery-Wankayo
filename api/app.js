@@ -44,8 +44,8 @@ app.use(session({
     saveUninitialized: true,
     
     cookie: {
-        // maxAge: 1000 * 60 * 60 * 24,
-        maxAge: 120000, // 2 minutos en milisegundos
+        maxAge: 1000 * 60 * 60 * 24,
+        // maxAge: 120000, // 2 minutos en milisegundos
         httpOnly: true,
         secure: false,
         sameSite: 'lax',
@@ -61,7 +61,8 @@ require("./passportConfig")(passport);
 app.use("/", routes);
 
 app.get("/getUserData",(req, res)=>{
-    const user = req.user
+    const user = req.user;
+    console.log(user)
     if(user){
         res.status(200).json(user)
     }

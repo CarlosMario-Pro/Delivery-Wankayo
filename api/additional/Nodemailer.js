@@ -185,4 +185,17 @@ module.exports = {
             `
         }
     },
+
+
+    mailDelete: (email) => {
+        return {
+            from: EMAIL,
+            to: email,
+            subject: 'Wankayo te desea lo mejor',
+            html: `
+                <p>Recibimos la noticia de que tomaste la decisión de eliminar tu cuenta, solo tenemos por darte las gracias y desearte buena suerte </p>
+                <br/>
+            `
+        }
+    },
 };

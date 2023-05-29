@@ -32,7 +32,8 @@ const productsSchema = new Schema(
             required: true
         },
         promoPrice: {
-            type: Number
+            type: Number,
+            default: ''
         },
         isDeleted: {
             type: Boolean,

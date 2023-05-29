@@ -75,8 +75,10 @@ const unblockUser = async (req, res) => {
 //Elimina la cuenta de un usuario
 const deleteAccountUser = async (req, res) => {
     const { idUser } = req.params;
+    console.log(idUser)
     try {
         const user = await User.findByIdAndRemove(idUser);
+        console.log('user ',user)
         if (!user) {
             res.status(404).send("Usuario no encontrado");
         } else {
@@ -173,7 +175,7 @@ const recoverPassword = async (req, res) => {
 };  //PUT - http://localhost:3001/user/recoverPassword/:idUser con { "password" : "Carlos..1000" }
 
 //Cambia la contraseña de un usuario
-const changePasswordr = async (req, res) => {
+const changePassword = async (req, res) => {
     const { email } = req.body;
     const session = await mongoose.startSession();
     try {
@@ -201,7 +203,7 @@ const changePasswordr = async (req, res) => {
     } finally {
         await session.endSession();
     }
-};  //PUT - http://localhost:3001/user/changePasswordr/:idUser con { "password" : "Carlos..1000"}
+};  //PUT - http://localhost:3001/user/changePassword/:idUser con { "password" : "Carlos..1000"}
 
 //Obtener toda la información de un solo usuario por ID
 const getAllInfoUser = async (req, res) => {
@@ -401,7 +403,7 @@ const postOrders = async (req, res) => {
     }
 }; // POST - http://localhost:3001/user/postOrders/:idUser con { "products": [ { "nameProduct": "Cono La Justa", "quantity": 1, "unitPrice": 8, "price": 8, "IdProduct": "6462f0a748d326c1ad0c0743" }, { "nameProduct": "Cono La Peque", "quantity": 2, "unitPrice": 6, "price": 12, "IdProduct": "6462f0a748d326c1ad0c0744" }, { "nameProduct": "Mayonesa", "quantity": 1, "unitPrice": 0, "price": 0, "IdProduct": "6462f0a948d326c1ad0c0791" } ], "total": 20, "user": "6462f108a3ae3a28738f3e8f", "address": "6462f164a3ae3a28738f3e9b", "comment": "Yo lo recojo en tienda, por favor, tenerla lista para las 5pm", "cancelMessage": "" }
 
-//Obtener todas las órdenes vigentes de un usuario a excepción de las ENTREGADAS
+//Obtener todas las órdenes vigentes de un usuario a excepción de las ENTREGADAS Y CANCELADAS
 const getIdUserOrders = async (req, res) => {
     const { idUser } = req.params;
     const session = await mongoose.startSession();
@@ -423,7 +425,27 @@ const getIdUserOrders = async (req, res) => {
     }
 }; //GET - http://localhost:3001/user/getIdUserOrders/:idUser
 
-
+//Traer la información de una orden por ID
+const getIdOrders = async (req, res) => {
+    const { idOrder } = req.params;
+    const session = await mongoose.startSession();
+    try {
+        await session.withTransaction(async (session) => {
+            const order = await Orders.findById(idOrder).populate("user address").session(session);
+            if (!order) {
+                return res.status(404).send({ message: "Orden no encontrada" });
+            }
+            return res.status(200).json(order);
+        });
+    } catch (error) {
+        console.error(error);
+        const status = error.status || 500;
+        const message = error.message || "Ocurrió un error al obtener la orden";
+        return res.status(status).send({ message });
+    } finally {
+         await session.endSession();
+    }
+}; //GET - http://localhost:3001/user/getIdOrders/:idOrder
 
 
 
@@ -477,27 +499,7 @@ const getAllEmails = async (req, res) => {            //!NO IMPLEMENTADA
 }; //GET - http://localhost:3001/user/getAllEmails
 
 
-//Traer la información de una orden por ID
-const getIdOrders = async (req, res) => {                   //!NO IMPLEMENTADA AUN
-    const { idOrder } = req.params;
-    const session = await mongoose.startSession();
-    try {
-        await session.withTransaction(async (session) => {
-            const order = await Orders.findById(idOrder).session(session);
-            if (!order) {
-                return res.status(404).send({ message: "Orden no encontrada" });
-            }
-            return res.status(200).json(order);
-        });
-    } catch (error) {
-        console.error(error);
-        const status = error.status || 500;
-        const message = error.message || "Ocurrió un error al obtener la orden";
-        return res.status(status).send({ message });
-    } finally {
-         await session.endSession();
-    }
-}; //GET - http://localhost:3001/user/getIdOrders/:idOrder
+
 
 
 //Obtener todas las órdenes en status ENTREGADO de un usuario (Historial de órdenes)
@@ -519,7 +521,7 @@ module.exports = {
     registerUsers,
     unblockUser,
     recoverPassword,
-    changePasswordr,
+    changePassword,
     deleteAccountUser,
     // confirmUser,
     logicalDeletionUser,

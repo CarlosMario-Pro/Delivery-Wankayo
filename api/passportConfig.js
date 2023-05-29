@@ -90,7 +90,7 @@ module.exports = function (passport) {
         try {
             const user = await User.findOne({ _id: id });
             const userInformation = {
-                id: user.id,
+                _id: user.id,
                 name: user.name,
                 lastName: user.lastName,
                 docIdentity: user.docIdentity,
