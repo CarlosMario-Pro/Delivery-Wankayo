@@ -12,7 +12,7 @@ userRouter.delete("/deleteAccount/:idUser", user.deleteAccountUser);            
 // userRouter.get("/verify/:token", user.confirmUser);                             //GET para verificar la cuenta del usuario recién registrado
 userRouter.put("/logicalDeletionUser/:idUser", user.logicalDeletionUser);       //DELETE para aplicar eliminado lógico a cuenta del usuario
 userRouter.put("/recoverPassword/:idUser", user.recoverPassword);               //PUT para cambiar contraseña del usuario
-userRouter.put("/changePasswordr", user.changePasswordr);         //PUT para cambiar contraseña del usuario
+userRouter.put("/changePassword", user.changePassword);         //PUT para cambiar contraseña del usuario
 
 
 //INFORMATION
